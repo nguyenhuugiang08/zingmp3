@@ -1,0 +1,135 @@
+.zingChart {
+    background-image: linear-gradient(180deg, #740091, #2d1a4c);
+    height: 450px;
+    border-radius: 8px;
+    padding: 20px 0 ;
+    .zingChartWrapper {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 0 20px 20px;
+    }
+
+    .zingChartLink {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        margin-right: 6px;
+        line-height: 34px;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .zingChartbutton {
+        width: 28px;
+        height: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: #fff;
+        border: none;
+    }
+
+    .zingChartIcon {
+        color: #7200a1;
+    }
+
+    .zingChartSong {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #914DA5;
+        height: 80px;
+        border-radius: 4px;
+        padding: 10px;
+        margin-bottom: 10px;
+
+        span {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+        }
+    }
+
+    .zingChartBox {
+        padding-left: 8px;
+        display: flex;
+        align-items: center;
+
+        .zingChartThumbPar {
+            width: 60px;
+            margin: 0 12px;
+        }
+
+        .zingChartThumb {
+            padding-top: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .zingChartMain {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .zingChartArtits {
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .zingChartIndex {
+            -webkit-text-stroke: 1.5px #fff;
+            font-size: 32px;
+            font-weight: 800;
+            color: #77149f;
+            line-height: 32px;
+        }
+
+        .zingChartIndex1 {
+            -webkit-text-stroke: 1.5px #4a90e2;
+        }
+
+        .zingChartIndex2 {
+            -webkit-text-stroke: 1.5px #50e3c2;
+        }
+
+        .zingChartIndex3 {
+            -webkit-text-stroke: 1.5px #e35050;
+        }
+        
+        .zingChartTagA {
+            text-decoration: none;
+            color: #ffffff80;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        .zingChartTagA:hover {
+            text-decoration: underline;
+            color: #c662ef;
+        }
+    }
+
+    .zingChartAddPar {
+        width: 100%;
+        height: 34px;
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .zingChartAdd {
+        color: #fff;
+        border: 1px solid #fff;
+        height: 34px;
+        width: 120px;
+        border-radius: 34px;
+        padding: 5px 20px;
+        text-decoration: none;
+    }
+
+}

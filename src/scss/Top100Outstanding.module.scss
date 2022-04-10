@@ -1,0 +1,119 @@
+.top100Outstanding {
+    color: #fff;
+    padding-top: 30px;
+
+    .mainTitle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        a {
+            text-decoration: none;
+            color: #798791;
+            font-size: 0.8rem;
+            font-weight: 500;
+           
+            span {
+                margin-right: 4px;
+            }
+        }
+    }
+
+    .top100OutstandingTitle {
+        display: block;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 4px 0 ;
+    }
+    
+    .top100OutstandingImage {
+        padding-top: 100%;
+        background-position: center;
+        background-size: contain;
+        border-radius: 8px;
+        transition: all 0.8s ease;
+    }
+    
+    .top100OutstandingContainer {
+        padding: 16px 0 30px;
+    }
+    
+    .top100OutstandingTiltle {
+        padding-left: 12px;
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+    
+    .top100OutstandingCol {
+        padding-bottom: 30px;
+        overflow: hidden;
+    }
+    
+    .top100OutstandingArtist {
+        display: flex;
+    }
+    
+    .top100OutstandingArtistItem {
+        padding: 0 !important;
+        font-size: 14px;
+        font-weight: 500;
+        color: #88848E !important;
+        margin-right: 4px;
+    }
+    
+    .top100OutstandingArtistItem:hover {
+        text-decoration: underline;
+        color: #c662ef !important;
+    }
+    
+    .top100OutstandingBanner {
+        position: relative;
+        opacity: 0.4;
+        border-radius: 3px;
+    }
+    
+    .top100OutstandingPar {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .top100OutstandingPar:hover .top100OutstandingChild {
+        display: flex;
+    }
+
+    .top100OutstandingPar:hover .top100OutstandingImage {
+        transform: scale(1.1);
+        opacity: 0.4;
+        transition: all 1.2s ease;
+    }
+    
+    .top100OutstandingChild {
+        position:absolute;
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.2rem;
+        transition: all 0.3s ease-in;
+        display: none;
+    }
+
+    .top100OutstandingPlay {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        top: -6px;
+        color: #fff;
+    }
+    
+}

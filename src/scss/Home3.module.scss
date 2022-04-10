@@ -1,0 +1,129 @@
+.home3 {
+    color: #fff;
+    margin-top: 30px;
+
+    .home3Col {
+        margin-top: 16px;
+    }
+
+    .home3Image {
+        padding-top: 100%;
+        background-position: center;
+        background-size: contain;
+        transition: all 0.8s ease;
+        border-radius: 8px;
+    }
+
+    .home3ImageActive {
+        padding-top: 100%;
+        background-position: center;
+        background-size: contain;
+        transition: all 0.8s ease;
+        border-radius: 50%;
+    }
+
+    .home3Descripton {
+        margin-top: 4px;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .home3DescriptonActive {
+        margin: 4px 0 0 24px;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .home3Par {
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    .home3ParActive {
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .home3Par:hover .home3Child {
+        display: flex;
+    }
+
+    .home3Par:hover .home3Image {
+        transform: scale(1.1);
+        opacity: 0.4;
+        transition: all 1.2s ease;
+    }
+
+    .home3Par:hover .home3ImageActive {
+        transform: scale(1.1);
+        opacity: 0.4;
+        transition: all 1.2s ease;
+    }
+
+    .home3ParActive:hover .home3Child {
+        display: flex;
+    }
+
+    .home3ParActive:hover .home3Image {
+        transform: scale(1.1);
+        opacity: 0.4;
+        transition: all 1.2s ease;
+    }
+
+    .home3ParActive:hover .home3ImageActive {
+        transform: scale(1.1);
+        opacity: 0.4;
+        transition: all 1.2s ease;
+    }
+
+    .home3Child {
+        position: absolute;
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.2rem;
+        transition: all 0.3s ease-in;
+        display: none;
+    }
+
+    .home3Play {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        top: -6px;
+    }
+
+    .mainTitle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        a {
+            text-decoration: none;
+            color: #798791;
+            font-size: 0.8rem;
+            font-weight: 500;
+
+            span {
+                margin-right: 4px;
+            }
+        }
+
+        .home3Title {
+            padding-left: 12px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+    }
+
+}

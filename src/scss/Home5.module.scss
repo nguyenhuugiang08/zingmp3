@@ -1,0 +1,111 @@
+.home5 {
+    color: #fff;
+
+    .home5Title {
+        display: block;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 4px 0;
+    }
+
+    .home5Image {
+        padding-top: 100%;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        border-radius: 8px;
+        transition: all 0.8s ease;
+    }
+
+    .home5Container {
+        padding: 16px 0 30px;
+    }
+
+    .home5Tiltle {
+        padding-left: 12px;
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+
+    .home5Col {
+        padding-bottom: 30px;
+        overflow: hidden;
+    }
+
+    .home5Artist {
+        display: flex;
+    }
+    
+    .home5ArtistItem {
+        padding: 0 !important;
+        font-size: 14px;
+        font-weight: 500;
+        color: #88848E !important;
+        margin-right: 4px;
+       
+    }
+    
+    .home5ArtistItem:hover {
+        text-decoration: underline;
+        color: #c662ef !important;
+    }
+
+    .home5Par {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .home5Par:hover .home5Child {
+        display: flex;
+    }
+
+    .home5Par:hover .home5Image {
+        transform: scale(1.1);
+        opacity: 0.4;
+        transition: all 1.2s ease;
+    }
+
+    .home5Child {
+        position: absolute;
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.2rem;
+        transition: all 0.3s ease-in;
+        display: none;
+    }
+
+    .home5Play {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        top: -6px;
+        color: #fff;
+    }
+
+    .home5Par {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .home5Par:hover .home5Child {
+        display: flex;
+    }
+
+    .home5Par:hover .home5Image {
+        transform: scale(1.1);
+        opacity: 0.4;
+        transition: all 1.2s ease;
+    }
+}

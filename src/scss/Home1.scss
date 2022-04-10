@@ -1,0 +1,34 @@
+
+.mySwiper {
+
+    .swiper-slide {
+        .swiper-slide-image {
+            width: 372px;
+            border-radius: 8px;
+        }
+    }
+
+    .swiper-button-prev {
+        color: #fff;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .swiper-button-next {
+        color: #fff;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .swiper-button-prev:after {
+        font-size: 1.4rem;
+    }
+
+    .swiper-button-next:after {
+        font-size: 1.4rem;
+    }
+}

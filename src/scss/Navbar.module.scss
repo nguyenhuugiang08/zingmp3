@@ -1,0 +1,104 @@
+.navbar {
+    background-color: #231B2E;
+    width: 240px;
+    font-size: 1rem;
+    position: fixed;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+
+    .navLink {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        padding: 0.5rem 1rem;
+    }
+
+    .navbarItem {
+        position: relative;
+    }
+
+    .navbarItem:hover {
+        cursor: pointer;
+        background-color: #393243;
+    }
+
+    img {
+        width: 120px;
+        height: 40px;
+    }
+
+    .navbarLogo {
+        height: 70px;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+    }
+
+    .navbarButton {
+        width: 240px;
+        height: 54px;
+        background-color: #231B2E;
+        position: absolute;
+        color: #fff;
+        border: none;
+        border-top: 1px solid #393243;
+        bottom: 0;
+    }
+
+    .navbarTag {
+        height: 110px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        background-image: linear-gradient(117deg, #5a4be7, #c86dd7 102%);
+        border-radius: 10px;
+    }
+
+    .navbarVIP {
+        text-decoration: none;
+        border: 1px;
+        padding: 6px 35px;
+        border-radius: 32px;
+        background-color: #E5C500;
+        color: #333;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .navbarText {
+        margin-left: 10px;
+    }
+
+    .navbarLir {
+        font-size: 14px;
+        font-weight: 600;
+        margin-left: 1rem;
+    }
+
+    .navarScroll {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 404px;
+        transition: all 0.3s ease-in;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .navarScroll::-webkit-scrollbar {
+        width: 4px;
+        background-color: #231B2E;
+    }
+
+    .navarScroll::-webkit-scrollbar-thumb {
+        background-color: #ffffff4d;
+        border-radius: 4px;
+    }
+
+    .navbarLive {
+        width: 34px;
+        height: 16px;
+        margin-left: 6px;
+    }
+
+}
