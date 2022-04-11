@@ -1,10 +1,21 @@
-import { Button } from 'reactstrap'
+import { Col, Container, Row } from 'reactstrap'
 import React, { useEffect, useRef, useState } from 'react'
 import playlistApi from 'api/playlistApi'
+import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import styles from 'scss/Album.module.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { loadCurrentSong } from 'features/top100/top100Slice'
 
 function Anbuml() {
     const [isPlaying, setIsPlaying] = useState(false)
     const [playlist, setPlaylist] = useState({})
+    const [playlistSong, setPlaylistSong] = useState({})
+    const [songs, setSongs] = useState([])
+    const [artist, setArtist] = useState([])
+    const dispatch = useDispatch()
+    const song = useSelector(state => state.top100)
+    console.log(song)
 
     useEffect(() => {
         const getPlayList = async () => {
@@ -15,29 +26,122 @@ function Anbuml() {
             setPlaylist(response.data)
         }
         getPlayList()
-    },[])
+    }, [])
+    useEffect(() => {
+        if (playlist.song) {
+            setPlaylistSong(playlist.song)
+        }
+    }, [playlist])
 
-    console.log(playlist)
+    useEffect(() => {
+        if (playlistSong.items) {
+            setSongs(playlistSong.items)
+        }
+    }, [playlistSong])
+
+    useEffect(() => {
+        if (playlist.artists) {
+            setArtist(playlist.artists)
+        }
+    }, [playlist])
+
+    const handleClick = (props) => {
+        const action = loadCurrentSong(props)
+        dispatch(action)
+    }
 
     const audioRef = useRef()
 
     const handlePlay = () => {
-        if(!isPlaying){
+        if (!isPlaying) {
             audioRef.current.play()
             setIsPlaying(true)
-        }else {
+        } else {
             audioRef.current.pause()
             setIsPlaying(false)
         }
     }
-
+    const d = new Date()
     return (
-        <div style={{ color: '#fff' }}>
-            <Button
-                onClick={handlePlay}
-            >Play
-                <audio ref={audioRef} src='https://vnno-zn-5-tf-mp3-s1-zmp3.zmdcdn.me/99d2818da2ca4b9412db/6993440792680589318?authen=exp=1649609647~acl=/99d2818da2ca4b9412db/*~hmac=9d8384625ea0bc89e6d8df686b06002f&fs=MTY0OTQzNjg0NzE4NXx3ZWJWNnwwfDMdUngMjM4LjI0LjE5'></audio>
-            </Button>
+        <div className={styles.Album}>
+            <Container>
+                <Row xs={2}>
+                    <Col xs={3}>
+                        <div className={styles.albumThumb} style={{ backgroundImage: `url(${playlist.thumbnailM})` }}></div>
+                        <div className={styles.albumTitle}>{playlist.title}</div>
+                        <div className={styles.albumTime}>Cập nhật : {d.getDate()}/{d.getMonth() + 1 > 10 ? d.getMonth() + 1 : `0${d.getMonth() + 1}`}/{d.getFullYear()}</div>
+                        <div className={styles.albumArtist}>
+                            {artist.map((artist, index) => (
+                                <Link key={index} className={styles.albumArtistItem} to={artist.link}>{artist.name},</Link>
+                            ))}
+                        </div>
+                        <div className={styles.albumLike}>{playlist.like} người yêu thích</div>
+                        <button className={styles.albumBtn}>
+                            <FontAwesomeIcon className={styles.albumIcon} icon="fa-solid fa-play" />
+                            <div>TIẾP TỤC PHÁT</div>
+                        </button>
+                        <div className={styles.albumAction}>
+                            <div className={styles.albumActionIcon}> <FontAwesomeIcon icon="fa-regular fa-heart" /></div>
+                            <div className={styles.albumActionIcon}><FontAwesomeIcon icon="fa-solid fa-ellipsis" /></div>
+                        </div>
+                    </Col>
+                    <Col xs={9}>
+                        <div className={styles.albumScroll}>
+                            <div><span className={styles.albumPreface}>Lời tựa </span> {playlist.sortDescription} </div>
+                            <div className={styles.albumTitleBox}>
+                                <div className={styles.albumTitleLeft}>
+                                    <FontAwesomeIcon icon="fa-solid fa-arrow-down-wide-short" />
+                                    <span style={{ marginLeft: '10px' }}>BÀI HÁT</span></div>
+                                <div className={styles.albumTitleCenter}>ALBUM</div>
+                                <div className={styles.albumTitleRight}>THỜI GIAN</div>
+                            </div>
+                            {songs.map((song, index) => (
+                                <div key={index} className={styles.albumWrapper}>
+                                    <div className={styles.albumLeft}>
+                                        <div className={styles.albumIconMusic}>
+                                            <FontAwesomeIcon icon="fa-solid fa-music" />
+                                        </div>
+                                        <div className={styles.albumImagePar}
+                                                onClick={() => handleClick({
+                                                    thumbnail: song.thumbnail,
+                                                    encodeId: song.encodeId,
+                                                    duration: song.duration
+                                                })}
+                                        >
+                                            <img className={styles.albumImage} src={song.thumbnail} alt="" />
+                                            <div
+                                                className={styles.albumIconChild}
+                                            >
+                                                <FontAwesomeIcon icon="fa-solid fa-play" />
+                                            </div>
+                                        </div>
+                                        <div className={styles.albumArtistMain}>
+                                            <div>{song.title}</div>
+                                            <div className={styles.albumSongArtist}>
+                                                {song.artists.map((artist, index) => (
+                                                    <Link className={styles.albumArtistItem} key={index} to={artist.link}>
+                                                        {index > 0 ? `, ${artist.name}` : artist.name}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <Link className={styles.albumCenter} to={song.album !== undefined && song.album.link}>
+                                        {song.album !== undefined && song.album.title}
+                                    </Link>
+                                    <div className={styles.albumRight}>
+                                        {Math.floor(song.duration / 60) >= 10 ?
+                                            Math.floor(song.duration / 60) :
+                                            `0${Math.floor(song.duration / 60)}`
+                                        }:
+                                        {song.duration % 60 >= 10 ? song.duration % 60 : `0${song.duration % 60}`}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
         </div>
     )
 }

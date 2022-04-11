@@ -85,7 +85,7 @@ function Top100() {
         </div>
     )
   }
-
+  
   return (
     <div>
       {loading ? <Loading /> : <ShowList />}
