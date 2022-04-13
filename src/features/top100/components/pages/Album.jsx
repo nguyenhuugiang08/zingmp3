@@ -4,18 +4,16 @@ import playlistApi from 'api/playlistApi'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from 'scss/Album.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { loadCurrentSong } from 'features/top100/top100Slice'
 
 function Anbuml() {
-    const [isPlaying, setIsPlaying] = useState(false)
     const [playlist, setPlaylist] = useState({})
     const [playlistSong, setPlaylistSong] = useState({})
     const [songs, setSongs] = useState([])
     const [artist, setArtist] = useState([])
+
     const dispatch = useDispatch()
-    const song = useSelector(state => state.top100)
-    console.log(song)
 
     useEffect(() => {
         const getPlayList = async () => {
@@ -45,29 +43,21 @@ function Anbuml() {
         }
     }, [playlist])
 
+
     const handleClick = (props) => {
         const action = loadCurrentSong(props)
         dispatch(action)
+        thumbRef.current.style.borderRadius = '50%'
     }
 
-    const audioRef = useRef()
-
-    const handlePlay = () => {
-        if (!isPlaying) {
-            audioRef.current.play()
-            setIsPlaying(true)
-        } else {
-            audioRef.current.pause()
-            setIsPlaying(false)
-        }
-    }
     const d = new Date()
+    const thumbRef = useRef()
     return (
         <div className={styles.Album}>
             <Container>
                 <Row xs={2}>
                     <Col xs={3}>
-                        <div className={styles.albumThumb} style={{ backgroundImage: `url(${playlist.thumbnailM})` }}></div>
+                        <div ref={thumbRef} className={styles.albumThumb} style={{ backgroundImage: `url(${playlist.thumbnailM})` }}></div>
                         <div className={styles.albumTitle}>{playlist.title}</div>
                         <div className={styles.albumTime}>Cập nhật : {d.getDate()}/{d.getMonth() + 1 > 10 ? d.getMonth() + 1 : `0${d.getMonth() + 1}`}/{d.getFullYear()}</div>
                         <div className={styles.albumArtist}>
@@ -102,11 +92,14 @@ function Anbuml() {
                                             <FontAwesomeIcon icon="fa-solid fa-music" />
                                         </div>
                                         <div className={styles.albumImagePar}
-                                                onClick={() => handleClick({
-                                                    thumbnail: song.thumbnail,
-                                                    encodeId: song.encodeId,
-                                                    duration: song.duration
-                                                })}
+                                            onClick={() => handleClick({
+                                                thumbnail: song.thumbnail,
+                                                encodeId: song.encodeId,
+                                                duration: song.duration,
+                                                title: song.title,
+                                                artists: song.artists,
+                                                isPlay: true
+                                            })}
                                         >
                                             <img className={styles.albumImage} src={song.thumbnail} alt="" />
                                             <div

@@ -1,0 +1,118 @@
+.play-song {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    padding: 10px 20px;
+    background-color: #120C1C;
+    border-top: 2px solid #ffffff0d;
+    height: 90px;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    z-index: 99;
+    transition: all 1s ease-in;
+}
+
+.play-song__right {
+    display: flex;
+    cursor: pointer;
+    height: 70px;
+    width: 33.33%;
+
+    &-singers {
+        display: flex;
+    }
+
+    &-singer {
+        padding: 0 !important;
+        font-size: 12px;
+        font-weight: 500;
+        color: #88848E !important;
+        margin-right: 4px;
+        text-decoration: none;
+    }
+
+    &-singer:hover {
+        text-decoration: underline;
+        color: #c662ef !important;
+    }
+
+    &-title {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    &-box {
+        width: 70px;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-right: 10px;
+    }
+
+    &-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &-wrapper-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 20px;
+    }
+}
+
+.play-song__thumb {
+    padding-top: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.play-song__action {
+    display: flex;
+    align-items: center;
+    width: 33.33%;
+    justify-content: center;
+}
+
+.play-song__btn {
+    background-color: #120C1C;
+    border: none;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    margin-right: 16px;
+}
+
+.play-song__btn:hover {
+    background-color: #ffffff1a;
+}
+
+.btn-play {
+    background-color: #120C1C;
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+}
+
+.btn-play:hover {
+    color: #c662ef;
+    border-color: #c662ef;
+    background-color: #120C1C;
+}
+
+.play-song__left {
+    width: 33.34%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}

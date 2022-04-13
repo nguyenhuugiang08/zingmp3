@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
+import PlaySong from 'components/PlaySong/PlaySong';
 library.add(fas, far)
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
     <div className="App">
      <Header />
      <Navbar/>
+     <PlaySong/>
     </div>
   );
 }
