@@ -48,6 +48,15 @@ function Anbuml() {
         const action = loadCurrentSong(props)
         dispatch(action)
         thumbRef.current.style.borderRadius = '50%'
+
+        const thumbAnimate = thumbRef.current.animate([
+            {transform: ' rotate(360deg) '}
+        ], {
+            duration: 10000,
+            iterations: Infinity
+        })
+
+        thumbAnimate.pause()
     }
 
     const d = new Date()
@@ -98,7 +107,9 @@ function Anbuml() {
                                                 duration: song.duration,
                                                 title: song.title,
                                                 artists: song.artists,
-                                                isPlay: true
+                                                isPlay: true,
+                                                songs: songs,
+                                                index: index
                                             })}
                                         >
                                             <img className={styles.albumImage} src={song.thumbnail} alt="" />
