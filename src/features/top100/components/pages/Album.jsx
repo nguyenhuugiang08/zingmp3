@@ -102,11 +102,7 @@ function Anbuml() {
                                         </div>
                                         <div className={styles.albumImagePar}
                                             onClick={() => handleClick({
-                                                thumbnail: song.thumbnail,
                                                 encodeId: song.encodeId,
-                                                duration: song.duration,
-                                                title: song.title,
-                                                artists: song.artists,
                                                 isPlay: true,
                                                 songs: songs,
                                                 index: index
