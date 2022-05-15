@@ -91,23 +91,28 @@ function PlaySongCenter() {
     }, [listSong, index])
 
     const handlePlay = () => {
-        if (!isPlaying) {
+        if (!isPlaying && audioRef.current) {
             audioRef.current.play()
             setIsPlaying(true)
         } else {
-            audioRef.current.pause()
-            setIsPlaying(false)
+            if (audioRef.current) {
+                audioRef.current.pause()
+                setIsPlaying(false)
+            }
+            else{
+                alert("Dành cho VIP")
+            }
         }
     }
 
     const handleOnchaneSeek = () => {
-        if (loading) {
+        if (loading && audioRef.current) {
             seekRef.current.value = 0
             setTime(0)
             audioRef.current.pause()
         } else {
             seekRef.current.value = (audioRef.current.currentTime / duration) * 100
-            setTime(audioRef.current.currentTime)
+            setTime(audioRef.current ? audioRef.current.currentTime : 0)
         }
     }
 
@@ -131,9 +136,11 @@ function PlaySongCenter() {
 
     const handleChange = () => {
         const seekTime = seekRef.current.value / 100 * duration
-        audioRef.current.currentTime = seekTime
-        audioRef.current.play()
-        setIsPlaying(true)
+        if (audioRef.current) {
+            audioRef.current.currentTime = seekTime
+            audioRef.current.play()
+            setIsPlaying(true)
+        }
     }
 
     const handleNextSong = () => {
@@ -167,7 +174,7 @@ function PlaySongCenter() {
     }
 
     const handleEndSong = () => {
-        if (isRepeat) {
+        if (isRepeat &&  audioRef.current) {
             audioRef.current.play()
             setIsPlaying(true)
         } else {
@@ -184,7 +191,9 @@ function PlaySongCenter() {
 
     const handleChangeVol = () => {
         setVol(volRef.current.value)
-        audioRef.current.volume = vol
+        if(audioRef.current){
+            audioRef.current.volume = vol
+        }
     }
 
     const handelDisplayLyric = () => {
@@ -193,7 +202,6 @@ function PlaySongCenter() {
         } else {
             setDisplayLyric(false)
         }
-        console.log(displayLyric)
     }
 
     const audioRef = useRef()
@@ -277,7 +285,7 @@ function PlaySongCenter() {
                 </button>
                 <button
                     className='play-song__btn'
-                onClick={handelDisplayLyric}
+                    onClick={handelDisplayLyric}
                 >
                     <FontAwesomeIcon icon="fa-solid fa-microphone" />
                 </button>
@@ -298,7 +306,7 @@ function PlaySongCenter() {
                     <FontAwesomeIcon icon="fa-solid fa-list-ul" />
                 </button>
             </div>
-            {displayLyric ? <PlaySongLyric id={id} thumb={thumb} time={time}/> : <></>}
+            {displayLyric ? <PlaySongLyric id={id} thumb={thumb} time={time} /> : <></>}
         </>
     )
 }

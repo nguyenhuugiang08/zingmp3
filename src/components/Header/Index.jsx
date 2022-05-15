@@ -1,18 +1,54 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from 'scss/Header.module.scss'
-import { Navbar, Input, Collapse, Button } from 'reactstrap'
+import { Navbar, Collapse, Button } from 'reactstrap'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import searchApi from "api/searchApi";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+    const [keyword, setKeyWord] = useState('')
+    const [data, setData] = useState({})
+    const [id, setId] = useState('')
+
+    const navigate = useNavigate()
+
+    const inputRef = useRef()
+
+    useEffect(() => {
+        const getSearch = async () => {
+            const params = {
+                keyword: keyword
+            }
+            const response = await searchApi.getAll(params)
+            setData(response.data)
+        }
+
+        getSearch()
+    }, [keyword])
+
+    const handleOnKeyUp = (e) => {
+        if(e.which === 13){
+            setKeyWord(id)
+        }
+    }
+
+    console.log(data)
+
     return (
         <>
             <div className={`${styles.header} d-flex `}>
                 <div className="d-flex">
-                    <Button className={styles.haederBtn}>
+                    <Button
+                        className={styles.haederBtn}
+                        onClick={() => navigate(-1)}
+                    >
                         <FontAwesomeIcon icon="fa-solid fa-arrow-left-long" />
                     </Button>
 
-                    <Button className={styles.haederBtn}>
+                    <Button
+                        className={styles.haederBtn}
+                        onClick={() => navigate(1)}
+                    >
                         <FontAwesomeIcon icon="fa-solid fa-arrow-right-long" />
                     </Button>
 
@@ -23,8 +59,16 @@ function Header() {
                         className={styles.headerPadding}
                     >
                         <Collapse navbar>
-                            <Input className={styles.navbarInput} type="Search" placeholder="Nhập tên bài hát, nghệ sĩ hoặc MV..." />
                         </Collapse>
+                        <input
+                            className={styles.headerInput}
+                            type="text"
+                            placeholder="Nhập tên bài hát, nghệ sĩ hoặc MV..."
+                            ref={inputRef}
+                            value={id}
+                            onChange={(e) => setId(e.target.value)}
+                            onKeyUp={(e) => handleOnKeyUp(e)}
+                        />
                     </Navbar>
                 </div>
 

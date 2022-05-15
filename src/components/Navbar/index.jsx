@@ -29,7 +29,7 @@ function Navbar() {
                <NavItem className={`${styles.navbarItem} ${styles.navbarLogo}`}>
                   <img src="https://zmp3-static.zadn.vn/skins/zmp3-v6.1/images/backgrounds/logo-dark.svg" alt="" className={styles.img} />
                </NavItem>
-               <Item path='/personal'
+               <Item path='personal'
                   icon='fa-solid fa-podcast'
                   content='Cá Nhân'
                />
@@ -37,15 +37,15 @@ function Navbar() {
                   icon='fa-solid fa-compact-disc'
                   content='Khám Phá'
                />
-               <Item path='/zingchart'
+               <Item path='zingchart'
                   icon='fa-solid fa-chart-line'
                   content='#Zingchart'
                />
-               <Item path='/radio'
+               <Item path='radio'
                   icon='fa-solid fa-radio'
                   content='Radio'
                />
-               <Item path='/follow'
+               <Item path='follow'
                   icon='fa-solid fa-rectangle-list'
                   content='Theo Dõi'
                />
@@ -54,19 +54,19 @@ function Navbar() {
 
             <div className={styles.navarScroll}>
                <Nav pills vertical>
-                  <Item path='/personal'
+                  <Item path='personal'
                      icon='fa-solid fa-music'
                      content='Nhạc Mới'
                   />
-                  <Item path='/genre'
+                  <Item path='genre'
                      icon='fa-solid fa-icons'
                      content='Thể Loại'
                   />
-                  <Item path='/top100'
+                  <Item path='top100'
                      icon='fa-solid fa-star'
                      content='Top 100'
                   />
-                  <Item path='/MV'
+                  <Item path='MV'
                      icon='fa-solid fa-circle-play'
                      content='MV'
                   />
@@ -88,15 +88,15 @@ function Navbar() {
                <div>
                   <div className={styles.navbarLir}>THƯ VIỆN</div>
                   <Nav pills vertical>
-                     <Item path='/song'
+                     <Item path='song'
                         icon='fa-solid fa-record-vinyl'
                         content='Bài hát'
                      />
-                      <Item path='/playlist'
+                      <Item path='playlist'
                         icon='fa-regular fa-rectangle-list'
                         content='Playlist'
                      />
-                      <Item path='/history'
+                      <Item path='history'
                         icon='fa-regular fa-clock'
                         content='Gần đây'
                      />

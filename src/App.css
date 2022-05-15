@@ -6,3 +6,7 @@
     bottom: 0;
     right: 0;
 }
+
+html{
+    scroll-behavior: smooth;
+}

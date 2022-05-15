@@ -48,7 +48,7 @@ function HomeRadio({ data }) {
                                                         </circle>
                                                     </svg>
                                                 </div>
-                                                <div className={styles.home6Image} style={{ backgroundImage: `url(${compo.program.thumbnail})` }}>
+                                                <div className={styles.home6Image} style={{ backgroundImage: `url(${compo.program !== undefined && compo.program.thumbnail})` }}>
                                                 </div>
                                                 <div className={styles.home6Child}>
                                                     <Link className={styles.home6Play} to={compo.link}>

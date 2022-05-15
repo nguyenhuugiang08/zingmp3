@@ -226,6 +226,7 @@
         transition: all 0.3s ease-in;
         position: relative;
         cursor: pointer;
+        -webkit-line-clamp: 7;
 
         &-sentences {
             display: flex;
@@ -236,6 +237,11 @@
             line-height: 1.2;
             padding: 15px 0;
             font-size: 30px;
+        }
+
+        &-sentences--over {
+            transform: translateY(-50px);
+            color: #ffffff1a;
         }
 
         &-words {
@@ -270,3 +276,4 @@
         height: 100vh;
     }
 }
+

@@ -30,7 +30,6 @@ function PlaySongLyric({ id, thumb, time }) {
       setSentences(lyric.sentences)
     }
   }, [lyric])
-  console.log(time)
 
   const handleClickOption = () => {
     optRef.current.classList.add("play-song-lyric__options-item--active")
@@ -54,10 +53,17 @@ function PlaySongLyric({ id, thumb, time }) {
     lyricRef.current.style.display = "none"
   }
 
+  const handleAutoScroll = (index) => {
+    if (sentencesRef.current) {
+      sentencesRef.current.parentElement.scrollTop = 66*index
+    }
+  }
+
   const optRef = useRef()
   const optRef1 = useRef()
   const optRef2 = useRef()
   const lyricRef = useRef()
+  const sentencesRef = useRef()
 
   return (
     <div ref={lyricRef} className='play-song-lyric'>
@@ -105,14 +111,25 @@ function PlaySongLyric({ id, thumb, time }) {
               </div>
             </Col>
             <Col xs={7}>
-              <div className='play-song-lyric__center'>
+              <div
+                className='play-song-lyric__center'
+              >
                 {loading ? <ReactLoading type='spinningBubbles' color='#fff' height={100} width={100} /> :
                   sentences.map((sentence, index) => (
-                    <div key={index} className='play-song-lyric__center-sentences'>
+                    <div
+                      key={index}
+                      ref={sentencesRef}
+                      className={`play-song-lyric__center-sentences
+                      ${index >= 1 && (sentence.words[sentence.words.length - 1].endTime / 1000).toFixed(3) - time.toFixed(3) < 0.1 ?
+                          handleAutoScroll(index) : ''}
+                    `}>
                       {sentence.words.map((word, index) => (
                         <div key={index}
                           className={`play-song-lyric__center-words
-                            ${(word.startTime / 1000).toFixed(3) - time.toFixed(3) < 0.1 ? 'play-song-lyric__center-words--active' : ''}`
+                            ${(word.startTime / 1000).toFixed(3) - time.toFixed(3) < 0.1 ?
+                              'play-song-lyric__center-words--active'
+                              :
+                              ''}`
                           }
                         >
                           {`${word.data}`}

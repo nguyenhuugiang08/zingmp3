@@ -13,7 +13,6 @@ function HomePublish({ data }) {
     }
   }, [data])
 
-  console.log(list)
   return (
     <div className='mt-5'>
       {list.map((slider, index) => (

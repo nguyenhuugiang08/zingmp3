@@ -1,13 +1,15 @@
 import { Col, Container, Row } from 'reactstrap'
 import React, { useEffect, useRef, useState } from 'react'
 import playlistApi from 'api/playlistApi'
-import { Link } from 'react-router-dom'
+import { Link ,useParams} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from 'scss/Album.module.scss'
 import { useDispatch } from 'react-redux'
 import { loadCurrentSong } from 'features/top100/top100Slice'
 
 function Anbuml() {
+    const { encodeId } = useParams()
+
     const [playlist, setPlaylist] = useState({})
     const [playlistSong, setPlaylistSong] = useState({})
     const [songs, setSongs] = useState([])
@@ -18,13 +20,14 @@ function Anbuml() {
     useEffect(() => {
         const getPlayList = async () => {
             const params = {
-                id: 'ZWZB969E'
+                id: encodeId
             }
             const response = await playlistApi.getAll(params)
             setPlaylist(response.data)
         }
         getPlayList()
-    }, [])
+    }, [encodeId])
+    
     useEffect(() => {
         if (playlist.song) {
             setPlaylistSong(playlist.song)
@@ -118,7 +121,7 @@ function Anbuml() {
                                         <div className={styles.albumArtistMain}>
                                             <div>{song.title}</div>
                                             <div className={styles.albumSongArtist}>
-                                                {song.artists.map((artist, index) => (
+                                                {song.artists !== undefined && song.artists.map((artist, index) => (
                                                     <Link className={styles.albumArtistItem} key={index} to={artist.link}>
                                                         {index > 0 ? `, ${artist.name}` : artist.name}
                                                     </Link>
