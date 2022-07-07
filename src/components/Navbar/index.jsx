@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Nav, NavItem, Card, CardBody, CardText } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from 'scss/Navbar.module.scss'
-import Content from '../pages/Content'
+import { useSelector } from 'react-redux'
 
 const Item = ({ path, icon, content }) => {
    return (
@@ -12,7 +12,7 @@ const Item = ({ path, icon, content }) => {
          <Link className={styles.navLink} to={path}>
             <FontAwesomeIcon icon={icon} />
             {content === 'Radio' ? <span className={styles.navbarText}>Radio
-               <img className={styles.navbarLive} src="https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/live-tag.svg" alt="" />
+               <img className={styles.navbarLive} src="https://zjs.zmdcdn.me/zmp3-desktop/dev/147506/static/media/live-tag.e25dd240.svg" alt="" />
             </span> :
                <span className={styles.navbarText}>{content}</span>
             }
@@ -22,9 +22,17 @@ const Item = ({ path, icon, content }) => {
 }
 
 function Navbar() {
+   const dataStore = useSelector(state => state.top100)
+   const [mounted, setMounted] = useState(false)
+ 
+   useEffect(() => {
+       if (dataStore.length !== 0) {
+           setMounted(dataStore[dataStore.length - 1].isPlay)
+       }
+   }, [dataStore])
    return (
       <div>
-         <div className={styles.navbar}>
+         <div className={styles.navbar}  style={{bottom: `${mounted ? "90px" : ""}`}}>
             <Nav pills vertical>
                <NavItem className={`${styles.navbarItem} ${styles.navbarLogo}`}>
                   <img src="https://zmp3-static.zadn.vn/skins/zmp3-v6.1/images/backgrounds/logo-dark.svg" alt="" className={styles.img} />
@@ -109,7 +117,6 @@ function Navbar() {
             </button>
          </div>
 
-         <Content />
       </div>
    )
 }

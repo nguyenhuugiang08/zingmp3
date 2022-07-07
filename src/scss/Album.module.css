@@ -1,0 +1,303 @@
+.Album {
+  color: #fff;
+  padding: 40px 0 30px;
+}
+
+.Album .albumScroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: calc(100vh - 110px);
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+  position: relative;
+  cursor: pointer;
+}
+
+.Album .albumScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.Album .albumTitleBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 10px;
+  font-size: 0.8rem;
+  color: #88848E;
+  text-align: left;
+  font-weight: 500;
+  margin-top: 30px;
+}
+
+.Album .albumTitleBox .albumTitleLeft {
+  width: 50%;
+}
+
+.Album .albumTitleBox .albumTitleCenter {
+  -ms-flex-preferred-size: auto;
+      flex-basis: auto;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  text-align: left;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  width: 0;
+  text-decoration: none;
+  color: #88848E;
+}
+
+.Album .albumTitleBox .albumTitleRight {
+  -ms-flex-preferred-size: auto;
+      flex-basis: auto;
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  color: #88848E;
+}
+
+.Album .albumThumb {
+  padding-top: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+}
+
+.Album .albumTitle {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.Album .albumTime {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-25%);
+          transform: translateX(-25%);
+  color: #88848E;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.Album .albumArtist {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.Album .albumArtistItem {
+  padding: 0 !important;
+  font-size: 12px;
+  font-weight: 500;
+  color: #88848E !important;
+  margin-right: 4px;
+  text-decoration: none;
+}
+
+.Album .albumArtistItem:hover {
+  text-decoration: underline;
+  color: #c662ef !important;
+}
+
+.Album .albumLike {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-25%);
+          transform: translateX(-25%);
+  color: #88848E;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.Album .albumBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 9px 24px;
+  line-height: 16px;
+  border-radius: 999px;
+  color: #fff;
+  border: none;
+  background-color: #7200a1;
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  margin: 16px 0;
+}
+
+.Album .albumBtn .albumIcon {
+  margin-right: 6px;
+}
+
+.Album .albumAction {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.Album .albumActionIcon {
+  margin-right: 10px;
+  background-color: #ffffff1a;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Album .albumPreface {
+  font-size: 1rem;
+  color: #ffffff80;
+  font-weight: 400;
+}
+
+.Album .albumWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ffffff0d;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  text-align: left;
+  position: relative;
+}
+
+.Album .albumWrapper .albumIconMusic {
+  font-size: 0.6rem;
+}
+
+.Album .albumWrapper .albumLeft {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50%;
+}
+
+.Album .albumWrapper .albumLeft .albumImagePar {
+  position: relative;
+}
+
+.Album .albumWrapper .albumLeft .albumImagePar:hover .albumIconChild {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.Album .albumWrapper .albumLeft .albumImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  margin: 0 10px;
+}
+
+.Album .albumWrapper .albumLeft .albumIconChild {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: none;
+  cursor: pointer;
+  -webkit-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
+}
+
+.Album .albumWrapper .albumLeft .albumArtistMain {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.Album .albumWrapper .albumLeft .albumArtistMain .albumSongArtist {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.Album .albumWrapper .albumCenter {
+  -ms-flex-preferred-size: auto;
+      flex-basis: auto;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  text-align: left;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  width: 0;
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: #88848E;
+}
+
+.Album .albumWrapper .albumRight {
+  -ms-flex-preferred-size: auto;
+      flex-basis: auto;
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  color: #88848E;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.Album .albumWrapper:hover {
+  background-color: #2F2739;
+}
+/*# sourceMappingURL=Album.module.css.map */

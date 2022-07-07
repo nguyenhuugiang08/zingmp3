@@ -1,0 +1,125 @@
+.home4 {
+  color: #fff;
+}
+
+.home4 .home4Title {
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 4px 0;
+}
+
+.home4 .home4Image {
+  padding-top: 100%;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+}
+
+.home4 .home4Container {
+  padding: 16px 0 30px;
+}
+
+.home4 .home4Tiltle {
+  padding-left: 12px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.home4 .home4Col {
+  padding-bottom: 30px;
+  overflow: hidden;
+}
+
+.home4 .home4SortDescription {
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: #88848E;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.home4 .home4Par {
+  position: relative;
+  cursor: pointer;
+}
+
+.home4 .home4Par:hover .home4Child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.home4 .home4Par:hover .home4Image {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  opacity: 0.4;
+  -webkit-transition: all 1.2s ease;
+  transition: all 1.2s ease;
+}
+
+.home4 .home4Child {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 1.2rem;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+  display: none;
+}
+
+.home4 .home4Play {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  top: -6px;
+  color: #fff;
+}
+
+.home4 .home4Par {
+  position: relative;
+  cursor: pointer;
+}
+
+.home4 .home4Par:hover .home4Child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.home4 .home4Par:hover .home4Image {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  opacity: 0.4;
+  -webkit-transition: all 1.2s ease;
+  transition: all 1.2s ease;
+}
+/*# sourceMappingURL=Home4.module.css.map */

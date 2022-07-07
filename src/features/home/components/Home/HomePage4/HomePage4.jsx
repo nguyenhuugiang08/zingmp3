@@ -1,25 +1,17 @@
-import homeApi from 'api/homeApi'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import HomePublish from './HomePublish/HomePublish'
 
 function HomePage4() {
-    const [data ,setData] = useState({})
+    const [data ,setData] = useState([])
+
+    const homeData = useSelector(state => state.homeData)
+
     useEffect(() => {
-        const getHomePage4 = async () => {
-            try {
-                const params = {
-                    page: 4
-                }
-                const response = await homeApi.getAll(params)
-                setData(response.data)
-            } catch (error) {
-                console.log('Failed to fetch data: ' , error)
-            }
+        if(homeData.length > 0){
+            setData(homeData[0].items)
         }
-
-        getHomePage4()
-    },[])
-
+    },[homeData])
   return (
     <div>
         <HomePublish data={data}/>

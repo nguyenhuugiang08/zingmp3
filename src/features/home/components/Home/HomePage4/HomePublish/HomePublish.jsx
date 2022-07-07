@@ -6,18 +6,14 @@ function HomePublish({ data }) {
   const [list, setList] = useState([])
 
   useEffect(() => {
-    if (data.items) {
-      const newList = [...data.items]
-      const restList = newList.splice(0, 1)
-      setList(restList)
+    if (data.length > 0) {
+      setList(data[9].items)
     }
   }, [data])
 
   return (
     <div className='mt-5'>
-      {list.map((slider, index) => (
         <Swiper
-          key={index}
           slidesPerView={3}
           spaceBetween={30}
           slidesPerGroup={3}
@@ -27,13 +23,12 @@ function HomePublish({ data }) {
           modules={[Navigation]}
           className="mySwiper"
         >
-          {slider.items.map((item, index) => (
-            <SwiperSlide key={index}>
+          {list.map(item => (
+            <SwiperSlide key={item.encodeId}>
               <img className='swiper-slide-image' src={item.thumbnail} alt="" />
             </SwiperSlide>
           ))}
         </Swiper>
-      ))}
     </div>
   )
 }

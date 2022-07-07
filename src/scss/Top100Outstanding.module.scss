@@ -33,8 +33,27 @@
     .top100OutstandingImage {
         padding-top: 100%;
         background-position: center;
+        background-repeat: no-repeat;
         background-size: contain;
         border-radius: 8px;
+        transition: all 0.8s ease;
+    }
+
+    .top100OutstandingMv {
+        padding-top: 60%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 8px;
+        transition: all 0.8s ease;
+    }
+
+    .top100OutstandingMvImg {
+        padding-top: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 50%;
         transition: all 0.8s ease;
     }
     
@@ -78,6 +97,8 @@
     
     .top100OutstandingPar {
         position: relative;
+        overflow: hidden;
+        border-radius: 8px;
         cursor: pointer;
     }
 
@@ -86,6 +107,12 @@
     }
 
     .top100OutstandingPar:hover .top100OutstandingImage {
+        transform: scale(1.1);
+        opacity: 0.4;
+        transition: all 1.2s ease;
+    }
+
+    .top100OutstandingPar:hover .top100OutstandingMv {
         transform: scale(1.1);
         opacity: 0.4;
         transition: all 1.2s ease;

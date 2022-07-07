@@ -8,7 +8,7 @@ import clsx from 'clsx'
 import styles from 'scss/Home7.module.scss'
 
 function HomeChart({ list }) {
-    const [chart, setChart] = useState([])
+    const [chart, setChart] = useState({})
     const [time, setTime] = useState([])
     const [counts, setConuts] = useState({})
 
@@ -19,40 +19,38 @@ function HomeChart({ list }) {
     const chartRef = useRef()
 
     useEffect(() => {
-        if (list.items) {
-            const newList = [...list.items]
-            const restList = newList.splice(0, 1)
-            setChart(restList)
+        if (list.length > 0) {
+            setChart(list[5])
         }
     }, [list])
 
     useEffect(() => {
-        if (chart.length !== 0) {
-            setTime(chart[0].chart.times)
+        if (chart.chart) {
+            setTime(chart.chart.times)
         }
     }, [chart])
 
     useEffect(() => {
-        if (chart.length !== 0) {
-            setConuts(chart[0].chart.items)
+        if (chart.chart) {
+            setConuts(chart.chart.items)
         }
     }, [chart])
 
     useEffect(() => {
-        if (counts.ZZ8FBUW9) {
-            setCount1(counts.ZZ8FBUW9)
+        if (counts) {
+            setCount1(Object.values(counts)[0])
         }
     }, [counts])
 
     useEffect(() => {
-        if (counts.ZZ9OIWA0) {
-            setCount2(counts.ZZ9OIWA0)
+        if (counts) {
+            setCount2(Object.values(counts)[1])
         }
     }, [counts])
 
     useEffect(() => {
-        if (counts.ZZ9UWZO7) {
-            setCount3(counts.ZZ9UWZO7)
+        if (counts) {
+            setCount3(Object.values(counts)[2])
         }
     }, [counts])
 
@@ -63,9 +61,9 @@ function HomeChart({ list }) {
         }
         return 0
     })
-    const counter1 = count1.map(count => count.counter)
-    const counter2 = count2.map(count => count.counter)
-    const counter3 = count3.map(count => count.counter)
+    const counter1 = count1 && count1.map(count => count.counter)
+    const counter2 = count2 && count2.map(count => count.counter)
+    const counter3 = count3 && count3.map(count => count.counter)
 
     ChartJS.register(
         CategoryScale,
@@ -89,7 +87,16 @@ function HomeChart({ list }) {
                 text: 'Chart.js Line Chart',
             },
         },
-        tension: 0.3
+        tension: 0.3,
+        scales: {
+
+            y: {
+                display: false,
+                ticks: {
+                    stepSize:5000
+                }
+            }
+        },
     };
 
     const labels = arrTime;
@@ -130,42 +137,38 @@ function HomeChart({ list }) {
             <Container>
                 <Row>
                     <Col xs={4}>
-                        {chart.map((chart, index) => (
+                        {chart.items && chart.items.map((item, index) => (
                             <div key={index}>
-                                {chart.items.map((item, index) => (
-                                    <div key={index}>
-                                        {index > 2 ? <></> :
-                                            <div className={styles.zingChartSong}>
-                                                <div className={styles.zingChartBox}>
-                                                    <div className={index === 0 ? classes : (index === 1 ? classes1 : classes2)}>
-                                                        {index + 1}
+                                {index > 2 ? <></> :
+                                    <div className={styles.zingChartSong}>
+                                        <div className={styles.zingChartBox}>
+                                            <div className={index === 0 ? classes : (index === 1 ? classes1 : classes2)}>
+                                                {index + 1}
+                                            </div>
+                                            <div className={styles.zingChartMain}>
+                                                <div className={styles.zingChartThumbPar}>
+                                                    <div className={styles.zingChartThumb} style={{ backgroundImage: `url(${item.thumbnailM})` }}></div>
+                                                </div>
+                                                <div >
+                                                    <div className={styles.zingChartArtits}>
+                                                        {item.title}
                                                     </div>
-                                                    <div className={styles.zingChartMain}>
-                                                        <div className={styles.zingChartThumbPar}>
-                                                            <div className={styles.zingChartThumb} style={{ backgroundImage: `url(${item.thumbnailM})` }}></div>
-                                                        </div>
-                                                        <div >
-                                                            <div className={styles.zingChartArtits}>
-                                                                {item.title}
+                                                    <div style={{ display: 'flex' }}>
+                                                        {item.artists.map((artist, index) => (
+                                                            <div className={styles.zingChartTagA} key={index}>
+                                                                {index > 0 ? `,${artist.name}` : `${artist.name}`}
                                                             </div>
-                                                            <div style={{ display: 'flex' }}>
-                                                                {item.artists.map((artist, index) => (
-                                                                    <div className={styles.zingChartTagA} key={index}>
-                                                                        {index > 0 ? `,${artist.name}` : `${artist.name}`}
-                                                                    </div>
-                                                                ))}
-                                                            </div>
-                                                        </div>
+                                                        ))}
                                                     </div>
                                                 </div>
-                                                {index > 1 ?
-                                                    <span>{Math.floor((item.score) / (chart.chart.totalScore) * 100) - 1}%</span> :
-                                                    <span>{Math.ceil((item.score) / (chart.chart.totalScore) * 100)}%</span>
-                                                }
                                             </div>
+                                        </div>
+                                        {index > 1 ?
+                                            <span>{Math.floor((item.score) / (chart.chart.totalScore) * 100) - 1}%</span> :
+                                            <span>{Math.ceil((item.score) / (chart.chart.totalScore) * 100)}%</span>
                                         }
                                     </div>
-                                ))}
+                                }
                             </div>
                         ))}
                     </Col>

@@ -4,11 +4,15 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Col, Container, Row } from 'reactstrap'
 import ReactLoading from 'react-loading';
 import "scss/PlaySongLyric.scss"
+import { useDispatch, useSelector } from 'react-redux';
+import { getLyricApi } from '../getLyric';
 
 function PlaySongLyric({ id, thumb, time }) {
-  const [lyric, setLyric] = useState({})
   const [sentences, setSentences] = useState([])
   const [loading, setLoading] = useState(false)
+
+  const dispatch = useDispatch()
+  const lyric = useSelector(state => state.lyric)
 
   useEffect(() => {
     if (id) {
@@ -18,7 +22,7 @@ function PlaySongLyric({ id, thumb, time }) {
         }
         setLoading(true)
         const response = await lyricApi.getAll(params)
-        setLyric(response.data)
+        dispatch(getLyricApi(response.data))
         setLoading(false)
       }
       getLyric()
@@ -26,28 +30,22 @@ function PlaySongLyric({ id, thumb, time }) {
   }, [id])
 
   useEffect(() => {
-    if (lyric.sentences) {
-      setSentences(lyric.sentences)
+    if (lyric.length > 0) {
+      setSentences(lyric[lyric.length - 1].sentences)
     }
   }, [lyric])
 
-  const handleClickOption = () => {
-    optRef.current.classList.add("play-song-lyric__options-item--active")
-    optRef1.current.classList.remove("play-song-lyric__options-item--active")
-    optRef2.current.classList.remove("play-song-lyric__options-item--active")
-  }
+  let optionBtn = document.querySelectorAll('.play-song-lyric__options-item')
+  let optionActiveBtn = document.querySelectorAll('.play-song-lyric__options-item--active')
 
-  const handleClickOption1 = () => {
-    optRef.current.classList.remove("play-song-lyric__options-item--active")
-    optRef1.current.classList.add("play-song-lyric__options-item--active")
-    optRef2.current.classList.remove("play-song-lyric__options-item--active")
-  }
-
-  const handleClickOption2 = () => {
-    optRef.current.classList.remove("play-song-lyric__options-item--active")
-    optRef1.current.classList.remove("play-song-lyric__options-item--active")
-    optRef2.current.classList.add("play-song-lyric__options-item--active")
-  }
+  optionBtn.forEach((element, index) => {
+    element.addEventListener('click', () => {
+      element.classList.add("play-song-lyric__options-item--active")
+      optionActiveBtn.forEach(btn => {
+        btn.classList.remove("play-song-lyric__options-item--active")
+      })
+    })
+  })
 
   const handleUnmountedLyric = () => {
     lyricRef.current.style.display = "none"
@@ -55,45 +53,48 @@ function PlaySongLyric({ id, thumb, time }) {
 
   const handleAutoScroll = (index) => {
     if (sentencesRef.current) {
-      sentencesRef.current.parentElement.scrollTop = 66*index
+      sentencesRef.current.parentElement.scrollTop = 66 * index
     }
   }
 
-  const optRef = useRef()
-  const optRef1 = useRef()
-  const optRef2 = useRef()
   const lyricRef = useRef()
   const sentencesRef = useRef()
 
   return (
     <div ref={lyricRef} className='play-song-lyric'>
+      <img src={`${lyric.length > 0 && lyric[lyric.length - 1].defaultIBGUrls[0]}`} alt="" style={{ position: 'fixed', bottom: '90px', opacity: '0.7' }} />
       <div className='play-song-lyric__wrapper'>
         <div className='play-song-lyric__options'>
           <div
-            ref={optRef}
             className='play-song-lyric__options-item'
-            onClick={handleClickOption}
           >
             Danh sách bài hát
           </div>
           <div
-            ref={optRef1}
             className='play-song-lyric__options-item'
-            onClick={handleClickOption1}
           >
             karaoke
           </div>
           <div
-            ref={optRef2}
-            className='play-song-lyric__options-item'
-            onClick={handleClickOption2}
+            className='play-song-lyric__options-item play-song-lyric__options-item--active'
           >
             Lời bài hát
           </div>
         </div>
         <div className='play-song-lyric__actions'>
           <div className='play-song__btn'><FontAwesomeIcon icon="fa-solid fa-up-right-and-down-left-from-center" /></div>
-          <div className='play-song__btn'><FontAwesomeIcon icon="fa-solid fa-gear" /></div>
+          <div className='play-song__btn'>
+            <FontAwesomeIcon icon="fa-solid fa-gear" />
+            <div>
+              <div>
+                Hình nền
+                
+              </div>
+              <div>Chỉ phát nhạc nền</div>
+              <div>Cỡ chữ lời nhạc</div>
+              <div>Luôn phát nhạc toàn màn hình</div>
+            </div>
+          </div>
           <div
             className='play-song__btn'
             onClick={handleUnmountedLyric}
@@ -114,8 +115,8 @@ function PlaySongLyric({ id, thumb, time }) {
               <div
                 className='play-song-lyric__center'
               >
-                {loading ? <ReactLoading type='spinningBubbles' color='#fff' height={100} width={100} /> :
-                  sentences.map((sentence, index) => (
+                {loading ? <ReactLoading type='spinningBubbles' color='#fff' height={100} style={{ padding: 180 + 'px' }} /> :
+                  sentences && sentences.map((sentence, index) => (
                     <div
                       key={index}
                       ref={sentencesRef}

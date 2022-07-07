@@ -1,5 +1,5 @@
-import homeApi from 'api/homeApi'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import Artist from './artistSpotlight/Artist'
 import Event from './Event/Event'
 import HomeChart from './homeChart/HomeChart'
@@ -9,21 +9,13 @@ import ZingchartWeek from './ZingchartWeek/ZingchartWeek'
 function HomePage3() {
     const [list, setList] = useState({})
 
-    useEffect(() => {
-        const getHomePage3 = async () => {
-            try {
-                const params = {
-                    page: 3
-                }
-                const response = await homeApi.getAll(params)
-                setList(response.data)
-            } catch (error) {
-                console.log('Falied to fetch data: ', error)
-            }
-        }
+    const homeData = useSelector(state => state.homeData)
 
-        getHomePage3()
-    },[])
+    useEffect(() => {
+        if(homeData.length > 0){
+            setList(homeData[0].items)
+        }
+    },[homeData])
 
   return (
     <div>

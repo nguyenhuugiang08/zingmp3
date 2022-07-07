@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+const { createSlice } = require("@reduxjs/toolkit");
 
 const top100 = createSlice({
     name: 'top100',

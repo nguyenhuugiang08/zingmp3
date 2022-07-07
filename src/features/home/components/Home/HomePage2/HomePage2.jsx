@@ -1,26 +1,19 @@
-import homeApi from 'api/homeApi'
 import React, { useEffect, useState } from 'react'
 import HomeNewMusic from './HomeNewMusic/HomeNewMusic'
 import HomeRadio from './HomeRadio/HomeRadio'
 
+import { useSelector } from 'react-redux'
+
 function HomePage2() {
-    const [data, setData] = useState({})
+    const [data, setData] = useState([])
+    const homeData = useSelector(state => state.homeData)
 
     useEffect(() => {
-        const getRadio = async () => {
-            try {
-                const params = {
-                    page: 2
-                }
-                const response = await homeApi.getAll(params)
-                setData(response.data)
-            } catch (error) {
-                console.log('Failed to fetch data: ', error)
-            }
+        if(homeData.length > 0){
+            setData(homeData[0].items)
         }
+    },[homeData])
 
-        getRadio()
-    }, [])
   return (
     <div>
             <HomeRadio data={data}/>

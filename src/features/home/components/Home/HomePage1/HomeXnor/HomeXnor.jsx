@@ -3,60 +3,69 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import { Col, Container, Row } from 'reactstrap'
 import styles from 'scss/Home5.module.scss'
+import { useDispatch } from 'react-redux'
+import { loadLink } from 'features/linkSlice'
 
 
 function HomeXnor({ list }) {
     const [chooses, setChooses] = useState([])
+    const dispatch = useDispatch()
     useEffect(() => {
-        if (list.length !== 0) {
-            const newList = [...list]
-            const restList = newList.splice(4, 1)
-            setChooses(restList)
+        if (list.length > 0) {
+            setChooses(list[11])
         }
     }, [list])
+
+
+    const handleClickLink = (link) => {
+        const action = loadLink(link)
+        dispatch(action)
+    }
     return (
         <div>
             <div className={styles.home5}>
-                {chooses.map((item, index) => (
-                    <div key={index}>
-                        <div className={styles.home5Tiltle}>{item.title}</div>
-                        <div className={styles.home5Container}>
-                            <Container>
-                                <Row xs={5}>
-                                    {item.items.map((compo, index) => (
-                                        <div key={index}>
-                                            {index >= 5 ? <></> :
-                                                <Col className={styles.home5Col}>
-                                                    <div className={styles.home5Par}>
-                                                        <div className={styles.home5Image} style={{ backgroundImage: `url(${compo.thumbnail})` }}>
+                <div>
+                    <div className={styles.home5Tiltle}>{chooses.title}</div>
+                    <div className={styles.home5Container}>
+                        <Container>
+                            <Row xs={5}>
+                                {chooses.items && chooses.items.map((compo, index) => (
+                                    <div key={index}>
+                                        {index >= 5 ? <></> :
+                                            <Col className={styles.home5Col}>
+                                                <div className={styles.home5Par}>
+                                                    <div className={styles.home5Image} style={{ backgroundImage: `url(${compo.thumbnail})` }}>
+                                                    </div>
+                                                    <div className={styles.home5Child}>
+                                                        <div>
+                                                            <FontAwesomeIcon icon="fa-regular fa-heart" />
                                                         </div>
-                                                        <div className={styles.home5Child}>
-                                                            <div>
-                                                                <FontAwesomeIcon icon="fa-regular fa-heart" />
-                                                            </div>
-                                                            <Link className={styles.home5Play} to={compo.link}>
-                                                                <FontAwesomeIcon icon="fa-solid fa-play" />
-                                                            </Link>
-                                                            <div>
-                                                                <FontAwesomeIcon icon="fa-solid fa-ellipsis" />
-                                                            </div>
+                                                        <Link
+                                                            className={styles.home5Play}
+                                                            to={`${compo.link}/${compo.encodeId}`}
+                                                            onClick={() => handleClickLink(compo.link)}
+                                                        >
+                                                            <FontAwesomeIcon icon="fa-solid fa-play" />
+                                                        </Link>
+                                                        <div>
+                                                            <FontAwesomeIcon icon="fa-solid fa-ellipsis" />
                                                         </div>
                                                     </div>
-                                                    <div className={styles.home5Title}>
-                                                        {compo.title}
-                                                    </div>
-                                                    <div className={styles.home5SortDescription}>
-                                                        {compo.sortDescription}
-                                                    </div>
-                                                </Col>
-                                            }
-                                        </div>
-                                    ))}
-                                </Row>
-                            </Container>
-                        </div>
+                                                </div>
+                                                <div className={styles.home5Title}>
+                                                    {compo.title}
+                                                </div>
+                                                <div className={styles.home5SortDescription}>
+                                                    {compo.sortDescription}
+                                                </div>
+                                            </Col>
+                                        }
+                                    </div>
+                                ))}
+                            </Row>
+                        </Container>
                     </div>
-                ))}
+                </div>
             </div>
         </div>
     )

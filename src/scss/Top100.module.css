@@ -1,0 +1,120 @@
+.top100 {
+  color: #fff;
+}
+
+.top100 .top100Title {
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 4px 0;
+}
+
+.top100 .top100Image {
+  padding-top: 100%;
+  background-position: center;
+  background-size: contain;
+  border-radius: 8px;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+}
+
+.top100 .top100Container {
+  padding: 16px 0 30px;
+}
+
+.top100 .top100Tiltle {
+  padding-left: 12px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.top100 .top100Col {
+  padding-bottom: 30px;
+  overflow: hidden;
+}
+
+.top100 .top100Artist {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.top100 .top100ArtistItem {
+  padding: 0 !important;
+  font-size: 14px;
+  font-weight: 500;
+  color: #88848E !important;
+  margin-right: 4px;
+}
+
+.top100 .top100ArtistItem:hover {
+  text-decoration: underline;
+  color: #c662ef !important;
+}
+
+.top100 .top100Banner {
+  position: relative;
+  opacity: 0.3;
+  border-radius: 3px;
+  padding-bottom: 30px;
+}
+
+.top100 .top100Par {
+  position: relative;
+  cursor: pointer;
+}
+
+.top100 .top100Par:hover .top100Child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.top100 .top100Par:hover .top100Image {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  opacity: 0.4;
+  -webkit-transition: all 1.2s ease;
+  transition: all 1.2s ease;
+}
+
+.top100 .top100Child {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 1.2rem;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+  display: none;
+}
+
+.top100 .top100Play {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  top: -6px;
+  color: #fff;
+}
+/*# sourceMappingURL=Top100.module.css.map */

@@ -1,0 +1,143 @@
+.top100Outstanding {
+  color: #fff;
+  padding-top: 30px;
+}
+
+.top100Outstanding .mainTitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.top100Outstanding .mainTitle a {
+  text-decoration: none;
+  color: #798791;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.top100Outstanding .mainTitle a span {
+  margin-right: 4px;
+}
+
+.top100Outstanding .top100OutstandingTitle {
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 4px 0;
+}
+
+.top100Outstanding .top100OutstandingImage {
+  padding-top: 100%;
+  background-position: center;
+  background-size: contain;
+  border-radius: 8px;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+}
+
+.top100Outstanding .top100OutstandingContainer {
+  padding: 16px 0 30px;
+}
+
+.top100Outstanding .top100OutstandingTiltle {
+  padding-left: 12px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.top100Outstanding .top100OutstandingCol {
+  padding-bottom: 30px;
+  overflow: hidden;
+}
+
+.top100Outstanding .top100OutstandingArtist {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.top100Outstanding .top100OutstandingArtistItem {
+  padding: 0 !important;
+  font-size: 14px;
+  font-weight: 500;
+  color: #88848E !important;
+  margin-right: 4px;
+}
+
+.top100Outstanding .top100OutstandingArtistItem:hover {
+  text-decoration: underline;
+  color: #c662ef !important;
+}
+
+.top100Outstanding .top100OutstandingBanner {
+  position: relative;
+  opacity: 0.4;
+  border-radius: 3px;
+}
+
+.top100Outstanding .top100OutstandingPar {
+  position: relative;
+  cursor: pointer;
+}
+
+.top100Outstanding .top100OutstandingPar:hover .top100OutstandingChild {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.top100Outstanding .top100OutstandingPar:hover .top100OutstandingImage {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  opacity: 0.4;
+  -webkit-transition: all 1.2s ease;
+  transition: all 1.2s ease;
+}
+
+.top100Outstanding .top100OutstandingChild {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 1.2rem;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+  display: none;
+}
+
+.top100Outstanding .top100OutstandingPlay {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  top: -6px;
+  color: #fff;
+}
+/*# sourceMappingURL=Top100Outstanding.module.css.map */

@@ -1,0 +1,160 @@
+.home3 {
+  color: #fff;
+  margin-top: 30px;
+}
+
+.home3 .home3Col {
+  margin-top: 16px;
+}
+
+.home3 .home3Image {
+  padding-top: 100%;
+  background-position: center;
+  background-size: contain;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+  border-radius: 8px;
+}
+
+.home3 .home3ImageActive {
+  padding-top: 100%;
+  background-position: center;
+  background-size: contain;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+  border-radius: 50%;
+}
+
+.home3 .home3Descripton {
+  margin-top: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.home3 .home3DescriptonActive {
+  margin: 4px 0 0 24px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.home3 .home3Par {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.home3 .home3ParActive {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.home3 .home3Par:hover .home3Child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.home3 .home3Par:hover .home3Image {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  opacity: 0.4;
+  -webkit-transition: all 1.2s ease;
+  transition: all 1.2s ease;
+}
+
+.home3 .home3Par:hover .home3ImageActive {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  opacity: 0.4;
+  -webkit-transition: all 1.2s ease;
+  transition: all 1.2s ease;
+}
+
+.home3 .home3ParActive:hover .home3Child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.home3 .home3ParActive:hover .home3Image {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  opacity: 0.4;
+  -webkit-transition: all 1.2s ease;
+  transition: all 1.2s ease;
+}
+
+.home3 .home3ParActive:hover .home3ImageActive {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  opacity: 0.4;
+  -webkit-transition: all 1.2s ease;
+  transition: all 1.2s ease;
+}
+
+.home3 .home3Child {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 1.2rem;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+  display: none;
+}
+
+.home3 .home3Play {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  top: -6px;
+}
+
+.home3 .mainTitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.home3 .mainTitle a {
+  text-decoration: none;
+  color: #798791;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.home3 .mainTitle a span {
+  margin-right: 4px;
+}
+
+.home3 .mainTitle .home3Title {
+  padding-left: 12px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+/*# sourceMappingURL=Home3.module.css.map */

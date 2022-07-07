@@ -32,11 +32,9 @@ function Header() {
         }
     }
 
-    console.log(data)
-
     return (
         <>
-            <div className={`${styles.header} d-flex `}>
+            <div className={`${styles.header} d-flex header`}>
                 <div className="d-flex">
                     <Button
                         className={styles.haederBtn}

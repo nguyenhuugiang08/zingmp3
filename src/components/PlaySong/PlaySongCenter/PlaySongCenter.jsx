@@ -7,6 +7,8 @@ import PlaySongRight from '../PlaySongRight/PlaySongRight';
 import PlaySongLyric from 'components/PlaySong/PlaySongLyric/PlaySongLyric';
 
 function PlaySongCenter() {
+    const dataStore = useSelector(state => state.top100)
+
     const [loading, setLoading] = useState(false)
     const [id, setId] = useState('')
     const [pathSong, setPathSong] = useState('')
@@ -22,7 +24,6 @@ function PlaySongCenter() {
     const [duration, setDuration] = useState('')
     const [vol, setVol] = useState(1)
     const [displayLyric, setDisplayLyric] = useState(false)
-    const dataStore = useSelector(state => state.top100)
 
     const [thumb, setThumb] = useState('')
 
@@ -35,6 +36,7 @@ function PlaySongCenter() {
                 setLoading(true)
                 const response = await songApi.getAll(params)
                 setPathSong(response.data)
+                setIsPlaying(true)
                 setLoading(false)
             }
             getPath()
