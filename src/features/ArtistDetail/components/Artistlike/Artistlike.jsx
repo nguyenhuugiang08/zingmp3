@@ -4,10 +4,10 @@ import style from 'scss/Top100Outstanding.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Col, Container, Nav, NavItem, NavLink, Row } from 'reactstrap'
+import { Col, Container, Row } from 'reactstrap'
 
-function Artistamong() {
-    const [among, setAmong] = useState([])
+function Artistlike() {
+    const [like, setLike] = useState([])
     const artistData = useSelector(state => state.artist)
 
     const dispatch = useDispatch()
@@ -21,18 +21,18 @@ function Artistamong() {
 
     useEffect(() => {
         if (data.sections && data.sections.length > 0) {
-            setAmong(data.sections[data.sections.length === 7 ? 5 : 4].items)
+            setLike(data.sections[data.sections.length === 7 ? 6 : 5].items)
         }
     }, [data])
 
-    const handleClickLink = (link) => {
-        const action = loadLink(link)
+    const handleClickLink = (...rest) => {
+        const action = loadLink(rest)
         dispatch(action)
     }
     return (
         <div className={style.top100Outstanding}>
             <div className={style.mainTitle}>
-                <div className={style.top100OutstandingTiltle}>{data.sections && data.sections[data.sections.length === 7 ? 5 : 4].title}</div>
+                <div className={style.top100OutstandingTiltle}>{data.sections && data.sections[data.sections.length === 7 ? 6 : 5].title}</div>
                 <Link to="/Top100">
                     <span>{'tất cả'.toUpperCase()}</span>
                     <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
@@ -41,12 +41,12 @@ function Artistamong() {
             <div className={style.top100OutstandingContainer}>
                 <Container>
                     <Row xs={5}>
-                        {among.map((among, index) => (
+                        {like.map((like, index) => (
                             <div key={index}>
                                 {index >= 5 ? <></> :
                                     <Col className={style.top100OutstandingCol}>
-                                        <div className={style.top100OutstandingPar}>
-                                            <div className={style.top100OutstandingImage} style={{ backgroundImage: `url(${among.thumbnail})` }}>
+                                        <div className={style.top100OutstandingPar} style={{borderRadius:'50%'}}>
+                                            <div className={style.top100OutstandingImage} style={{ backgroundImage: `url(${like.thumbnail})`, borderRadius:'50%' }}>
                                             </div>
                                             <div className={style.top100OutstandingChild}>
                                                 <div>
@@ -54,8 +54,8 @@ function Artistamong() {
                                                 </div>
                                                 <Link
                                                     className={style.top100OutstandingPlay}
-                                                    to={`${among.link}/${among.encodeId}`}
-                                                    onClick={() => handleClickLink(among.link)}
+                                                    to={`${like.link}/${like.alias}`}
+                                                    onClick={() => handleClickLink(like.link, 'artistdetail')}
                                                 >
                                                     <FontAwesomeIcon icon="fa-solid fa-play" />
                                                 </Link>
@@ -64,24 +64,11 @@ function Artistamong() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className={style.top100OutstandingTitle}>
-                                            {among.title}
-                                        </div>
-                                        <div>
-                                            <Nav>
-                                                {among.artists.map((artist, index) => (
-                                                    <div key={index} className={style.top100OutstandingArtist}>
-                                                        <NavItem>
-                                                            <NavLink
-                                                                href="#"
-                                                                className={style.top100OutstandingArtistItem} 
-                                                            >
-                                                                {artist.name},
-                                                            </NavLink>
-                                                        </NavItem>
-                                                    </div>
-                                                ))}
-                                            </Nav>
+                                        <div className='d-flex justify-content-center align-items-center flex-column'>
+                                            <div className={style.top100OutstandingTitle}>
+                                                {like.name}
+                                            </div>
+                                            <div>{Math.floor(like.totalFollow / 1000)}K quan tâm</div>
                                         </div>
                                     </Col>
                                 }
@@ -95,4 +82,4 @@ function Artistamong() {
     )
 }
 
-export default Artistamong
+export default Artistlike

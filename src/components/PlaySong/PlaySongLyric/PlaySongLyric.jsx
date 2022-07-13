@@ -10,6 +10,8 @@ import { getLyricApi } from '../getLyric';
 function PlaySongLyric({ id, thumb, time }) {
   const [sentences, setSentences] = useState([])
   const [loading, setLoading] = useState(false)
+  const [mode, setMode] = useState(false)
+  const [display, setDisplay] = useState(false)
 
   const dispatch = useDispatch()
   const lyric = useSelector(state => state.lyric)
@@ -35,17 +37,13 @@ function PlaySongLyric({ id, thumb, time }) {
     }
   }, [lyric])
 
-  let optionBtn = document.querySelectorAll('.play-song-lyric__options-item')
-  let optionActiveBtn = document.querySelectorAll('.play-song-lyric__options-item--active')
-
-  optionBtn.forEach((element, index) => {
-    element.addEventListener('click', () => {
-      element.classList.add("play-song-lyric__options-item--active")
-      optionActiveBtn.forEach(btn => {
-        btn.classList.remove("play-song-lyric__options-item--active")
-      })
-    })
-  })
+  const handleChangeCategory = (e) => {
+    let activeElement = document.querySelectorAll('.play-song-lyric__options-item')
+    activeElement.forEach((element) => {
+      element.style.backgroundColor = "transparent"
+    });
+    e.target.style.backgroundColor = "#6D5C79"
+  }
 
   const handleUnmountedLyric = () => {
     lyricRef.current.style.display = "none"
@@ -59,40 +57,105 @@ function PlaySongLyric({ id, thumb, time }) {
 
   const lyricRef = useRef()
   const sentencesRef = useRef()
+  const circleRef = useRef()
+  const modeRef = useRef()
+  const imgRef = useRef()
+
+  const handleChangeFontSize = (e, val) => {
+    let activeElement = document.querySelectorAll('.btn-fontsize')
+    activeElement.forEach((element) => {
+      element.style.backgroundColor = "#ffffff1a"
+    });
+    e.target.style.backgroundColor = "#7200a1"
+    let sentencesElement = document.querySelectorAll('.play-song-lyric__center-sentences')
+    sentencesElement.forEach(element => {
+      element.style.fontSize = `${val === 1 ? "30px" : (val ===2 ? "42px" : "46px")}`
+    });
+  }
+
+  const handleClickMode = () => {
+    if (!mode) {
+      let index = Math.floor(Math.random() * (lyric[lyric.length - 1].defaultIBGUrls.length - 1))
+      circleRef.current.style.marginLeft = '13px'
+      circleRef.current.style.animation = 'lightMode linear 0.2s'
+      modeRef.current.style.backgroundColor = '#7200a1'
+      imgRef.current.src = `${lyric.length > 0 && lyric[lyric.length - 1].defaultIBGUrls[index]}`
+      setMode(true)
+    } else {
+      circleRef.current.style.marginLeft = '0px'
+      circleRef.current.style.animation = 'darkMode linear 0.2s'
+      modeRef.current.style.backgroundColor = '#a0a0a0'
+      imgRef.current.src = ''
+      setMode(false)
+    }
+  }
+
+  const handleDisplayMenu = () => {
+    let modeElement = document.querySelector('.play-song__btn-mode')
+    if(!display){
+      modeElement.style.display = "block"
+      setDisplay(true)
+    }else {
+      modeElement.style.display = "none"
+      setDisplay(false)
+    }
+  }
 
   return (
     <div ref={lyricRef} className='play-song-lyric'>
-      <img src={`${lyric.length > 0 && lyric[lyric.length - 1].defaultIBGUrls[0]}`} alt="" style={{ position: 'fixed', bottom: '90px', opacity: '0.7' }} />
+      <img ref={imgRef} src={''} alt="" style={{ position: 'fixed', bottom: '90px', opacity: '0.7' }} />
       <div className='play-song-lyric__wrapper'>
         <div className='play-song-lyric__options'>
           <div
             className='play-song-lyric__options-item'
+            onClick={e => handleChangeCategory(e)}
           >
             Danh sách bài hát
           </div>
           <div
             className='play-song-lyric__options-item'
+            onClick={e => handleChangeCategory(e)}
           >
             karaoke
           </div>
           <div
             className='play-song-lyric__options-item play-song-lyric__options-item--active'
+            onClick={e => handleChangeCategory(e)}
           >
             Lời bài hát
           </div>
         </div>
         <div className='play-song-lyric__actions'>
           <div className='play-song__btn'><FontAwesomeIcon icon="fa-solid fa-up-right-and-down-left-from-center" /></div>
-          <div className='play-song__btn'>
+          <div className='play-song__btn' onClick={handleDisplayMenu}>
             <FontAwesomeIcon icon="fa-solid fa-gear" />
-            <div>
-              <div>
-                Hình nền
-                
+            <div className='play-song__btn-mode' onClick={e => e.stopPropagation()}>
+              <div className='play-song__btn-mode-item '>
+                <div>Hình nền</div>
+                <div className='btn-mode' ref={modeRef} onClick={handleClickMode}>
+                  <div className='btn-mode__circle' ref={circleRef}></div>
+                </div>
               </div>
-              <div>Chỉ phát nhạc nền</div>
-              <div>Cỡ chữ lời nhạc</div>
-              <div>Luôn phát nhạc toàn màn hình</div>
+              <div className='play-song__btn-mode-item play-song__btn-mode-item__prevent'>
+                Chỉ phát nhạc nền
+                <div className='btn-mode' >
+                  <div className='btn-mode__circle'></div>
+                </div>
+              </div>
+              <div className='play-song__btn-mode-item'>
+                Cỡ chữ lời nhạc
+                <div className='d-flex justify-content-between'>
+                  <div className='play-song__btn-mode-item__sm ms-2 btn-fontsize' onClick={(e) => handleChangeFontSize(e,1)}>A</div>
+                  <div className='play-song__btn-mode-item__md play-song__btn-mode-item__active ms-2 btn-fontsize' onClick={(e) => handleChangeFontSize(e,2)}>A</div>
+                  <div className='play-song__btn-mode-item__xl ms-2 btn-fontsize' onClick={(e) => handleChangeFontSize(e,3)}>A</div>
+                </div>
+              </div>
+              <div className='play-song__btn-mode-item'>
+                Luôn phát nhạc toàn màn hình
+                <div className='btn-mode' >
+                  <div className='btn-mode__circle'></div>
+                </div>
+              </div>
             </div>
           </div>
           <div

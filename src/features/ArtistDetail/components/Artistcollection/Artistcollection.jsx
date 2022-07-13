@@ -21,7 +21,7 @@ function Artistcollection() {
 
     useEffect(() => {
         if (data.sections && data.sections.length > 0) {
-            setCollection(data.sections[4].items)
+            setCollection(data.sections[data.sections.length === 7 ? 4 : 3].items)
         }
     }, [data])
 
@@ -32,7 +32,7 @@ function Artistcollection() {
     return (
         <div className={style.top100Outstanding}>
             <div className={style.mainTitle}>
-                <div className={style.top100OutstandingTiltle}>{data.sections && data.sections[4].title}</div>
+                <div className={style.top100OutstandingTiltle}>{data.sections && data.sections[data.sections.length === 7 ? 4 : 3].title}</div>
                 <Link to="/Top100">
                     <span>{'tất cả'.toUpperCase()}</span>
                     <FontAwesomeIcon icon="fa-solid fa-chevron-right" />

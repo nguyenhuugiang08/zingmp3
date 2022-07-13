@@ -25,6 +25,7 @@ function Home() {
         setLoading(true)
         const response = await homeApi.getAll()
         dispatch(getHomeApi(response.data))
+        console.log(response.url)
         setLoading(false)
       } catch (error) {
         console.log('Failed to fetch data: ', error)

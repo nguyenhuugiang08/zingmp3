@@ -11,6 +11,9 @@ import Artistcollection from './Artistcollection/Artistcollection'
 import ArtistMv from './Artistmv/ArtistMv'
 import Artistoutstanding from './Artistoutstanding/Artistoutstanding'
 import Artistsingle from './Artistsingle/Artistsingle'
+import 'scss/ArtistDetail.scss'
+import { loadCurrentSong } from 'features/top100/top100Slice'
+import Artistlike from './Artistlike/Artistlike'
 
 function ArtistDetail() {
   const { encodeId } = useParams()
@@ -31,7 +34,7 @@ function ArtistDetail() {
       setLoading(false)
     }
     getInfoArtist()
-  }, [])
+  }, [encodeId])
 
   useEffect(() => {
     if (artistData.length > 0) {
@@ -39,51 +42,74 @@ function ArtistDetail() {
     }
   }, [artistData])
 
+  const handleClick = (props) => {
+    const action = loadCurrentSong(props)
+    dispatch(action)
+  }
+
+  let index = Math.floor(Math.random() * 40)
+
   return (
     <div>
       {loading ? <span style={{ color: '#fff' }}>Loading...</span> :
-        <div style={{ color: '#fff' }}>
-          <Container>
-            <Row>
-              <Col xs={7}>
-                <div>{data.name}</div>
-                <div>{data.biography}</div>
-                <div className='d-flex justify-content-start align-items-center'>
-                  <div>
-                    <FontAwesomeIcon icon="fa-solid fa-play" />
-                    PHÁT NHẠC
+        <div>
+          <div className='Artist-blur'></div>
+          <div className='Artist-detail'>
+            <Container>
+              <Row>
+                <Col xs={7}>
+                  <div className='Artist-detail__name'>{data.name}</div>
+                  <div className='Artist-detail__biography'>
+                    {data.biography}
                   </div>
-                  <div className='ms-5'>QUAN TÂM <span className='mx-1'>•</span> {Math.floor(data.totalFollow / 1000)}K</div>
+                  <div className='Artist-detail__more'>XEM THÊM</div>
+                  <div className='d-flex justify-content-start align-items-center mt-4'>
+                    <div className='Artist-detail__play' onClick={() => handleClick(
+                      {
+                        encodeId: data.sections && data.sections.length > 0 && data.sections[0].items[index].encodeId,
+                        isPlay: true,
+                        songs: data.sections && data.sections.length > 0 && data.sections[0].items,
+                        index: index
+                      }
+                    )}>
+                      <FontAwesomeIcon icon="fa-solid fa-play" className='me-2' />
+                      PHÁT NHẠC
+                    </div>
+                    <div className='ms-3 Artist-detail__care'>QUAN TÂM <span className='mx-1'>•</span> {Math.floor(data.totalFollow / 1000)}K</div>
+                  </div>
+                  <div>
+                    <i class="icon ic-zing-choice"></i>
+                  </div>
+                </Col>
+                <Col xs={5}>
+                  <div className='d-flex justify-content-end'>
+                    <img className='Artist-detail__img' src={data.thumbnail} alt="" />
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <div className='Artist-detail__filter '>
+                  <div className='Artist-detail__filter-wrapper d-flex justify-content-between align-items-center'>
+                    <div className='Artist-detail__filter-wrapper-cate Artist-detail__filter-wrapper-cate--active'>TỔNG QUAN</div>
+                    <div className='Artist-detail__filter-wrapper-cate'>HOẠT ĐỘNG</div>
+                    <div className='Artist-detail__filter-wrapper-cate'>SỰ KIỆN</div>
+                    <div className='Artist-detail__filter-wrapper-cate'>BÀI HÁT</div>
+                    <div className='Artist-detail__filter-wrapper-cate'>SINGLE {'&'} EP</div>
+                    <div className='Artist-detail__filter-wrapper-cate'>ALBUM</div>
+                    <div className='Artist-detail__filter-wrapper-cate'>MV</div>
+                  </div>
                 </div>
-                <div>
-                  <i class="icon ic-zing-choice"></i>
-                </div>
-              </Col>
-              <Col xs={5}>
-                <div>
-                  <img src={data.thumbnail} alt="" />
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <div className='d-flex justify-content-between align-items-center px-5'>
-                <div>TỔNG QUAN</div>
-                <div>HOẠT ĐỘNG</div>
-                <div>SỰ KIỆN</div>
-                <div>BÀI HÁT</div>
-                <div>SINGLE {'&'} EP</div>
-                <div>ALBUM</div>
-                <div>MV</div>
-              </div>
-            </Row>
-            <Artistoutstanding />
-            <Artistsingle />
-            <Artistalbum/>
-            <ArtistMv/>
-            <Artistcollection/>
-            <Artistamong/>
-          </Container>
+              </Row>
+              <Artistoutstanding />
+              <Artistsingle />
+              {data.sections && data.sections.length === 7 ? < Artistalbum /> : <></>}
+              <ArtistMv />
+              <Artistcollection />
+              <Artistamong />
+              <Artistlike />
+            </Container>
 
+          </div>
         </div>
       }
     </div >

@@ -3,7 +3,8 @@ import styles from 'scss/Header.module.scss'
 import { Navbar, Collapse, Button } from 'reactstrap'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import searchApi from "api/searchApi";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Header() {
     const [keyword, setKeyWord] = useState('')
@@ -11,7 +12,6 @@ function Header() {
     const [id, setId] = useState('')
 
     const navigate = useNavigate()
-
     const inputRef = useRef()
 
     useEffect(() => {

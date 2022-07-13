@@ -23,18 +23,19 @@ function ArtistMv() {
 
     useEffect(() => {
         if (data.sections && data.sections.length > 0) {
-            setMv(data.sections[3].items)
+            setMv(data.sections[data.sections.length === 7 ? 3 : 2].items)
         }
     }, [data])
 
-    const handleClickLink = (link) => {
-        const action = loadLink(link)
+    const handleClickLink = (...rest) => {
+        const action = loadLink(rest)
         dispatch(action)
     }
+
     return (
         <div className={style.top100Outstanding}>
             <div className={style.mainTitle}>
-                <div className={style.top100OutstandingTiltle}>{data.sections && data.sections[3].title}</div>
+                <div className={style.top100OutstandingTiltle}>{data.sections && data.sections[data.sections.length === 7 ? 3 : 2].title}</div>
                 <Link to="/Top100">
                     <span>{'tất cả'.toUpperCase()}</span>
                     <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
@@ -65,7 +66,7 @@ function ArtistMv() {
                                         <Link
                                             className={style.top100OutstandingPlay}
                                             to={`${mv.link}/${mv.encodeId}`}
-                                            onClick={() => handleClickLink(mv.link)}
+                                            onClick={() => handleClickLink(mv.link, 'mv')}
                                         >
                                             <FontAwesomeIcon icon="fa-solid fa-play" />
                                         </Link>
@@ -73,7 +74,7 @@ function ArtistMv() {
                                 </div>
                                 <div className=' d-flex justify-content-start align-items-center mt-1'>
                                     <div style={{width: '40px', height: '40px',position:'relative', top: '3px'}}>
-                                        <div className={style.top100OutstandingMvImg} style={{ backgroundImage: `url(${mv.artist.thumbnail})` }}></div>
+                                        <div className={style.top100OutstandingMvImg} style={{ backgroundImage: `url(${mv.artist && mv.artist.thumbnail})` }}></div>
                                     </div>
                                     <div className='ms-2'>
                                         <div className={style.top100OutstandingTitle}>
@@ -86,33 +87,6 @@ function ArtistMv() {
                         </SwiperSlide>
                     ))}
                 </Swiper>
-                {/* {mv.map((mv, index) => (
-                    <div key={index}>
-                        {index >= 4 ? <></> :
-                            <Col className={style.top100OutstandingCol}>
-                                <div className={style.top100OutstandingPar}>
-                                    <div className={style.top100OutstandingImage} style={{ backgroundImage: `url(${mv.thumbnailM})` }}>
-                                    </div>
-                                    <div className={style.top100OutstandingChild}>
-                                        <Link
-                                            className={style.top100OutstandingPlay}
-                                            to={`${mv.link}/${mv.encodeId}`}
-                                            onClick={() => handleClickLink(mv.link)}
-                                        >
-                                            <FontAwesomeIcon icon="fa-solid fa-play" />
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className={style.top100OutstandingTitle}>
-                                    {mv.title}
-                                </div>
-                                <div className={style.top100OutstandingArtistItem}>
-                                    {mv.releaseDateText}
-                                </div>
-                            </Col>
-                        }
-                    </div>
-                ))} */}
             </div>
         </div>
     )

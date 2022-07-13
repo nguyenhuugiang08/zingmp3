@@ -9,7 +9,7 @@ import MV from 'features/Mv/components/MV';
 import ArtistDetail from 'features/ArtistDetail/components/ArtistDetail';
 
 import { useSelector } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 function Routerall() {
@@ -29,6 +29,7 @@ function Routerall() {
     { path: `${path[path.length - 1]}/:encodeId`, component: Anbuml },
     { path: `${path.length > 0 && path[path.length - 1][1] === 'chart' && path[path.length - 1][0]}/:encodeId`, component: Chartdetail },
     { path: `${path.length > 0 && path[path.length - 1][1] === 'artistdetail' && path[path.length - 1][0]}/:encodeId`, component: ArtistDetail },
+    { path: `${path.length > 0 && path[path.length - 1][1] === 'mv' && path[path.length - 1][0]}/:encodeId`, component: MV },
     { path: "personal", component: Personal },
     { path: "zingchart", component:  Zingchart },
     { path: "radio", component: Radio },

@@ -3,7 +3,7 @@ import { loadLink } from 'features/linkSlice'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Col, Container, Nav, NavItem, NavLink, Row } from 'reactstrap'
+import { Col, Container, Nav, NavItem, Row } from 'reactstrap'
 import styles from 'scss/Home5.module.scss'
 
 function HomeNewMusic({ data }) {
@@ -19,6 +19,11 @@ function HomeNewMusic({ data }) {
 
     const handleClickLink = (link) => {
         const action = loadLink(link)
+        dispatch(action)
+    }
+
+    const handleClickNameArtist = (...rest) => {
+        const action = loadLink(rest)
         dispatch(action)
     }
     return (
@@ -60,12 +65,13 @@ function HomeNewMusic({ data }) {
                                                         {compo.artists.map((artist, index) => (
                                                             <div key={index} className={styles.home5Artist}>
                                                                 <NavItem>
-                                                                    <NavLink
-                                                                        href="#"
+                                                                    <Link
+                                                                        to={`${artist.link}/${artist.alias}`}
                                                                         className={styles.home5ArtistItem}
+                                                                        onClick={() =>handleClickNameArtist(artist.link, 'artistdetail')}
                                                                     >
                                                                         {artist.name},
-                                                                    </NavLink>
+                                                                    </Link>
                                                                 </NavItem>
                                                             </div>
                                                         ))}

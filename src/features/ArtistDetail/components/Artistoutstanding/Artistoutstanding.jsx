@@ -35,7 +35,7 @@ function Artistoutstanding() {
     return (
         <div style={{ color: '#fff' }}>
             <Row>
-                <div>{data.sections && data.sections[0].title}</div>
+                <div className='Artist-outstanding__title'>{data.sections && data.sections[0].title}</div>
                 <Col xs={3}>
                     <Swiper
                         slidesPerView={1}
@@ -52,54 +52,56 @@ function Artistoutstanding() {
                     >
                         {outstanding.map((outstanding, index) => (
                             <SwiperSlide key={index}>
-                                <img src={outstanding.thumbnailM} alt="" />
+                                <img className='Artist-outstanding__title-img' src={outstanding.thumbnailM} alt="" />
                             </SwiperSlide>
                         ))}
                     </Swiper>
                 </Col>
                 <Col xs={9}>
-                    <div className={styles.Album}>
-                        {outstanding.map((item, index) => (
-                            <div key={index} className={`${styles.albumWrapper}`} style={{ flex: '1' }}>
-                                <div className={styles.albumLeft}>
-                                    <div className={styles.albumImagePar}
-                                        onClick={() => handleClick({
-                                            encodeId: item.encodeId,
-                                            isPlay: true,
-                                            songs: outstanding,
-                                            index: index
-                                        })}
-                                    >
-                                        <img className={styles.albumImage} src={item.thumbnail} alt="" />
-                                        <div
-                                            className={styles.albumIconChild}
+                    <div className='Artist-outstanding__scroll'>
+                        <div className={`${styles.Album} Artist-outstanding`}>
+                            {outstanding.map((item, index) => (
+                                <div key={index} className={`${styles.albumWrapper}`} style={{ flex: '1' }}>
+                                    <div className={styles.albumLeft}>
+                                        <div className={styles.albumImagePar}
+                                            onClick={() => handleClick({
+                                                encodeId: item.encodeId,
+                                                isPlay: true,
+                                                songs: outstanding,
+                                                index: index
+                                            })}
                                         >
-                                            <FontAwesomeIcon icon="fa-solid fa-play" />
+                                            <img className={styles.albumImage} src={item.thumbnail} alt="" />
+                                            <div
+                                                className={styles.albumIconChild}
+                                            >
+                                                <FontAwesomeIcon icon="fa-solid fa-play" />
+                                            </div>
+                                        </div>
+                                        <div className={styles.albumArtistMain}>
+                                            <div>{item.title}</div>
+                                            <div className={styles.albumSongArtist}>
+                                                {item.artists !== undefined && item.artists.map((artist, index) => (
+                                                    <Link className={styles.albumArtistItem} key={index} to={artist.link}>
+                                                        {index > 0 ? `, ${artist.name}` : artist.name}
+                                                    </Link>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className={styles.albumArtistMain}>
-                                        <div>{item.title}</div>
-                                        <div className={styles.albumSongArtist}>
-                                            {item.artists !== undefined && item.artists.map((artist, index) => (
-                                                <Link className={styles.albumArtistItem} key={index} to={artist.link}>
-                                                    {index > 0 ? `, ${artist.name}` : artist.name}
-                                                </Link>
-                                            ))}
-                                        </div>
+                                    <Link className={styles.albumCenter} to={item.album !== undefined && item.album.link}>
+                                        {item.album !== undefined && item.album.title}
+                                    </Link>
+                                    <div className={styles.albumRight}>
+                                        {Math.floor(item.duration / 60) >= 10 ?
+                                            Math.floor(item.duration / 60) :
+                                            `0${Math.floor(item.duration / 60)}`
+                                        }:
+                                        {item.duration % 60 >= 10 ? item.duration % 60 : `0${item.duration % 60}`}
                                     </div>
                                 </div>
-                                <Link className={styles.albumCenter} to={item.album !== undefined && item.album.link}>
-                                    {item.album !== undefined && item.album.title}
-                                </Link>
-                                <div className={styles.albumRight}>
-                                    {Math.floor(item.duration / 60) >= 10 ?
-                                        Math.floor(item.duration / 60) :
-                                        `0${Math.floor(item.duration / 60)}`
-                                    }:
-                                    {item.duration % 60 >= 10 ? item.duration % 60 : `0${item.duration % 60}`}
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </Col>
             </Row>
