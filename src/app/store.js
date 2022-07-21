@@ -4,7 +4,7 @@ import linkReducer from "features/linkSlice"
 import homeReducer from "features/home/getHomeSlice"
 import zingchartReducer from "features/zingchart/getZingchartSlice"
 import playlistReducer from "features/zingchart/components/getPlaylistData"
-import idReducer from "features/home/components/Home/HomePage1/HomeSlider/getidSlice"
+import idReducer from "features/home/components/Home/HomePage1/getidSlice"
 import lyricReducer from "components/PlaySong/getLyric"
 import artistReducer from "features/ArtistDetail/getiArtistSlice"
 

@@ -7,9 +7,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import 'scss/confirmplaysong.scss'
 
 function ConfirmPlaySong() {
-    const [info, setInfo] = useState({})
+    const [infoSong, setInfoSong] = useState({})
     const [array, setarray] = useState([])
     const [encodeId, setEncodeId] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const dispatch = useDispatch()
     const id = useSelector(state => state.id)
@@ -33,37 +34,26 @@ function ConfirmPlaySong() {
                 id: encodeId
             }
             const respone = await infoSongApi.getAll(params)
-            if (respone.data) {
-                setInfo(respone.data)
-            }
-            if (info.album) {
-                const getplaylist = async () => {
-                    const params = {
-                        id: info.album.encodeId
-                    }
-                    const respone = await playlistApi.getAll(params)
-                    let newList = [...respone.data.song.items, ...respone.data.sections[0].items]
-                    setarray(newList)
-                }
-                getplaylist()
-            }
+            setInfoSong(respone.data)
         }
         getInfoSong()
     }, [encodeId])
 
     useEffect(() => {
-        if (info.album) {
+        if (infoSong && infoSong.album) {
             const getplaylist = async () => {
                 const params = {
-                    id: info.album.encodeId
+                    id: infoSong.album.encodeId
                 }
+                setLoading(true)
                 const respone = await playlistApi.getAll(params)
                 let newList = [...respone.data.song.items, ...respone.data.sections[0].items]
                 setarray(newList)
+                setLoading(false)
             }
             getplaylist()
         }
-    }, [info])
+    }, [infoSong])
 
     const handleCancel = () => {
         let ConfirmPlaySongElement = document.querySelector('.overlay_confirm')
@@ -74,18 +64,19 @@ function ConfirmPlaySong() {
             <div className='confirmplaysong'>
                 <div className='confirmplaysong_wrapper'>
                     <div>Bạn có muốn phát bài hát này? Danh sách phát hiện tại sẽ bị thay thế.</div>
-                    <div className='confirmplaysong_wrapper_img' ><div style={{ backgroundImage: `url(${info.thumbnailM})` }}></div></div>
-                    <div>{info.title}</div>
-                    <div className='confirmplaysong_wrapper_artist'>{info.artistsNames}</div>
-                    <div className='confirmplaysong_wrapper_play' onClick={() => handleClick({
-                        encodeId: encodeId,
-                        isPlay: true,
-                        songs: array,
-                        index: 0
-                    })}>
-                        <FontAwesomeIcon className='me-2' icon="fa-solid fa-play" />
-                        PHÁT BÀI HÁT
-                    </div>
+                    <div className='confirmplaysong_wrapper_img' ><div style={{ backgroundImage: `url(${infoSong && infoSong.thumbnailM})` }}></div></div>
+                    <div>{infoSong && infoSong.title}</div>
+                    <div className='confirmplaysong_wrapper_artist'>{infoSong && infoSong.artistsNames}</div>
+                    {loading ? <div></div> :
+                        <div className='confirmplaysong_wrapper_play' onClick={() => handleClick({
+                            encodeId: encodeId,
+                            isPlay: true,
+                            songs: array,
+                            index: array.indexOf(array.find(item => item.encodeId === encodeId))
+                        })}>
+                            <FontAwesomeIcon className='me-2' icon="fa-solid fa-play" />
+                            PHÁT BÀI HÁT
+                        </div>}
                     <div className='confirmplaysong_wrapper_addplaylist'>THÊM VÀO DANH SÁCH PHÁT</div>
                     <div className='confirmplaysong_wrapper_cancel' onClick={handleCancel}>BỎ QUA</div>
                 </div>

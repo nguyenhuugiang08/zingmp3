@@ -7,15 +7,15 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { loadLink } from 'features/linkSlice'
 
-function Artist({ list }) {
+function Artist({ data }) {
     const [artists, setArtist] = useState([])
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (list.length > 0) {
-            setArtist(list[7].items)
+        if (data.length > 0) {
+            setArtist(data.filter(item => item.sectionType === 'artistSpotlight')[0].items)
         }
-    }, [list])
+    }, [data])
 
     const classes = clsx(styles.artistThumb)
 

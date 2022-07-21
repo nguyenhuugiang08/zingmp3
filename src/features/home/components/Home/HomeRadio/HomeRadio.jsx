@@ -8,11 +8,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
 function HomeRadio({ data }) {
-    const [list, setList] = useState([])
+    const [list, setList] = useState({})
 
     useEffect(() => {
         if (data.length > 0) {
-            setList(data[13])
+            setList(data.filter(item => item.sectionType === 'livestream')[0])
         }
     }, [data])
 

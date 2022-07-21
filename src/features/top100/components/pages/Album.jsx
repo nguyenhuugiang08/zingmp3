@@ -7,11 +7,15 @@ import styles from 'scss/Album.module.scss'
 import { useDispatch } from 'react-redux'
 import { loadCurrentSong } from 'features/top100/top100Slice'
 import Loading from './Loading'
+import suggestPlaylistApi from 'api/SuggestPlaylistApi'
+import Artistjoin from './Artistjoin'
+import PlaylistSuggest from './PlaylistSuggest'
 
 function Anbuml() {
     const { encodeId } = useParams()
 
     const [playlist, setPlaylist] = useState({})
+    const [suggestPlaylist, setSuggestPlaylist] = useState({})
     const [playlistSong, setPlaylistSong] = useState({})
     const [songs, setSongs] = useState([])
     const [artist, setArtist] = useState([])
@@ -27,6 +31,19 @@ function Anbuml() {
             setLoading(true)
             const response = await playlistApi.getAll(params)
             setPlaylist(response.data)
+            setLoading(false)
+        }
+        getPlayList()
+    }, [encodeId])
+
+    useEffect(() => {
+        const getPlayList = async () => {
+            const params = {
+                id: encodeId
+            }
+            setLoading(true)
+            const response = await suggestPlaylistApi.getAll(params)
+            setSuggestPlaylist(response.data)
             setLoading(false)
         }
         getPlayList()
@@ -162,6 +179,8 @@ function Anbuml() {
                     </Container>
                 </div>
             }
+            <Artistjoin suggestPlaylist ={suggestPlaylist}/>
+            <PlaylistSuggest suggestPlaylist ={suggestPlaylist}/>
         </div>
     )
 }

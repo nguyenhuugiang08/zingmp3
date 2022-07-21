@@ -1,10 +1,10 @@
 import axiosClient from "./axiosClient";
 
-const videoApi = {
+const suggestPlaylistApi = {
   getAll: (params) => {
-    const url = '/mv';
+    const url = '/suggestedplaylist';
     return axiosClient.get(url, { params });
   },
 }
 
-export default videoApi; 
+export default suggestPlaylistApi; 

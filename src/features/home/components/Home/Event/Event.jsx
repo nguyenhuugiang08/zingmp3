@@ -5,14 +5,14 @@ import { SwiperSlide, Swiper } from 'swiper/react'
 
 import 'scss/Event.scss'
 
-function Event({ list }) {
+function Event({ data }) {
     const [event, setEvent] = useState({})
 
     useEffect(() => {
-        if (list.length > 0) {
-            setEvent(list[14])
+        if (data.length > 0) {
+            setEvent(data.filter(item => item.sectionType === 'event')[0])
         }
-    }, [list])
+    }, [data])
 
     const handleSubcribe = (e, sub, unSub) => {
         if (e.target.innerText === `${sub}`.toUpperCase()) {

@@ -6,16 +6,16 @@ import { Link } from 'react-router-dom'
 import { Col, Container, Row } from 'reactstrap'
 import styles from 'scss/ZingchartWeek.module.scss'
 
-function ZingchartWeek({ list }) {
+function ZingchartWeek({ data }) {
     const [week, setWeek] = useState([])
     const zingchartData = useSelector(state => state.zingchartData)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (list.length > 0) {
-            setWeek(list[6].items)
+        if (data.length > 0) {
+            setWeek(data.filter(item => item.sectionType === 'weekChart')[0].items)
         }
-    }, [list])
+    }, [data])
 
     const classes = clsx(styles.banner)
     const linkClasses = clsx(styles.link)

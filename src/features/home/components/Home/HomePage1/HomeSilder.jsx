@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper";
-import 'scss/Home1.scss'
 import { Link } from 'react-router-dom';
 import { loadLink } from 'features/linkSlice';
 import { useDispatch } from 'react-redux';
 import { getId } from './getidSlice';
 import ConfirmPlaySong from './confirmplaysong/ConfirmPlaySong';
 
-function HomeSilder({ list }) {
+import "swiper/css";
+import "swiper/css/navigation";
+import 'scss/Home1.scss'
+
+function HomeSilder({ data }) {
     const [sliders, setLiders] = useState([])
 
     const dispatch = useDispatch()
     useEffect(() => {
-        if (list.length !== 0) {
-            const newList = [...list]
-            const restList = newList.splice(0, 1)
-            setLiders(restList)
+        if (data.length !== 0) {
+            setLiders(data.filter(item => item.sectionType === 'banner'))
         }
-    }, [list])
+    }, [data])
 
     const handleClickLink = (link) => {
         const action = loadLink(link)

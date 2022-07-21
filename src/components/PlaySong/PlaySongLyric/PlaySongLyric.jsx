@@ -49,9 +49,11 @@ function PlaySongLyric({ id, thumb, time }) {
     lyricRef.current.style.display = "none"
   }
 
+  let scrollDistance = 66
+
   const handleAutoScroll = (index) => {
     if (sentencesRef.current) {
-      sentencesRef.current.parentElement.scrollTop = 66 * index
+      sentencesRef.current.parentElement.scrollTop = scrollDistance * index
     }
   }
 
@@ -69,7 +71,8 @@ function PlaySongLyric({ id, thumb, time }) {
     e.target.style.backgroundColor = "#7200a1"
     let sentencesElement = document.querySelectorAll('.play-song-lyric__center-sentences')
     sentencesElement.forEach(element => {
-      element.style.fontSize = `${val === 1 ? "30px" : (val ===2 ? "42px" : "46px")}`
+      element.style.fontSize = `${val === 1 ? "30px" : (val ===2 ? "40px" : "44px")}`
+      scrollDistance = `${val === 2 ? 90 : 98}`
     });
   }
 
@@ -178,7 +181,7 @@ function PlaySongLyric({ id, thumb, time }) {
               <div
                 className='play-song-lyric__center'
               >
-                {loading ? <ReactLoading type='spinningBubbles' color='#fff' height={100} style={{ padding: 180 + 'px' }} /> :
+                {loading ? <ReactLoading type='spinningBubbles' color='#fff' height={40} style={{ padding: 200 + 'px' }} /> :
                   sentences && sentences.map((sentence, index) => (
                     <div
                       key={index}

@@ -14,17 +14,17 @@ function Header() {
     const navigate = useNavigate()
     const inputRef = useRef()
 
-    useEffect(() => {
-        const getSearch = async () => {
-            const params = {
-                keyword: keyword
-            }
-            const response = await searchApi.getAll(params)
-            setData(response.data)
-        }
+    // useEffect(() => {
+    //     const getSearch = async () => {
+    //         const params = {
+    //             keyword: keyword
+    //         }
+    //         const response = await searchApi.getAll(params)
+    //         setData(response.data)
+    //     }
 
-        getSearch()
-    }, [keyword])
+    //     getSearch()
+    // }, [keyword])
 
     const handleOnKeyUp = (e) => {
         if(e.which === 13){

@@ -3,15 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styles from 'scss/Home3.module.scss'
 
-function Homeheard({ list }) {
+function Homeheard({ data }) {
     const [playlist, setPlaylist] = useState([])
     useEffect(() => {
-        if (list.length !== 0) {
-            const newList = [...list]
+        if (data.length !== 0) {
+            const newList = [...data]
             const restList = newList.splice(2, 1)
             setPlaylist(restList)
         }
-    }, [list])
+    }, [data])
     return (
         <div className={styles.home3}>
             {playlist.map((playlist, index) => (

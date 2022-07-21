@@ -60,7 +60,7 @@ function ArtistDetail() {
                 <Col xs={7}>
                   <div className='Artist-detail__name'>{data.name}</div>
                   <div className='Artist-detail__biography'>
-                    {data.biography}
+                    {data.biography || data.sortBiography}
                   </div>
                   <div className='Artist-detail__more'>XEM THÊM</div>
                   <div className='d-flex justify-content-start align-items-center mt-4'>

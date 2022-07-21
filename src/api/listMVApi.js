@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const listMVApi = {
   getAll: (params) => {
-    const url = '/listmv';
+    const url = '/listMv';
     return axiosClient.get(url, { params });
   },
 }

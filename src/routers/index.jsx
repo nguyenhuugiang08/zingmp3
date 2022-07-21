@@ -1,4 +1,4 @@
-import Home from 'features/home/components/Home/HomePage1/Home';
+import Home from 'features/home/components/Home/Home';
 import Top100 from 'features/top100/components/top100/Top100';
 import Anbuml from 'features/top100/components/pages/Album';
 import Personal from 'features/Personal/components/Personal/Personal';

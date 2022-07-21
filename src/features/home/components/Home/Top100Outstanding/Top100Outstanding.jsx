@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom'
 import { Col, Container, Nav, NavItem, NavLink, Row } from 'reactstrap'
 import styles from 'scss/Top100Outstanding.module.scss'
 
-function Top100Outstanding({ list }) {
+function Top100Outstanding({ data }) {
     const [outstanding, setOutstanding] = useState({})
     const dispatch = useDispatch()
     useEffect(() => {
-        if (list.length > 0) {
-            setOutstanding(list[8])
+        if (data.length > 0) {
+            setOutstanding(data.filter(item => item.sectionType === 'playlist' && item.title === "Top 100")[0])
         }
-    }, [list])
+    }, [data])
 
     const handleClickLink = (link) => {
         const action = loadLink(link)

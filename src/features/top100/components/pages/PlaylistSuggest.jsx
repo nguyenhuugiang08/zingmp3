@@ -3,52 +3,50 @@ import { loadLink } from 'features/linkSlice'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Col, Container, Nav, NavItem, Row } from 'reactstrap'
-import styles from 'scss/Home5.module.scss'
+import { Col, Container, Nav, NavItem, Row, NavLink } from 'reactstrap'
+import styles from 'scss/Top100Outstanding.module.scss'
 
-function HomeNewMusic({ data }) {
-    const [list, setList] = useState({})
-
+function PlaylistSuggest({ suggestPlaylist }) {
+    const [playlists, setPlaylists] = useState([])
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (data.length > 0) {
-            setList(data[4])
+        if (suggestPlaylist.length > 0) {
+            setPlaylists(suggestPlaylist.filter(item => item.sectionType === 'playlist'))
         }
-    }, [data])
+    }, [suggestPlaylist])
 
-    const handleClickLink = (link) => {
-        const action = loadLink(link)
-        dispatch(action)
-    }
 
-    const handleClickNameArtist = (...rest) => {
+    const handleClickLink = (...rest) => {
         const action = loadLink(rest)
         dispatch(action)
     }
+
     return (
-        <div>
-            <div>
-                <div className={styles.home5}>
-                    <div className={styles.home5Tiltle}>{list.title}</div>
-                    <div className={styles.home5Container}>
+        <div className={styles.top100Outstanding}>
+            {playlists.map((playlist, index) => (
+                <div key={index}>
+                    <div className={styles.mainTitle}>
+                        <div className={styles.top100OutstandingTiltle}>{playlist.title}</div>
+                    </div>
+                    <div className={styles.top100OutstandingContainer}>
                         <Container>
                             <Row xs={5}>
-                                {list.items && list.items.map((compo, index) => (
+                                {playlist.items.map((item, index) => (
                                     <div key={index}>
                                         {index >= 5 ? <></> :
-                                            <Col className={styles.home5Col}>
-                                                <div className={styles.home5Par}>
-                                                    <div className={styles.home5Image} style={{ backgroundImage: `url(${compo.thumbnail})` }}>
+                                            <Col className={styles.top100OutstandingCol}>
+                                                <div className={styles.top100OutstandingPar}>
+                                                    <div className={styles.top100OutstandingImage} style={{ backgroundImage: `url(${item.thumbnail})` }}>
                                                     </div>
-                                                    <div className={styles.home5Child}>
+                                                    <div className={styles.top100OutstandingChild}>
                                                         <div>
                                                             <FontAwesomeIcon icon="fa-regular fa-heart" />
                                                         </div>
                                                         <Link
-                                                            className={styles.home5Play}
-                                                            to={`${compo.link}/${compo.encodeId}`}
-                                                            onClick={() => handleClickLink(compo.link)}
+                                                            className={styles.top100OutstandingPlay}
+                                                            to={`${item.link}/${item.encodeId}`}
+                                                            onClick={() => handleClickLink(item.link)}
                                                         >
                                                             <FontAwesomeIcon icon="fa-solid fa-play" />
                                                         </Link>
@@ -57,21 +55,20 @@ function HomeNewMusic({ data }) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className={styles.home5Title}>
-                                                    {compo.title}
+                                                <div className={styles.top100OutstandingTitle}>
+                                                    {item.title}
                                                 </div>
                                                 <div>
                                                     <Nav>
-                                                        {compo.artists.map((artist, index) => (
-                                                            <div key={index} className={styles.home5Artist}>
+                                                        {item.artists.map((artist, index) => (
+                                                            <div key={index} className={styles.top100OutstandingArtist}>
                                                                 <NavItem>
-                                                                    <Link
-                                                                        to={`${artist.link}/${artist.alias}`}
-                                                                        className={styles.home5ArtistItem}
-                                                                        onClick={() =>handleClickNameArtist(artist.link, 'artistdetail')}
+                                                                    <NavLink
+                                                                        href="#"
+                                                                        className={styles.top100OutstandingArtistItem}
                                                                     >
                                                                         {artist.name},
-                                                                    </Link>
+                                                                    </NavLink>
                                                                 </NavItem>
                                                             </div>
                                                         ))}
@@ -85,9 +82,9 @@ function HomeNewMusic({ data }) {
                         </Container>
                     </div>
                 </div>
-            </div>
+            ))}
         </div>
     )
 }
 
-export default HomeNewMusic
+export default PlaylistSuggest

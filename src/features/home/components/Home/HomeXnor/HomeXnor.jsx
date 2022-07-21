@@ -7,14 +7,14 @@ import { useDispatch } from 'react-redux'
 import { loadLink } from 'features/linkSlice'
 
 
-function HomeXnor({ list }) {
+function HomeXnor({ data }) {
     const [chooses, setChooses] = useState([])
     const dispatch = useDispatch()
     useEffect(() => {
-        if (list.length > 0) {
-            setChooses(list[11])
+        if (data.length > 0) {
+            setChooses(data.filter(item => item.sectionType === 'playlist' && item.title === "XONE's CORNER")[0])
         }
-    }, [list])
+    }, [data])
 
 
     const handleClickLink = (link) => {

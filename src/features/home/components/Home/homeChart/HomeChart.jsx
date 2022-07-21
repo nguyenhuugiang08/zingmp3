@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx'
 import styles from 'scss/Home7.module.scss'
 
-function HomeChart({ list }) {
+function HomeChart({ data }) {
     const [chart, setChart] = useState({})
     const [time, setTime] = useState([])
     const [counts, setConuts] = useState({})
@@ -19,10 +19,10 @@ function HomeChart({ list }) {
     const chartRef = useRef()
 
     useEffect(() => {
-        if (list.length > 0) {
-            setChart(list[5])
+        if (data.length > 0) {
+            setChart(data.filter(item => item.sectionType === 'RTChart')[0])
         }
-    }, [list])
+    }, [data])
 
     useEffect(() => {
         if (chart.chart) {
@@ -93,7 +93,7 @@ function HomeChart({ list }) {
             y: {
                 display: false,
                 ticks: {
-                    stepSize:5000
+                    stepSize: 5000
                 }
             }
         },
@@ -101,7 +101,7 @@ function HomeChart({ list }) {
 
     const labels = arrTime;
 
-    const data = {
+    const dataChart = {
         labels,
         datasets: [
             {
@@ -171,12 +171,13 @@ function HomeChart({ list }) {
                                 }
                             </div>
                         ))}
+                        <div className='zingchart_showall'><span>Xem Thêm</span></div>
                     </Col>
                     <Col xs={8}>
                         <Line
                             ref={chartRef}
                             options={options}
-                            data={data}
+                            data={dataChart}
                         />
                     </Col>
                 </Row>
