@@ -94,6 +94,7 @@
     align-items: center;
     padding: 20px 0;
     color: #fff;
+    text-decoration: none;
 
     span {
         border-radius: 999px;
@@ -111,6 +112,10 @@
     span:hover {
         background-color: #ffffff1a;
     }
+}
+
+.zingchart_showall:hover {
+    color: #fff;
 }
 
 .zingchart_hide {

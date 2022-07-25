@@ -12,6 +12,7 @@ function PlaySongLyric({ id, thumb, time }) {
   const [loading, setLoading] = useState(false)
   const [mode, setMode] = useState(false)
   const [display, setDisplay] = useState(false)
+  const [scrollDistance, setScrollDistance] = useState(80)
 
   const dispatch = useDispatch()
   const lyric = useSelector(state => state.lyric)
@@ -49,8 +50,6 @@ function PlaySongLyric({ id, thumb, time }) {
     lyricRef.current.style.display = "none"
   }
 
-  let scrollDistance = 66
-
   const handleAutoScroll = (index) => {
     if (sentencesRef.current) {
       sentencesRef.current.parentElement.scrollTop = scrollDistance * index
@@ -71,9 +70,16 @@ function PlaySongLyric({ id, thumb, time }) {
     e.target.style.backgroundColor = "#7200a1"
     let sentencesElement = document.querySelectorAll('.play-song-lyric__center-sentences')
     sentencesElement.forEach(element => {
-      element.style.fontSize = `${val === 1 ? "30px" : (val ===2 ? "40px" : "44px")}`
-      scrollDistance = `${val === 2 ? 90 : 98}`
+      element.style.fontSize = `${val === 1 ? "30px" : (val === 2 ? "40px" : "44px")}`
     });
+    if (val === 1) {
+      setScrollDistance(66)
+    } else if (val === 2) {
+      setScrollDistance(80)
+    } else {
+      setScrollDistance(80)
+    }
+
   }
 
   const handleClickMode = () => {
@@ -95,10 +101,10 @@ function PlaySongLyric({ id, thumb, time }) {
 
   const handleDisplayMenu = () => {
     let modeElement = document.querySelector('.play-song__btn-mode')
-    if(!display){
+    if (!display) {
       modeElement.style.display = "block"
       setDisplay(true)
-    }else {
+    } else {
       modeElement.style.display = "none"
       setDisplay(false)
     }
@@ -148,9 +154,9 @@ function PlaySongLyric({ id, thumb, time }) {
               <div className='play-song__btn-mode-item'>
                 Cỡ chữ lời nhạc
                 <div className='d-flex justify-content-between'>
-                  <div className='play-song__btn-mode-item__sm ms-2 btn-fontsize' onClick={(e) => handleChangeFontSize(e,1)}>A</div>
-                  <div className='play-song__btn-mode-item__md play-song__btn-mode-item__active ms-2 btn-fontsize' onClick={(e) => handleChangeFontSize(e,2)}>A</div>
-                  <div className='play-song__btn-mode-item__xl ms-2 btn-fontsize' onClick={(e) => handleChangeFontSize(e,3)}>A</div>
+                  <div className='play-song__btn-mode-item__sm ms-2 btn-fontsize' onClick={(e) => handleChangeFontSize(e, 1)}>A</div>
+                  <div className='play-song__btn-mode-item__md play-song__btn-mode-item__active ms-2 btn-fontsize' onClick={(e) => handleChangeFontSize(e, 2)}>A</div>
+                  <div className='play-song__btn-mode-item__xl ms-2 btn-fontsize' onClick={(e) => handleChangeFontSize(e, 3)}>A</div>
                 </div>
               </div>
               <div className='play-song__btn-mode-item'>

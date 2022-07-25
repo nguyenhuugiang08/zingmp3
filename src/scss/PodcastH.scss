@@ -1,0 +1,135 @@
+.podcastH {
+    color: #fff;
+    margin-top: 30px;
+    overflow: hidden;
+    padding: 0 12px;
+
+    &-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+
+    &-wrapper {
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+
+        &-background {
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.2;
+        }
+
+        &-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        &-left {
+            width: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+
+            &__img {
+                padding-top: 100%;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                transition: all 0.8 ease;
+            }
+
+            &__img:hover {
+                transition: all 1.2s ease;
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        &-right {
+            width: 388px;
+
+            &__name {
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 1.43;
+                color: rgba(254, 255, 255, .8);
+            }
+
+            &__description {
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                margin-top: 6px;
+                font-size: 16px;
+                line-height: 1.43;
+                color: rgba(254, 255, 255, .8);
+                white-space: normal;
+            }
+        }
+    }
+
+    .podcastH-swiper {
+        overflow: visible;
+        position: relative;
+    
+        .swiper-slide {
+    
+            .overflow {
+                overflow: hidden;
+                margin-bottom: 8px;
+                width: 366px;
+                cursor: pointer;
+                border-radius: 8px;
+            }
+    
+            .swiper-slide-image {
+                width: 366px;
+                transition: all ease-in 0.5s;
+            }
+        }
+    
+        .overflow:hover .swiper-slide-image {
+            transform: scale(1.05);
+            transition: all ease-in 0.5s;
+        }
+    
+        .swiper-button-prev {
+            color: #fff;
+            right: 50px;
+            left: auto;
+            top: -26px;
+        }
+    
+        .swiper-button-prev::after {
+            font-size: 1.2rem;
+        }
+    
+        .swiper-button-next {
+            color: #fff;
+            right: 0;
+            left: auto;
+            top: -26px;
+        }
+    
+        .swiper-button-next::after {
+            font-size: 1.2rem;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import Home from 'features/home/components/Home/Home';
+import Home from 'features/home/components/Home';
 import Top100 from 'features/top100/components/top100/Top100';
 import Anbuml from 'features/top100/components/pages/Album';
 import Personal from 'features/Personal/components/Personal/Personal';
@@ -9,7 +9,7 @@ import MV from 'features/Mv/components/MV';
 import ArtistDetail from 'features/ArtistDetail/components/ArtistDetail';
 
 import { useSelector } from 'react-redux';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 function Routerall() {

@@ -5,15 +5,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Col, Container, Row } from 'reactstrap'
 import { getInfoArtistApi } from '../getiArtistSlice'
-import Artistalbum from './Artistalbum/ArtistAlbum'
-import Artistamong from './Artistamong/Artistamong'
-import Artistcollection from './Artistcollection/Artistcollection'
-import ArtistMv from './Artistmv/ArtistMv'
-import Artistoutstanding from './Artistoutstanding/Artistoutstanding'
-import Artistsingle from './Artistsingle/Artistsingle'
-import 'scss/ArtistDetail.scss'
 import { loadCurrentSong } from 'features/top100/top100Slice'
-import Artistlike from './Artistlike/Artistlike'
+import SongType from './SongType/SongType'
+import VideoType from './VideoType/VideoType'
+import ArtistType from './ArtistType/ArtistType'
+import 'scss/ArtistDetail.scss'
+import PlaylistType from './PlaylistType/PlaylistType'
 
 function ArtistDetail() {
   const { encodeId } = useParams()
@@ -100,13 +97,10 @@ function ArtistDetail() {
                   </div>
                 </div>
               </Row>
-              <Artistoutstanding />
-              <Artistsingle />
-              {data.sections && data.sections.length === 7 ? < Artistalbum /> : <></>}
-              <ArtistMv />
-              <Artistcollection />
-              <Artistamong />
-              <Artistlike />
+              {data.sections && data.sections.includes(data.sections.filter(item => item.sectionType === 'song')[0]) ? <SongType /> : <></>}
+              {data.sections && data.sections.includes(data.sections.filter(item => item.sectionType === 'video')[0]) ? <VideoType /> : <></>}
+              {data.sections && data.sections.includes(data.sections.filter(item => item.sectionType === 'playlist')[0]) ? <PlaylistType /> : <></>}
+              {data.sections && data.sections.includes(data.sections.filter(item => item.sectionType === 'artist')[0]) ? <ArtistType /> : <></>}
             </Container>
 
           </div>

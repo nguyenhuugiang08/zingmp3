@@ -17,8 +17,8 @@ function PlaylistSuggest({ suggestPlaylist }) {
     }, [suggestPlaylist])
 
 
-    const handleClickLink = (...rest) => {
-        const action = loadLink(rest)
+    const handleClickLink = (link) => {
+        const action = loadLink(link)
         dispatch(action)
     }
 
