@@ -18,31 +18,40 @@ function Routerall() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-      if (dataStore.length !== 0) {
-          setMounted(dataStore[dataStore.length - 1].isPlay)
-      }
+    if (dataStore.length !== 0) {
+      setMounted(dataStore[dataStore.length - 1].isPlay)
+    }
   }, [dataStore])
+
+  const listPath = path.map(path => {
+    return {
+      path: `${path[0]}/:encodeId`,
+      component: path[1] === 'chart' ? Chartdetail :
+        (path[1] === 'artistdetail' ? ArtistDetail :
+          (path[1] === 'mv' ? MV : Anbuml))
+    }
+  })
 
   const routes = [
     { path: "/", component: Home },
     { path: "top100", component: Top100, },
-    { path: `${path[path.length - 1]}/:encodeId`, component: Anbuml },
-    { path: `${path.length > 0 && path[path.length - 1][1] === 'chart' && path[path.length - 1][0]}/:encodeId`, component: Chartdetail },
-    { path: `${path.length > 0 && path[path.length - 1][1] === 'artistdetail' && path[path.length - 1][0]}/:encodeId`, component: ArtistDetail },
-    { path: `${path.length > 0 && path[path.length - 1][1] === 'mv' && path[path.length - 1][0]}/:encodeId`, component: MV },
     { path: "personal", component: Personal },
-    { path: "zingchart", component:  Zingchart },
+    { path: "zingchart", component: Zingchart },
     { path: "radio", component: Radio },
     { path: "follow", component: "Follow" },
     { path: "MV", component: MV },
   ]
 
+  listPath.map(item => {
+    routes.push(item)
+  })
+
   return (
-    <div style={{ width: 'calc(100% - 240px)', position: 'relative', left: '240px', padding: '70px 60px 0', top: '0', marginBottom: `${mounted ? "90px" : ""}`}}>
+    <div style={{ width: 'calc(100% - 240px)', position: 'relative', left: '240px', padding: '70px 60px 0', top: '0', marginBottom: `${mounted ? "90px" : ""}` }}>
       <Routes>
         {routes.map((route, index) => {
-          const Page = route.component
-          return <Route key={index} path={route.path} element={<Page />}></Route>
+            const Page = route.component
+            return <Route key={index} path={route.path} element={<Page />}></Route>
         })}
       </Routes>
     </div >

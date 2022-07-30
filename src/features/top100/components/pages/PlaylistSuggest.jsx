@@ -17,8 +17,8 @@ function PlaylistSuggest({ suggestPlaylist }) {
     }, [suggestPlaylist])
 
 
-    const handleClickLink = (link) => {
-        const action = loadLink(link)
+    const handleClickLink = (...rest) => {
+        const action = loadLink(rest)
         dispatch(action)
     }
 
@@ -32,7 +32,7 @@ function PlaylistSuggest({ suggestPlaylist }) {
                     <div className={styles.top100OutstandingContainer}>
                         <Container>
                             <Row xs={5}>
-                                {playlist.items.map((item, index) => (
+                                {playlist.items && playlist.items.map((item, index) => (
                                     <div key={index}>
                                         {index >= 5 ? <></> :
                                             <Col className={styles.top100OutstandingCol}>
@@ -46,7 +46,7 @@ function PlaylistSuggest({ suggestPlaylist }) {
                                                         <Link
                                                             className={styles.top100OutstandingPlay}
                                                             to={`${item.link}/${item.encodeId}`}
-                                                            onClick={() => handleClickLink(item.link)}
+                                                            onClick={() => handleClickLink(item.link, 'album')}
                                                         >
                                                             <FontAwesomeIcon icon="fa-solid fa-play" />
                                                         </Link>
@@ -60,7 +60,7 @@ function PlaylistSuggest({ suggestPlaylist }) {
                                                 </div>
                                                 <div>
                                                     <Nav>
-                                                        {item.artists.map((artist, index) => (
+                                                        {item.artists && item.artists.map((artist, index) => (
                                                             <div key={index} className={styles.top100OutstandingArtist}>
                                                                 <NavItem>
                                                                     <NavLink

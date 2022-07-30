@@ -80,7 +80,7 @@ function Anbuml() {
             iterations: Infinity
         })
 
-        thumbAnimate.pause()
+        thumbAnimate.play()
     }
 
     const d = new Date()
@@ -89,6 +89,8 @@ function Anbuml() {
     songs.map((item) => (
         sumDuration += (item.duration * 1)
     ))
+
+    console.log(suggestPlaylist)
     return (
         <div>
             {loading ? <Loading /> :
@@ -179,8 +181,8 @@ function Anbuml() {
                     </Container>
                 </div>
             }
-            <Artistjoin suggestPlaylist ={suggestPlaylist}/>
-            <PlaylistSuggest suggestPlaylist ={suggestPlaylist}/>
+            {suggestPlaylist.length > 0 && suggestPlaylist.includes(suggestPlaylist.filter(item => item.sectionType === 'artist')[0]) ? <Artistjoin suggestPlaylist ={suggestPlaylist}/> : <></>}
+            {suggestPlaylist.length > 0 && suggestPlaylist.includes(suggestPlaylist.filter(item => item.sectionType === 'playlist')[0]) ? <PlaylistSuggest suggestPlaylist ={suggestPlaylist}/> : <></>}
         </div>
     )
 }

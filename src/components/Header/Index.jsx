@@ -12,6 +12,7 @@ function Header() {
     const [id, setId] = useState('')
 
     const navigate = useNavigate()
+    const location = useLocation()
     const inputRef = useRef()
 
     // useEffect(() => {
@@ -35,20 +36,20 @@ function Header() {
     return (
         <>
             <div className={`${styles.header} d-flex header`}>
-                <div className="d-flex">
-                    <Button
-                        className={styles.haederBtn}
+                <div className="d-flex justify-content-center align-items-center">
+                    <div
+                        className={`${styles.haederBtn} me-3`}
                         onClick={() => navigate(-1)}
                     >
                         <FontAwesomeIcon icon="fa-solid fa-arrow-left-long" />
-                    </Button>
+                    </div>
 
-                    <Button
+                    <div
                         className={styles.haederBtn}
                         onClick={() => navigate(1)}
                     >
                         <FontAwesomeIcon icon="fa-solid fa-arrow-right-long" />
-                    </Button>
+                    </div>
 
                     <Navbar
                         dark

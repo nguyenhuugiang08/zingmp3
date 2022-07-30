@@ -25,8 +25,8 @@ function ArtistType() {
         }
     }, [data])
 
-    const handleClickLink = (link) => {
-        const action = loadLink(link)
+    const handleClickLink = (...rest) => {
+        const action = loadLink(rest)
         dispatch(action)
     }
     return (
@@ -54,8 +54,8 @@ function ArtistType() {
                                                 </div>
                                                 <Link
                                                     className={style.top100OutstandingPlay}
-                                                    to={`${like.link}/${like.alias}/artistdetail`}
-                                                    onClick={() => handleClickLink(like.link)}
+                                                    to={`${like.link}/${like.alias}`}
+                                                    onClick={() => handleClickLink(like.link, 'artistdetail')}
                                                 >
                                                     <FontAwesomeIcon icon="fa-solid fa-play" />
                                                 </Link>

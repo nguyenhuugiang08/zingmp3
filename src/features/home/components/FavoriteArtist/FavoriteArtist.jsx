@@ -34,15 +34,15 @@ function FavoriteArtist({ data }) {
             <Container className='mt-3'>
                 <Row xs={5}>
                     {favoriteArtist.map((artist, index) => (
-                        <div className='favorite-artist__card'>
+                        <div className='favorite-artist__card' key={artist.encodeId}>
                             {index >= 5 ? <></> :
                                 <Col>
-                                    <div key={artist.encodeId}>
+                                    <div >
                                         <div className='favorite-artist__card-wrapper'>
                                             <div className='favorite-artist__card-wrapper-img'
                                                 style={{ backgroundImage: `url(${artist.thumbnailM})` }}
                                                 onClick={() => handleLoadCurrentSong({
-                                                    encodeId : artist.song.items[0].encodeId,
+                                                    encodeId: artist.song.items[0].encodeId,
                                                     isPlay: true,
                                                     songs: artist.song.items,
                                                     index: 0
@@ -53,7 +53,7 @@ function FavoriteArtist({ data }) {
                                             <div className='favorite-artist__card-box__name'>{artist.artists[0].name}</div>
                                             <div className='d-flex justify-content-center align-items-center'>
                                                 {artist.song.items.map((song, index) => (
-                                                    <div>
+                                                    <div key={song.encodeId}>
                                                         {index >= 3 ? <></> :
                                                             <div className='favorite-artist__card-box__container me-2' key={song.encodeId}>
                                                                 <Link

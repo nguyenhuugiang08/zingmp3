@@ -25,14 +25,14 @@ function PlaylistType() {
         }
     }, [data])
 
-    const handleClickLink = (link) => {
-        const action = loadLink(link)
+    const handleClickLink = (...rest) => {
+        const action = loadLink(rest)
         dispatch(action)
     }
     return (
         <div>
-            {single.map(playlist => (
-                <div className={style.top100Outstanding}>
+            {single.map((playlist, index) => (
+                <div key={index} className={style.top100Outstanding}>
                     <div className={style.mainTitle}>
                         <div className={style.top100OutstandingTiltle}>{playlist.title}</div>
                         <Link to="/Top100">
@@ -57,7 +57,7 @@ function PlaylistType() {
                                                         <Link
                                                             className={style.top100OutstandingPlay}
                                                             to={`${compo.link}/${compo.encodeId}`}
-                                                            onClick={() => handleClickLink(compo.link)}
+                                                            onClick={() => handleClickLink(compo.link, 'album')}
                                                         >
                                                             <FontAwesomeIcon icon="fa-solid fa-play" />
                                                         </Link>
