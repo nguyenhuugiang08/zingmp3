@@ -166,7 +166,7 @@ function PlayMv({ encodeId }) {
     }
   }
 
-  //cử lý bắt đầu load video thanh thời gian chạy
+  //xử lý bắt đầu load video thanh thời gian chạy
   const handleStartPlay = () => {
     setStatus({ ...status, time: videoRef.current.getCurrentTime() / videoRef.current.getDuration() * 100 })
     progressRef.current.value = time

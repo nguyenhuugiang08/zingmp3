@@ -21,8 +21,8 @@ function HomeSilder({ data }) {
         }
     }, [data])
 
-    const handleClickLink = (link) => {
-        const action = loadLink(link)
+    const handleClickLink = (...rest) => {
+        const action = loadLink(rest)
         dispatch(action)
     }
 
@@ -55,7 +55,7 @@ function HomeSilder({ data }) {
                         <SwiperSlide key={index}>
                             <Link
                                 to={(item.type === 3 || item.type === 4) && `${item.link}/${item.encodeId}`}
-                                onClick={item.type === 3 || item.type === 4 ? (() => handleClickLink(item.link)) : (item.type === 1 ? (() => handleClick({
+                                onClick={item.type === 3 || item.type === 4 ? (() => handleClickLink(item.link, 'album')) : (item.type === 1 ? (() => handleClick({
                                     encodeId: item.encodeId
                                 })) : "")}
                             > <img className='swiper-slide-image' src={item.banner} alt="" /></Link>
