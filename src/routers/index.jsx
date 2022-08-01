@@ -7,6 +7,8 @@ import Radio from 'features/radio/Radio';
 import Chartdetail from 'features/zingchart/components/chartdetail/Chartdetail';
 import MV from 'features/Mv/components/MV';
 import ArtistDetail from 'features/ArtistDetail/components/ArtistDetail';
+import Follow from 'features/Follow/Follow';
+import NewMusic from 'features/NewMusic/NewMusic';
 
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
@@ -38,8 +40,9 @@ function Routerall() {
     { path: "personal", component: Personal },
     { path: "zingchart", component: Zingchart },
     { path: "radio", component: Radio },
-    { path: "follow", component: "Follow" },
+    { path: "follow", component: Follow },
     { path: "MV", component: MV },
+    {path: 'new-music', component: NewMusic}
   ]
 
   listPath.map(item => {

@@ -25,6 +25,7 @@
     .category {
         position: absolute;
         z-index: 80;
+        transition: all 0.3s ease-in;
 
         &-wrapper {
             background-color: #432275;

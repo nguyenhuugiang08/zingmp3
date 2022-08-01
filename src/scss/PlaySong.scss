@@ -135,7 +135,6 @@
         padding: 15px 0;
         border-radius: 8px;
         display: none;
-        animation: identifier linear 0.3s;
 
         &-item {
             padding: 10px 14px;
@@ -188,16 +187,6 @@
 
         &-item:hover {
             background-color: #ffffff1a;
-        }
-    }
-
-    @keyframes identifier {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
         }
     }
 }

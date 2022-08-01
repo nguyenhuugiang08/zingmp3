@@ -62,7 +62,7 @@ function Navbar() {
 
             <div className={styles.navarScroll}>
                <Nav pills vertical>
-                  <Item path='personal'
+                  <Item path='new-music'
                      icon='fa-solid fa-music'
                      content='Nhạc Mới'
                   />

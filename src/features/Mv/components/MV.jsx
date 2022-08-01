@@ -39,6 +39,8 @@ function MV() {
         if (response.data.items) {
           const newList = [...mvData, ...response.data.items]
           setMvData(newList)
+        }else {
+          setPage(prev => prev + 1)
         }
         setHasMore(response.data.hasMore)
         setLoading(false)
@@ -104,6 +106,11 @@ function MV() {
     setPage(1)
   }
 
+  const handleDisplayCategory = () => {
+    let categoryElement = document.querySelector('.category')
+    categoryElement.classList.toggle('d-none')
+  }
+
   return (
     <div className='mv'>
       <div >
@@ -115,14 +122,17 @@ function MV() {
           <div className='wrapper-filter wrapper-filter--item wrapper-concert ms-5' onClick={e => handleFilter(e, 'concert')}>hòa tấu</div>
         </div>
         <div className='mv-filter'>
-          <div className='mv-filter__all me-3'><FontAwesomeIcon icon="fa-solid fa-music " />
+          <div className='mv-filter__all me-3'
+            onClick={handleDisplayCategory}
+          >
+            <FontAwesomeIcon icon="fa-solid fa-music " />
             <span className='ms-2'>
               Tất Cả
             </span>
           </div>
           <div className='mv-filter__listen'><FontAwesomeIcon icon="fa-solid fa-list-ol" /><span className='ms-2'>Nghe Nhiều</span></div>
         </div>
-        <div className='category'>
+        <div className='category d-none'>
           <Container>
             <Row >
               <Col xs={4} className='category-wrapper'>
