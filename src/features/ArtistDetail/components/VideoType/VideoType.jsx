@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Autoplay, Navigation } from 'swiper'
 import { SwiperSlide, Swiper } from 'swiper/react'
+import { Nav, NavItem } from 'reactstrap'
 
 function VideoType() {
     const [mv, setMv] = useState([])
@@ -72,14 +73,29 @@ function VideoType() {
                                     </div>
                                 </div>
                                 <div className=' d-flex justify-content-start align-items-center mt-1'>
-                                    <div style={{width: '40px', height: '40px',position:'relative', top: '3px'}}>
+                                    <div style={{ width: '40px', height: '40px', position: 'relative', top: '3px' }}>
                                         <div className={style.top100OutstandingMvImg} style={{ backgroundImage: `url(${mv.artist && mv.artist.thumbnail})` }}></div>
                                     </div>
                                     <div className='ms-2'>
                                         <div className={style.top100OutstandingTitle}>
                                             {mv.title}
                                         </div>
-                                        <div className={`${style.top100OutstandingArtistItem}`}>{mv.artistsNames}</div>
+                                        <Nav>
+                                            {mv.artists.map((artist, index) => (
+                                                <div key={index} className={style.top100OutstandingArtist}>
+                                                    <NavItem>
+                                                        <Link
+                                                            to={`${artist.link}/${artist.alias}`}
+                                                            onClick={() => handleClickLink(artist.link, 'artistdetail')}
+                                                            className={style.top100OutstandingArtistItem}
+                                                            style={{ textDecoration: 'none' }}
+                                                        >
+                                                            {index < mv.artists.length - 1 ? `${artist.name},` : `${artist.name}`}
+                                                        </Link>
+                                                    </NavItem>
+                                                </div>
+                                            ))}
+                                        </Nav>
                                     </div>
                                 </div>
                             </div>

@@ -8,6 +8,9 @@ import ReactLoading from 'react-loading';
 import Loading from './Loading';
 import PlayMv from './PlayMv/PlayMv';
 import 'scss/Mv.scss';
+import { loadLink } from 'features/linkSlice';
+import { useDispatch } from 'react-redux';
+import categoryApi from 'api/categoryMV';
 
 function MV() {
   const [mvData, setMvData] = useState([])
@@ -17,28 +20,52 @@ function MV() {
   const [hasMore, setHasMore] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [encodeId, setEncodeId] = useState('')
+  const [categories, setCategories] = useState([])
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const getList = async () => {
-      const params = {
-        id: id,
-        page: page,
-        count: 15,
+      try {
+        const params = {
+          id: id,
+          page: page,
+          count: 15,
+        }
+        if (page === 1) {
+          setLoading(true)
+        }
+        const response = await listMVApi.getAll(params)
+        if (response.data.items) {
+          const newList = [...mvData, ...response.data.items]
+          setMvData(newList)
+        }
+        setHasMore(response.data.hasMore)
+        setLoading(false)
+      } catch (error) {
+        console.log('Failed to fetch data: ', error)
       }
-      if (page === 1) {
-        setLoading(true)
-      }
-      const response = await listMVApi.getAll(params)
-      if (response.data.items) {
-        const newList = [...mvData, ...response.data.items]
-        setMvData(newList)
-      }
-      setHasMore(response.data.hasMore)
-      setLoading(false)
     }
 
     getList()
   }, [id, page])
+
+  useEffect(() => {
+    const getCategoryMv = async () => {
+      try {
+        const params = {
+          id: id,
+        }
+
+        const response = await categoryApi.getAll(params)
+        setCategories(response.data.childs)
+      } catch (error) {
+        console.log('Failed to fetch data: ', error)
+      }
+    }
+
+    getCategoryMv()
+  }, [id])
 
   const fetchData = () => {
     setPage(prev => prev + 1)
@@ -61,6 +88,22 @@ function MV() {
     setMounted(true)
   }
 
+  const handleClosePlayer = () => {
+    setMounted(false)
+  }
+
+  const handleClickLink = (...rest) => {
+    const action = loadLink(rest)
+    dispatch(action)
+  }
+
+  const handleCLickCategoryItem = (id) => {
+    setId(id)
+    const list = []
+    setMvData(list)
+    setPage(1)
+  }
+
   return (
     <div className='mv'>
       <div >
@@ -72,10 +115,33 @@ function MV() {
           <div className='wrapper-filter wrapper-filter--item wrapper-concert ms-5' onClick={e => handleFilter(e, 'concert')}>hòa tấu</div>
         </div>
         <div className='mv-filter'>
-          <div className='mv-filter__all me-3'><FontAwesomeIcon icon="fa-solid fa-music " /><span className='ms-2'>Tất Cả</span></div>
+          <div className='mv-filter__all me-3'><FontAwesomeIcon icon="fa-solid fa-music " />
+            <span className='ms-2'>
+              Tất Cả
+            </span>
+          </div>
           <div className='mv-filter__listen'><FontAwesomeIcon icon="fa-solid fa-list-ol" /><span className='ms-2'>Nghe Nhiều</span></div>
         </div>
-        {loading ? <Loading/> :
+        <div className='category'>
+          <Container>
+            <Row >
+              <Col xs={4} className='category-wrapper'>
+                <Row>
+                  {categories.map(category => (
+                    <Col xs={6}>
+                      <div className='category-wrapper__item'
+                        onClick={() => handleCLickCategoryItem(category.id)}
+                      >
+                        {category.name}
+                      </div>
+                    </Col>
+                  ))}
+                </Row>
+              </Col>
+            </Row>
+          </Container>
+        </div>
+        {loading ? <Loading /> :
           <InfiniteScroll
             dataLength={mvData.length} //This is important field to render the next data
             next={hasMore && fetchData}
@@ -103,7 +169,12 @@ function MV() {
                           <div>{mv.title}</div>
                           <div className='mv-wrapper-second__artist'>
                             {mv.artists.map((artist, index) => (
-                              <Link to={'/'} key={artist.id} className="me-1 mv-wrapper-second__artist-link">
+                              <Link
+                                to={`${artist.link}/${artist.alias}`}
+                                onClick={() => handleClickLink(artist.link, 'artistdetail')}
+                                key={artist.id}
+                                className="me-1 mv-wrapper-second__artist-link"
+                              >
                                 {index > 0 ? `${artist.name}` : `${artist.name},`}
                               </Link>
                             ))}
@@ -118,7 +189,16 @@ function MV() {
           </InfiniteScroll>
         }
       </div>
-      {!mounted ? <></> : <PlayMv encodeId={encodeId}/>}
+      {!mounted ? <></> :
+        <div>
+          <div className='playmv-container-header__icon'
+            onClick={handleClosePlayer}
+          >
+            <FontAwesomeIcon icon="fa-solid fa-xmark" />
+          </div>
+          <PlayMv encodeId={encodeId} />
+        </div>
+      }
     </div>
   )
 }

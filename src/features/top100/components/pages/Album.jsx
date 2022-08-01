@@ -10,6 +10,7 @@ import Loading from './Loading'
 import suggestPlaylistApi from 'api/SuggestPlaylistApi'
 import Artistjoin from './Artistjoin'
 import PlaylistSuggest from './PlaylistSuggest'
+import { loadLink } from 'features/linkSlice'
 
 function Anbuml() {
     const { encodeId } = useParams()
@@ -90,7 +91,10 @@ function Anbuml() {
         sumDuration += (item.duration * 1)
     ))
 
-    console.log(suggestPlaylist)
+    const handleClickLink = (...rest) => {
+        const action = loadLink(rest)
+        dispatch(action)
+    }
     return (
         <div>
             {loading ? <Loading /> :
@@ -103,7 +107,10 @@ function Anbuml() {
                                 <div className={styles.albumTime}>Cập nhật : {d.getDate()}/{d.getMonth() + 1 > 10 ? d.getMonth() + 1 : `0${d.getMonth() + 1}`}/{d.getFullYear()}</div>
                                 <div className={styles.albumArtist}>
                                     {artist.map((artist, index) => (
-                                        <Link key={index} className={styles.albumArtistItem} to={artist.link}>{artist.name},</Link>
+                                        <Link key={index} className={styles.albumArtistItem}
+                                            to={`${artist.link}/${artist.alias}`}
+                                            onClick={() => handleClickLink(artist.link, 'artistdetail')}
+                                        >{artist.name},</Link>
                                     ))}
                                 </div>
                                 <div className={styles.albumLike}>{playlist.like} người yêu thích</div>
@@ -151,7 +158,10 @@ function Anbuml() {
                                                     <div>{song.title}</div>
                                                     <div className={styles.albumSongArtist}>
                                                         {song.artists !== undefined && song.artists.map((artist, index) => (
-                                                            <Link className={styles.albumArtistItem} key={index} to={artist.link}>
+                                                            <Link className={styles.albumArtistItem} key={index}
+                                                                to={`${artist.link}/${artist.alias}`}
+                                                                onClick={() => handleClickLink(artist.link, 'artistdetail')}
+                                                            >
                                                                 {index > 0 ? `, ${artist.name}` : artist.name}
                                                             </Link>
                                                         ))}
@@ -170,19 +180,19 @@ function Anbuml() {
                                             </div>
                                         </div>
                                     ))}
-                                    <div className='d-flex mt-1 ps-2' style={{color:'#ffffff80', fontSize: '12px'}}>
+                                    <div className='d-flex mt-1 ps-2' style={{ color: '#ffffff80', fontSize: '12px' }}>
                                         {`${songs.length} bài hát`}
                                         <span className='mx-2'>•</span>
-                                        <div>{`${Math.floor(sumDuration/3600)} giờ ${Math.floor((sumDuration - Math.floor(sumDuration/3600)*3600)/60)} phút`}</div>
+                                        <div>{`${Math.floor(sumDuration / 3600)} giờ ${Math.floor((sumDuration - Math.floor(sumDuration / 3600) * 3600) / 60)} phút`}</div>
                                     </div>
                                 </div>
                             </Col>
                         </Row>
                     </Container>
+                    {suggestPlaylist.length > 0 && suggestPlaylist.includes(suggestPlaylist.filter(item => item.sectionType === 'artist')[0]) ? <Artistjoin suggestPlaylist={suggestPlaylist} /> : <></>}
+                    {suggestPlaylist.length > 0 && suggestPlaylist.includes(suggestPlaylist.filter(item => item.sectionType === 'playlist')[0]) ? <PlaylistSuggest suggestPlaylist={suggestPlaylist} /> : <></>}
                 </div>
             }
-            {suggestPlaylist.length > 0 && suggestPlaylist.includes(suggestPlaylist.filter(item => item.sectionType === 'artist')[0]) ? <Artistjoin suggestPlaylist ={suggestPlaylist}/> : <></>}
-            {suggestPlaylist.length > 0 && suggestPlaylist.includes(suggestPlaylist.filter(item => item.sectionType === 'playlist')[0]) ? <PlaylistSuggest suggestPlaylist ={suggestPlaylist}/> : <></>}
         </div>
     )
 }

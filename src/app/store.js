@@ -13,7 +13,7 @@ import idReducer from "features/home/components/HomePage1/getidSlice";
 import lyricReducer from "components/PlaySong/getLyric";
 import artistReducer from "features/ArtistDetail/getiArtistSlice";
 import radioReducer from 'features/radio/radioSlice';
-import mountedReducer from 'features/Mv/getEncodeId';
+import mountedReducer from 'features/Mv/getMounted';
 
 const rootReducer = combineReducers({
     top100: top100Reducer,

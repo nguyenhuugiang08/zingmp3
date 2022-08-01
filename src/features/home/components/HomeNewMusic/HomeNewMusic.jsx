@@ -27,6 +27,7 @@ function HomeNewMusic({ data }) {
         const action = loadLink(rest)
         dispatch(action)
     }
+
     return (
         <div>
             <div className={styles.home5}>
@@ -51,7 +52,7 @@ function HomeNewMusic({ data }) {
                                                             encodeId: compo.encodeId,
                                                             isPlay: true,
                                                             songs: list.items,
-                                                            index: 0
+                                                            index: index
                                                         })}
                                                     >
                                                         <FontAwesomeIcon icon="fa-solid fa-play" />

@@ -5,36 +5,25 @@ import songApi from 'api/songApi'
 import { useSelector } from 'react-redux';
 import PlaySongRight from '../PlaySongRight/PlaySongRight';
 import PlaySongLyric from 'components/PlaySong/PlaySongLyric/PlaySongLyric';
-import ReactPlayer from 'react-player';
 
 function PlaySongCenter() {
     const dataStore = useSelector(state => state.top100)
 
+    const [loading, setLoading] = useState(false)
     const [id, setId] = useState('')
+    const [pathSong, setPathSong] = useState('')
+    const [isPlaying, setIsPlaying] = useState(false)
+    const [time, setTime] = useState(0)
+    const [isRepeat, setIsRepeat] = useState(false)
+    const [isRandom, setIsRandom] = useState(false)
     const [listSong, setListSong] = useState([])
     const [index, setIndex] = useState(0)
     const [urlImage, setUrlImage] = useState('')
     const [title, setTitle] = useState('')
     const [artists, setArtists] = useState([])
-    const [loading, setLoading] = useState(false)
-    const [displayLyric, setDisplayLyric] = useState(false)
-    const [pathSong, setPathSong] = useState('')
     const [duration, setDuration] = useState('')
-
-    const [isRandom, setIsRandom] = useState(false)
     const [vol, setVol] = useState(1)
-
-    const [status, setStatus] = useState({
-        isPlaying: false,
-        time: 0,
-        isRepeat: false,
-    })
-
-    const {
-        isPlaying,
-        time,
-        isRepeat,
-    } = status
+    const [displayLyric, setDisplayLyric] = useState(false)
 
     const [thumb, setThumb] = useState('')
 
@@ -47,7 +36,7 @@ function PlaySongCenter() {
                 setLoading(true)
                 const response = await songApi.getAll(params)
                 setPathSong(response.data)
-                setStatus({ ...status, isPlaying: true })
+                setIsPlaying(true)
                 setLoading(false)
             }
             getPath()
@@ -104,29 +93,37 @@ function PlaySongCenter() {
     }, [listSong, index])
 
     const handlePlay = () => {
-        if (!isPlaying) {
-            setStatus({ ...status, isPlaying: true })
+        if (!isPlaying && audioRef.current) {
+            audioRef.current.play()
+            setIsPlaying(true)
         } else {
             if (audioRef.current) {
-                setStatus({ ...status, isPlaying: false })
+                audioRef.current.pause()
+                setIsPlaying(false)
             }
-            else {
+            else{
                 alert("Dành cho VIP")
             }
         }
     }
 
     const handleOnchaneSeek = () => {
-        seekRef.current.value = time
-        setStatus({ ...status, time: audioRef.current.getCurrentTime() / audioRef.current.getDuration() * 100 })
+        if (loading && audioRef.current) {
+            seekRef.current.value = 0
+            setTime(0)
+            audioRef.current.pause()
+        } else {
+            seekRef.current.value = (audioRef.current.currentTime / duration) * 100
+            setTime(audioRef.current ? audioRef.current.currentTime : 0)
+        }
     }
 
     const handleClickRepeatBtn = () => {
         repeatBtnRef.current.classList.toggle("play-song__btn--active")
         if (!isRepeat) {
-            setStatus({ ...status, isRepeat: true })
+            setIsRepeat(true)
         } else {
-            setStatus({ ...status, isRepeat: false })
+            setIsRepeat(false)
         }
     }
 
@@ -140,9 +137,12 @@ function PlaySongCenter() {
     }
 
     const handleChange = () => {
-        const seekTime = seekRef.current.value / 100 * audioRef.current.getDuration()
-        audioRef.current.seekTo(seekTime)
-        setStatus({ ...status, isPlaying: true })
+        const seekTime = seekRef.current.value / 100 * duration
+        if (audioRef.current) {
+            audioRef.current.currentTime = seekTime
+            audioRef.current.play()
+            setIsPlaying(true)
+        }
     }
 
     const handleNextSong = () => {
@@ -176,9 +176,9 @@ function PlaySongCenter() {
     }
 
     const handleEndSong = () => {
-        if (isRepeat) {
+        if (isRepeat &&  audioRef.current) {
             audioRef.current.play()
-            setStatus({ ...status, isPlaying: true })
+            setIsPlaying(true)
         } else {
             handleNextSong()
         }
@@ -193,7 +193,7 @@ function PlaySongCenter() {
 
     const handleChangeVol = () => {
         setVol(volRef.current.value)
-        if (audioRef.current) {
+        if(audioRef.current){
             audioRef.current.volume = vol
         }
     }
@@ -240,25 +240,13 @@ function PlaySongCenter() {
                     >
                         {loading ? <ReactLoading type='spinningBubbles' color='#fff' height={30} width={30} /> :
                             (!isPlaying ? <FontAwesomeIcon icon="fa-solid fa-play" /> : <FontAwesomeIcon icon="fa-solid fa-pause" />)}
-                        {pathSong &&
-                            // <audio
-                            //     ref={audioRef}
-                            //     src={pathSong["128"]}
-                            //     onTimeUpdate={handleOnchaneSeek}
-                            //     onEnded={handleEndSong}
-                            //     autoPlay={true}
-                            // ></audio>
-                            <ReactPlayer
-                                ref={audioRef}
-                                playing={isPlaying}
-                                url={pathSong["128"]}
-                                onProgress={handleOnchaneSeek}
-                                onEnded={handleEndSong}
-                                height={0}
-                                width={0}
-                                loop={isRepeat}
-                            />
-                        }
+                        {pathSong && <audio
+                            ref={audioRef}
+                            src={pathSong["128"]}
+                            onTimeUpdate={handleOnchaneSeek}
+                            onEnded={handleEndSong}
+                            autoPlay={true}
+                        ></audio>}
                     </button>
                     <button
                         className='play-song__btn'

@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { loadLink } from 'features/linkSlice'
 import { loadCurrentSong } from 'features/top100/top100Slice'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -40,6 +41,11 @@ function Chartdetail() {
       });
     })
   })
+
+  const handleClickLink = (...rest) => {
+    const action = loadLink(rest)
+    dispatch(action)
+  }
 
   function Content({ list }) {
     return (
@@ -87,7 +93,10 @@ function Chartdetail() {
                         <div>{song.title}</div>
                         <div className={styles.albumSongArtist}>
                           {song.artists !== undefined && song.artists.map((artist, index) => (
-                            <Link className={styles.albumArtistItem} key={index} to={artist.link}>
+                            <Link className={styles.albumArtistItem} key={index} 
+                            to={`${artist.link}/${artist.alias}`}
+                            onClick={() => handleClickLink(artist.link, 'artistdetail')}
+                            >
                               {index > 0 ? `, ${artist.name}` : artist.name}
                             </Link>
                           ))}

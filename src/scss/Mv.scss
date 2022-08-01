@@ -1,6 +1,7 @@
 .mv {
     color: #fff;
     cursor: pointer;
+    position: relative;
 
     &-filter {
         display: flex;
@@ -18,6 +19,35 @@
             padding: 6px 28px;
             border-radius: 999px;
             background-color: #ffffff1a;
+        }
+    }
+
+    .category {
+        position: absolute;
+        z-index: 80;
+
+        &-wrapper {
+            background-color: #432275;
+            padding: 10px 16px;
+            border-radius: 10px;
+
+            &__item {
+                font-size: 12px;
+                border-radius: 4px;
+                line-height: 1;
+                padding: 10px;
+                text-align: left;
+                cursor: pointer;
+                display: block;
+                text-decoration: none;
+                color: #fff;
+            }
+
+            &__item:hover {
+                color: #fff;
+                background-color: #ffffff1a;
+            }
+
         }
     }
 
@@ -41,7 +71,7 @@
                 opacity: 0.4;
             }
 
-            
+
             &__icon {
                 position: absolute;
                 top: 50%;
@@ -60,12 +90,12 @@
                 text-decoration: none;
                 color: #fff;
             }
-            
+
             &__icon:hover {
                 color: #fff;
             }
         }
-        
+
         &-first:hover &-first__icon {
             display: flex;
         }
@@ -74,12 +104,12 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            
+
             &__img {
                 width: 40px;
                 overflow: hidden;
                 border-radius: 50%;
-                
+
                 &-thumbnail {
                     padding-top: 100%;
                     background-size: cover;
@@ -97,7 +127,7 @@
                 -webkit-line-clamp: 1;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
-                
+
                 &-link {
                     color: #88848E;
                     font-size: 13px;
@@ -126,7 +156,7 @@
     align-items: center;
     border-bottom: 1px solid #ffffff1a;
     line-height: 1.5rem;
-    
+
     &-filter {
         padding: 16px 0;
     }

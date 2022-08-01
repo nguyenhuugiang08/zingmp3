@@ -17,8 +17,8 @@ function FavoriteArtist({ data }) {
     }, [data])
 
 
-    const handleClickLink = (link) => {
-        const action = loadLink(link)
+    const handleClickLink = (...rest) => {
+        const action = loadLink(rest)
         dispatch(action)
     }
 
@@ -58,7 +58,7 @@ function FavoriteArtist({ data }) {
                                                             <div className='favorite-artist__card-box__container me-2' key={song.encodeId}>
                                                                 <Link
                                                                     to={`${artist.link}/${artist.encodeId}`}
-                                                                    onClick={() => handleClickLink(artist.link)}
+                                                                    onClick={() => handleClickLink(artist.link, 'album')}
                                                                 >
                                                                     <div className='favorite-artist__card-box__container-img '
                                                                         style={{ backgroundImage: `url(${song.thumbnail})` }}></div>

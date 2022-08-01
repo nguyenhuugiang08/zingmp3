@@ -94,12 +94,14 @@ function PlaylistType() {
                                                                         {compo.artists.map((artist, index) => (
                                                                             <div key={index} className={style.top100OutstandingArtist}>
                                                                                 <NavItem>
-                                                                                    <NavLink
-                                                                                        href="#"
+                                                                                    <Link
+                                                                                        to={`${artist.link}/${artist.alias}`}
+                                                                                        onClick={() => handleClickLink(artist.link, 'artistdetail')}
                                                                                         className={style.top100OutstandingArtistItem}
+                                                                                        style={{textDecoration: 'none'}}
                                                                                     >
                                                                                         {artist.name},
-                                                                                    </NavLink>
+                                                                                    </Link>
                                                                                 </NavItem>
                                                                             </div>
                                                                         ))}

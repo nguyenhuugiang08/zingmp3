@@ -108,7 +108,10 @@ function Zingchart() {
                   <div className='vn_title'>{item.title}</div>
                   <div className={`${styles.albumSongArtist} `}>
                     {item.artists !== undefined && item.artists.map((artist, index) => (
-                      <Link className={`${styles.albumArtistItem} vn_artist`} key={index} to={artist.link}>
+                      <Link className={`${styles.albumArtistItem} vn_artist`} key={index}
+                        to={`${artist.link}/${artist.alias}`}
+                        onClick={() => handleClickLink(artist.link, 'artistdetail')}
+                      >
                         {index > 0 ? `, ${artist.name}` : artist.name}
                       </Link>
                     ))}
@@ -167,7 +170,10 @@ function Zingchart() {
                       <div>{song.title}</div>
                       <div className={styles.albumSongArtist}>
                         {song.artists !== undefined && song.artists.map((artist, index) => (
-                          <Link className={styles.albumArtistItem} key={index} to={artist.link}>
+                          <Link className={styles.albumArtistItem} key={index}
+                            to={`${artist.link}/${artist.alias}`}
+                            onClick={() => handleClickLink(artist.link, 'artistdetail')}
+                          >
                             {index > 0 ? `, ${artist.name}` : artist.name}
                           </Link>
                         ))}

@@ -7,6 +7,7 @@ import { Autoplay, Pagination } from 'swiper'
 import { SwiperSlide, Swiper } from 'swiper/react'
 import styles from 'scss/Album.module.scss'
 import { loadCurrentSong } from 'features/top100/top100Slice'
+import { loadLink } from 'features/linkSlice'
 
 function SongType() {
     const artistData = useSelector(state => state.artist)
@@ -29,6 +30,11 @@ function SongType() {
 
     const handleClick = (props) => {
         const action = loadCurrentSong(props)
+        dispatch(action)
+    }
+
+    const handleClickLink = (...rest) => {
+        const action = loadLink(rest)
         dispatch(action)
     }
 
@@ -82,7 +88,10 @@ function SongType() {
                                             <div>{item.title}</div>
                                             <div className={styles.albumSongArtist}>
                                                 {item.artists !== undefined && item.artists.map((artist, index) => (
-                                                    <Link className={styles.albumArtistItem} key={index} to={artist.link}>
+                                                    <Link className={styles.albumArtistItem} key={index}
+                                                        to={`${artist.link}/${artist.alias}`}
+                                                        onClick={() => handleClickLink(artist.link, 'artistdetail')}
+                                                    >
                                                         {index > 0 ? `, ${artist.name}` : artist.name}
                                                     </Link>
                                                 ))}

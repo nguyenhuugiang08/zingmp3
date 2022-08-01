@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Col, Container, Row } from 'reactstrap';
 import screenfull from 'screenfull'
 import 'scss/PlayMv.scss'
+import { loadLink } from 'features/linkSlice';
+import { useDispatch } from 'react-redux';
 
 function PlayMv({ encodeId }) {
   const [data, setData] = useState({})
@@ -13,6 +15,8 @@ function PlayMv({ encodeId }) {
   const [list, setList] = useState([])
   const [mode, setMode] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const dispatch = useDispatch()
 
   const [id, setId] = useState(encodeId)
   const [index, setIndex] = useState(0)
@@ -49,7 +53,7 @@ function PlayMv({ encodeId }) {
       const response = await videoApi.getAll(params)
       setData(response.data)
       setLoading(false)
-      setStatus({...status, isplay: false})
+      setStatus({ ...status, isplay: false })
     }
 
     getMv()
@@ -123,7 +127,6 @@ function PlayMv({ encodeId }) {
   // xử lý khi thay đôi volume
   const handleChangeVolume = (e) => {
     setStatus({ ...status, volume: e.target.value })
-    console.log(volume)
   }
 
   //xử lý khi ấn mute 
@@ -208,151 +211,162 @@ function PlayMv({ encodeId }) {
     volumeRef.current.style.display = 'none'
   }
 
+  //xử lý chuyển trang
+  const handleClickLink = (...rest) => {
+    const action = loadLink(rest)
+    dispatch(action)
+  }
+
   return (
-    <div className='playmv'>
-      <div className='playmv-blur'></div>
-      <div className='playmv-container'>
-        <div className='playmv-container-header mb-3 mx-3'>
-          <div>
-            <div className='playmv-container__wrapper'>
-              <div className='playmv-container-box'>
-                <div className='playmv-container-box-img' style={{ backgroundImage: `url(${data.artists && data.artists[0].thumbnail})` }}></div>
-              </div>
-              <div>
-                <div className='ms-1 playmv-container__wrapper-title'>{data.title}</div>
-                <div className='playmv-container__wrapper-name'>
-                  {artists.map((artist) => (
-                    <Link key={artist.id} to={'/'} className='ms-1'>{artist.name},</Link>
-                  ))}
+    <div>
+      <div className='playmv'>
+        <div className='playmv-blur'></div>
+        <div className='playmv-container'>
+          <div className='playmv-container-header mb-3 mx-3'>
+            <div>
+              <div className='playmv-container__wrapper'>
+                <div className='playmv-container-box'>
+                  <div className='playmv-container-box-img' style={{ backgroundImage: `url(${data.artists && data.artists[0].thumbnail})` }}></div>
+                </div>
+                <div>
+                  <div className='ms-1 playmv-container__wrapper-title'>{data.title}</div>
+                  <div className='playmv-container__wrapper-name'>
+                    {artists.map((artist) => (
+                      <Link key={artist.id}
+                        to={`${artist.link}/${artist.alias}`}
+                        onClick={() => handleClickLink(artist.link, 'artistdetail')}
+                        className='ms-1'>{artist.name},</Link>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
+            
           </div>
-          <div className='playmv-container-header__icon'
-          >
-            <FontAwesomeIcon icon="fa-solid fa-xmark" />
-          </div>
-        </div>
-        <Container fluid>
-          <Row>
-            <Col xs={9}>
-              {loading ? <>Loading...</> :
-                <div ref={playerVideoRef} className='position-relative wrapper'
-                  onMouseOver={handleDisplayControl}
-                  onMouseOut={handleHideControl}
-                >
-                  <ReactPlayer
-                    ref={videoRef}
-                    url={`${data.streaming && data.streaming.mp4["720p"]}`}
-                    playing={!isplay}
-                    controls={false}
-                    volume={volume}
-                    width={1110}
-                    height={624}
-                    muted={muted}
-                    onEnded={handleEnded}
-                    loop={repeat}
-                    onProgress={handleStartPlay}
-                  />
-                  <div className='player d-none' ref={playerRef}>
-                    <div className='player-custom-progress'>
-                      <input ref={progressRef} type="range" step={0.5} min={0} max={100} className='player-custom-progress-input ms-3 me-5'
-                        onChange={handleRewind}
-                      />
-                    </div>
-                    <div className='player-custom'>
-                      <div className='player-custom-left'>
-                        <div className='player-custom-left__item'
-                          onClick={e => handlePrevMv(e)}
-                        >
-                          <FontAwesomeIcon icon="fa-solid fa-backward-step" />
-                        </div>
-                        <div className='player-custom-left__item'
-                          onClick={handlePlay}
-                        >
-                          {!isplay ? <FontAwesomeIcon icon="fa-solid fa-pause" /> : <FontAwesomeIcon icon="fa-solid fa-play" />}
-                        </div>
-                        <div className='player-custom-left__item'
-                          onClick={handleNextMv}
-                        >
-                          <FontAwesomeIcon icon="fa-solid fa-forward-step" />
-                        </div>
-                        <div className='player-custom-left__item d-flex justify-content-start align-items-center'
-                          onMouseOver={handleDisplayVolume}
-                          onMouseOut={handleHideVolume}
-                        >
-                          <div className='player-custom-left__item-icon'
-                            onClick={handleMuteVolume}
+          <Container fluid>
+            <Row>
+              <Col xs={9}>
+                {loading ? <>Loading...</> :
+                  <div ref={playerVideoRef} className='position-relative wrapper'
+                    onMouseOver={handleDisplayControl}
+                    onMouseOut={handleHideControl}
+                  >
+                    <ReactPlayer
+                      ref={videoRef}
+                      url={`${data.streaming && data.streaming.mp4["720p"]}`}
+                      playing={!isplay}
+                      controls={false}
+                      volume={volume}
+                      width={1110}
+                      height={624}
+                      muted={muted}
+                      onEnded={handleEnded}
+                      loop={repeat}
+                      onProgress={handleStartPlay}
+                    />
+                    <div className='player d-none' ref={playerRef}>
+                      <div className='player-custom-progress'>
+                        <input ref={progressRef} type="range" step={0.5} min={0} max={100} className='player-custom-progress-input ms-3 me-5'
+                          onChange={handleRewind}
+                        />
+                      </div>
+                      <div className='player-custom'>
+                        <div className='player-custom-left'>
+                          <div className='player-custom-left__item'
+                            onClick={e => handlePrevMv(e)}
                           >
-                            {!muted && volume > 0 ? <FontAwesomeIcon icon="fa-solid fa-volume-high" /> : <FontAwesomeIcon icon="fa-solid fa-volume-xmark" />}
+                            <FontAwesomeIcon icon="fa-solid fa-backward-step" />
                           </div>
-                          <input ref={volumeRef} type="range" step={0.01} min={0} max={1} className='player-custom-left__item-input ms-2'
-                            onChange={e => handleChangeVolume(e)}
-                          />
+                          <div className='player-custom-left__item'
+                            onClick={handlePlay}
+                          >
+                            {!isplay ? <FontAwesomeIcon icon="fa-solid fa-pause" /> : <FontAwesomeIcon icon="fa-solid fa-play" />}
+                          </div>
+                          <div className='player-custom-left__item'
+                            onClick={handleNextMv}
+                          >
+                            <FontAwesomeIcon icon="fa-solid fa-forward-step" />
+                          </div>
+                          <div className='player-custom-left__item d-flex justify-content-start align-items-center'
+                            onMouseOver={handleDisplayVolume}
+                            onMouseOut={handleHideVolume}
+                          >
+                            <div className='player-custom-left__item-icon'
+                              onClick={handleMuteVolume}
+                            >
+                              {!muted && volume > 0 ? <FontAwesomeIcon icon="fa-solid fa-volume-high" /> : <FontAwesomeIcon icon="fa-solid fa-volume-xmark" />}
+                            </div>
+                            <input ref={volumeRef} type="range" step={0.01} min={0} max={1} className='player-custom-left__item-input ms-2'
+                              onChange={e => handleChangeVolume(e)}
+                            />
+                          </div>
+                          <div className='player-custom-left__item'
+                            style={{ fontSize: '14px' }}
+                          >
+                            {loading ? '00' : (Math.floor(time / 60) >= 10 ? Math.floor(time / 60) :
+                              `0${Math.floor(time / 60)}`)}
+                            :{loading ? '00' : (time % 60 > 9 ? Math.ceil(time % 60) : `0${Math.ceil(time % 60)}`)} | {` `}
+                            {Math.floor(data.duration / 60) > 10 ? Math.floor(data.duration / 60) : `0${Math.floor(data.duration / 60)}`}
+                            :{data.duration % 60 > 10 ? data.duration % 60 : `0${data.duration % 60}`}
+                          </div>
                         </div>
-                        <div className='player-custom-left__item'
-                          style={{ fontSize: '14px' }}
-                        >
-                          {loading ? '00' : (Math.floor(time / 60) >= 10 ? Math.floor(time / 60) :
-                            `0${Math.floor(time / 60)}`)}
-                          :{loading ? '00' : (time % 60 > 9 ? Math.ceil(time % 60) : `0${Math.ceil(time % 60)}`)} | {` `}
-                          {Math.floor(data.duration / 60) > 10 ? Math.floor(data.duration / 60) : `0${Math.floor(data.duration / 60)}`}
-                          :{data.duration % 60 > 10 ? data.duration % 60 : `0${data.duration % 60}`}
-                        </div>
-                      </div>
-                      <div className='player-custom-right'>
-                        <div className='player-custom-right__item'
-                          onClick={handleRepeat}>
-                          <FontAwesomeIcon icon="fa-solid fa-repeat" />
-                        </div>
-                        <div className='player-custom-right__item'><FontAwesomeIcon icon="fa-solid fa-gear" /></div>
-                        <div className='player-custom-right__item'
-                          onClick={handleSreenFull}
-                        >
-                          <FontAwesomeIcon icon="fa-solid fa-expand" />
+                        <div className='player-custom-right'>
+                          <div className='player-custom-right__item'
+                            onClick={handleRepeat}>
+                            <FontAwesomeIcon icon="fa-solid fa-repeat" />
+                          </div>
+                          <div className='player-custom-right__item'><FontAwesomeIcon icon="fa-solid fa-gear" /></div>
+                          <div className='player-custom-right__item'
+                            onClick={handleSreenFull}
+                          >
+                            <FontAwesomeIcon icon="fa-solid fa-expand" />
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              }
-            </Col>
-            <Col xs={3}>
-              <div className='list-mv'>
-                <div className='list-mv__header'>
-                  <div style={{ fontSize: '18px', fontWeight: '600' }}>Danh Sách Phát</div>
-                  <div className='list-mv__header-mode'>
-                    TỰ ĐỘNG PHÁT
-                    <div className='btn-mode list-mv__header-mode__btn ms-2' ref={modeRef} onClick={handleClickMode}>
-                      <div className='btn-mode__circle list-mv__header-mode__btn-circle' ref={circleRef}></div>
+                }
+              </Col>
+              <Col xs={3}>
+                <div className='list-mv'>
+                  <div className='list-mv__header'>
+                    <div style={{ fontSize: '18px', fontWeight: '600' }}>Danh Sách Phát</div>
+                    <div className='list-mv__header-mode'>
+                      TỰ ĐỘNG PHÁT
+                      <div className='btn-mode list-mv__header-mode__btn ms-2' ref={modeRef} onClick={handleClickMode}>
+                        <div className='btn-mode__circle list-mv__header-mode__btn-circle' ref={circleRef}></div>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className='list-mv__content'>
-                  {list.map(song => (
-                    <div key={song.encodeId} className='list-mv__content-wrapper my-2'>
-                      <div className='list-mv__content-box'>
-                        <div className='list-mv__content-thumbnail'
-                          style={{ backgroundImage: `url(${song.thumbnail})` }}
-                          onClick={() => handleLoadCurrentVideo(song.encodeId)}
-                        ></div>
-                      </div>
-                      <div className='ms-3' style={{ width: 'calc(100% - 120px)' }}>
-                        <div className='list-mv__content-title'>{song.title}</div>
-                        <div className='list-mv__content-name'>
-                          {song.artists.map((artist, index) => (
-                            <Link to={'/'} key={artist.id}>{index > song.artists.length - 2 ? artist.name : `${artist.name}, `}</Link>
-                          ))}
+                  <div className='list-mv__content'>
+                    {list.map(song => (
+                      <div key={song.encodeId} className='list-mv__content-wrapper my-2'>
+                        <div className='list-mv__content-box'>
+                          <div className='list-mv__content-thumbnail'
+                            style={{ backgroundImage: `url(${song.thumbnail})` }}
+                            onClick={() => handleLoadCurrentVideo(song.encodeId)}
+                          ></div>
+                        </div>
+                        <div className='ms-3' style={{ width: 'calc(100% - 120px)' }}>
+                          <div className='list-mv__content-title'>{song.title}</div>
+                          <div className='list-mv__content-name'>
+                            {song.artists.map((artist, index) => (
+                              <Link
+                                to={`${artist.link}/${artist.alias}`}
+                                onClick={() => handleClickLink(artist.link, 'artistdetail')}
+                                key={artist.id}>{index > song.artists.length - 2 ? artist.name : `${artist.name}, `}</Link>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Col>
-          </Row>
-        </Container>
+              </Col>
+            </Row>
+          </Container>
+        </div>
       </div>
     </div>
   )

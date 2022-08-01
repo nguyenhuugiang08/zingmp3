@@ -17,8 +17,8 @@ function HomeXnor({ data }) {
     }, [data])
 
 
-    const handleClickLink = (link) => {
-        const action = loadLink(link)
+    const handleClickLink = (...rest) => {
+        const action = loadLink(rest)
         dispatch(action)
     }
     return (
@@ -43,7 +43,7 @@ function HomeXnor({ data }) {
                                                         <Link
                                                             className={styles.home5Play}
                                                             to={`${compo.link}/${compo.encodeId}`}
-                                                            onClick={() => handleClickLink(compo.link)}
+                                                            onClick={() => handleClickLink(compo.link, 'album')}
                                                         >
                                                             <FontAwesomeIcon icon="fa-solid fa-play" />
                                                         </Link>

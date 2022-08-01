@@ -54,8 +54,8 @@ function NewRelease({ data }) {
         dispatch(action)
     }
 
-    const handleLoadCurrentAlbum = (link) => {
-        const action = loadLink(link)
+    const handleLoadCurrentAlbum = (...rest) => {
+        const action = loadLink(rest)
         dispatch(action)
     }
 
@@ -122,7 +122,7 @@ function NewRelease({ data }) {
                                     <div className='new-release-album d-none'>
                                         <Link className='new-release-album--wrapper'
                                             to={`${album.link}/${album.encodeId}`}
-                                            onClick={() => handleLoadCurrentAlbum(album.link)}
+                                            onClick={() => handleLoadCurrentAlbum(album.link, 'album')}
                                         >
                                             <img className='new-release-album-img' src={`${album.thumbnail}`} alt={`${album.title}`} />
                                             <FontAwesomeIcon className='new-release-album--wrapper-icon' icon="fa-solid fa-play" />

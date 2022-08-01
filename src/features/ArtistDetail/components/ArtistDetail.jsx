@@ -11,6 +11,7 @@ import VideoType from './VideoType/VideoType'
 import ArtistType from './ArtistType/ArtistType'
 import 'scss/ArtistDetail.scss'
 import PlaylistType from './PlaylistType/PlaylistType'
+import Loading from './Loading'
 
 function ArtistDetail() {
   const { encodeId } = useParams()
@@ -44,11 +45,11 @@ function ArtistDetail() {
     dispatch(action)
   }
 
-  let index = Math.floor(Math.random() * 40)
+  let index = Math.floor(Math.random() * (data.sections && data.sections.length > 0 && data.sections[0].items.length))
 
   return (
     <div>
-      {loading ? <span style={{ color: '#fff' }}>Loading...</span> :
+      {loading ? <Loading/> :
         <div>
           <div className='Artist-blur'></div>
           <div className='Artist-detail'>
@@ -102,7 +103,6 @@ function ArtistDetail() {
               {data.sections && data.sections.includes(data.sections.filter(item => item.sectionType === 'playlist')[0]) ? <PlaylistType /> : <></>}
               {data.sections && data.sections.includes(data.sections.filter(item => item.sectionType === 'artist')[0]) ? <ArtistType /> : <></>}
             </Container>
-
           </div>
         </div>
       }
