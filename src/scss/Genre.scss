@@ -1,0 +1,119 @@
+.topic {
+    color: #fff;
+
+    &-title {
+        text-transform: capitalize;
+        margin-bottom: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    &-wrapper {
+        cursor: pointer;
+        position: relative;
+
+        &__thumbnail {
+            width: 100%;
+
+            &-img {
+                padding-top: 56%;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                border-radius: 8px;
+            }
+        }
+
+        &-playlist {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+
+            &__box {
+                width: 48px;
+                margin-right: 6px;
+
+                &-item {
+                    padding-top: 100%;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    border-radius: 4px;
+                }
+            }
+        }
+    }
+}
+
+.nation {
+    color: #fff;
+
+    &-title {
+        text-transform: capitalize;
+        margin-bottom: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    &-wrapper {
+        cursor: pointer;
+        position: relative;
+
+        &__thumbnail {
+            width: 100%;
+
+            &-img {
+                padding-bottom: 70%;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                border-radius: 8px;
+            }
+        }
+
+        &-title {
+            position: absolute;
+            bottom: 16px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: 700;
+            line-height: normal;
+            text-shadow: 0 2px 5px rgb(0 0 0 / 30%);
+        }
+    }
+}
+
+.genre-detail-banner {
+    margin: 0 -59px;
+    position: relative;
+
+    &__img {
+        padding-top: 30%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    &__blur {
+        height: 100px;
+        width: 100%;
+        background-image: linear-gradient( transparent,rgb(23 15 35 / 5%), rgb(23 15 35 / 10%), rgb(23 15 35 / 20%), rgb(23 15 35 / 40%), rgb(23 15 35 / 60%),rgb(23 15 35 / 80%), rgb(23 15 35));
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+.genre-detail-wrapper {
+    position: relative;
+    top: -16px;
+}

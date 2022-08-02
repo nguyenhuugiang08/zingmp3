@@ -9,6 +9,9 @@ import MV from 'features/Mv/components/MV';
 import ArtistDetail from 'features/ArtistDetail/components/ArtistDetail';
 import Follow from 'features/Follow/Follow';
 import NewMusic from 'features/NewMusic/NewMusic';
+import Genre from 'features/Genre/Genre';
+import TopicDetail from 'features/Genre/Topic/TopicDetail/TopicDetail';
+import NationsDetail from 'features/Genre/Nations/NationsDetail/NationsDetail';
 
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
@@ -30,7 +33,9 @@ function Routerall() {
       path: `${path[0]}/:encodeId`,
       component: path[1] === 'chart' ? Chartdetail :
         (path[1] === 'artistdetail' ? ArtistDetail :
-          (path[1] === 'mv' ? MV : Anbuml))
+          (path[1] === 'mv' ? MV :
+            (path[1] === 'hubdetail' ? TopicDetail :
+              (path[1] === 'nationdetail' ? NationsDetail : Anbuml))))
     }
   })
 
@@ -42,7 +47,8 @@ function Routerall() {
     { path: "radio", component: Radio },
     { path: "follow", component: Follow },
     { path: "MV", component: MV },
-    {path: 'new-music', component: NewMusic}
+    { path: 'new-music', component: NewMusic },
+    { path: 'genre', component: Genre },
   ]
 
   listPath.map(item => {
@@ -53,8 +59,8 @@ function Routerall() {
     <div style={{ width: 'calc(100% - 240px)', position: 'relative', left: '240px', padding: '70px 60px 0', top: '0', marginBottom: `${mounted ? "90px" : ""}` }}>
       <Routes>
         {routes.map((route, index) => {
-            const Page = route.component
-            return <Route key={index} path={route.path} element={<Page />}></Route>
+          const Page = route.component
+          return <Route key={index} path={route.path} element={<Page />}></Route>
         })}
       </Routes>
     </div >
