@@ -28,6 +28,8 @@ function Routerall() {
     }
   }, [dataStore])
 
+  console.log(path);
+
   const listPath = path.map(path => {
     return {
       path: `${path[0]}/:encodeId`,
