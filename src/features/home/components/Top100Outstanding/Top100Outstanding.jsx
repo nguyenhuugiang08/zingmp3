@@ -18,7 +18,7 @@ function Top100Outstanding({ data }) {
     const handleClickLink = (...rest) => {
         const action = loadLink(rest)
         dispatch(action)
-      }
+    }
 
     return (
         <div className={styles.top100Outstanding}>
@@ -63,12 +63,14 @@ function Top100Outstanding({ data }) {
                                                 {compo.artists.map((artist, index) => (
                                                     <div key={index} className={styles.top100OutstandingArtist}>
                                                         <NavItem>
-                                                            <NavLink
-                                                                href="#"
+                                                            <Link
+                                                                style={{ textDecoration: 'none' }}
+                                                                to={`${artist.link}/${artist.alias}`}
+                                                                onClick={() => handleClickLink(artist.link, 'artistdetail')}
                                                                 className={styles.top100OutstandingArtistItem}
                                                             >
                                                                 {artist.name},
-                                                            </NavLink>
+                                                            </Link>
                                                         </NavItem>
                                                     </div>
                                                 ))}

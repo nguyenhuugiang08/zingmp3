@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx'
 import styles from 'scss/Home7.module.scss'
+import { loadLink } from 'features/linkSlice';
+import { useDispatch } from 'react-redux';
 
 function HomeChart({ data }) {
     const [chart, setChart] = useState({})
@@ -17,6 +19,8 @@ function HomeChart({ data }) {
     const [count3, setCount3] = useState([])
 
     const chartRef = useRef()
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (data.length > 0) {
@@ -126,6 +130,11 @@ function HomeChart({ data }) {
     const classes1 = clsx(styles.zingChartIndex, styles.zingChartIndex2)
     const classes2 = clsx(styles.zingChartIndex, styles.zingChartIndex3)
 
+    const handleClickLink = (...rest) => {
+        const action = loadLink(rest)
+        dispatch(action)
+    }
+
     return (
         <div className={styles.zingChart}>
             <div className={styles.zingChartWrapper}>
@@ -149,15 +158,20 @@ function HomeChart({ data }) {
                                                 <div className={styles.zingChartThumbPar}>
                                                     <div className={styles.zingChartThumb} style={{ backgroundImage: `url(${item.thumbnailM})` }}></div>
                                                 </div>
-                                                <div >
+                                                <div className={styles.zingChartArtitsBox} >
                                                     <div className={styles.zingChartArtits}>
                                                         {item.title}
                                                     </div>
-                                                    <div style={{ display: 'flex' }}>
+                                                    <div >
                                                         {item.artists.map((artist, index) => (
-                                                            <div className={styles.zingChartTagA} key={index}>
+                                                            <Link
+                                                                className={styles.zingChartTagA}
+                                                                key={index}
+                                                                to={`${artist.link}/${artist.alias}`}
+                                                                onClick={() => handleClickLink(artist.link, 'artistdetail')}
+                                                            >
                                                                 {index > 0 ? `,${artist.name}` : `${artist.name}`}
-                                                            </div>
+                                                            </Link>
                                                         ))}
                                                     </div>
                                                 </div>

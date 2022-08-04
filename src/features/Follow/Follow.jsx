@@ -4,12 +4,12 @@ import Artist from 'features/home/components/artistSpotlight/Artist';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Container, Row } from 'reactstrap';
 import ReactLoading from 'react-loading';
 import 'scss/Follow.scss';
 import { Link } from 'react-router-dom';
 import { loadLink } from 'features/linkSlice';
 import ReactPlayer from 'react-player';
+import Masonry from 'react-masonry-css';
 
 function Follow() {
     const [data, setData] = useState([])
@@ -79,6 +79,11 @@ function Follow() {
         dispatch(action)
     }
 
+    const handleDateTime  = (time) => {
+        const date = new Date(time * 1000);
+        return `${date.getDay()} tháng ${date.getMonth() + 1} lúc ${date.getHours()}:${date.getMinutes()}`;
+    }
+
     return (
         <div className='follow'>
             <div className='follow-filter'>
@@ -106,61 +111,71 @@ function Follow() {
                     hasMore={true}
                     loader={hasMore ? <></> : <div className='mv-loading-more'><ReactLoading type='spinningBubbles' color='#fff' height={'4%'} width={'4%'} /></div>}
                 >
-                    <Container className='mt-5'>
-                        <Row>
-                            {list.map(item => (
-                                <Col key={item.id} xs={4} className='mb-3'>
-                                    <div className='main'>
-                                        <div className='main__header'>
-                                            <div className='main__header-avatar'>
-                                                <div className='main__header-avatar-thumbnail' style={{ backgroundImage: `url(${item.publisher.thumbnail})` }}></div>
-                                            </div>
-                                            <div className='ms-2 main__header-title'>
-                                                <Link
-                                                    className='main__header-title__artist'
-                                                    to={`${item.publisher.link}/${item.publisher.alias}`}
-                                                    onClick={() => handleArtistDetail(item.publisher.link, 'artistdetail')}
-                                                >{item.publisher.name}</Link>
-                                                <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-                                                <span className='main__header-title__care'>Quan tâm</span>
-                                            </div>
-                                        </div>
-                                        <div className='mt-2 main-title'>{item.title}</div>
-                                        <div className='main-thumbnail mt-2'>
-                                            {item.content.photos ?
-                                                <div className='main-thumbnail__item' style={{ backgroundImage: `url(${item.content.photos[0].url})` }}></div> :
-                                                <div></div>
-                                            }
-                                            {item.content.source ?
-                                                <div>
-                                                    <ReactPlayer
-                                                        style={{ borderRadius: '8px' }}
-                                                        url={item.content.source['240p']}
-                                                        width={322.4}
-                                                        height={472}
-                                                        controls={true}
-                                                        playing={false}
-                                                    />
+                    <div className='mt-5'>
+                        <div>
+                            <Masonry
+                                breakpointCols={3}
+                                className="my-masonry-grid"
+                                columnClassName="my-masonry-grid_column">
+                                {list.map(item => (
+                                    <div key={item.id} xs={4} className='mb-3'>
+                                        <div className='main'>
+                                            <div className='main__header'>
+                                                <div className='main__header-avatar'>
+                                                    <div className='main__header-avatar-thumbnail' style={{ backgroundImage: `url(${item.publisher.thumbnail})` }}></div>
                                                 </div>
-                                                :
-                                                <div></div>
-                                            }
-                                        </div>
-                                        <div className='main-action'>
-                                            <div className='main-action__like'>
-                                                <FontAwesomeIcon icon="fa-regular fa-heart" className='me-1' />
-                                                {item.like}
+                                                <div>
+                                                    <div className='ms-2 main__header-title'>
+                                                        <Link
+                                                            className='main__header-title__artist'
+                                                            to={`${item.publisher.link}/${item.publisher.alias}`}
+                                                            onClick={() => handleArtistDetail(item.publisher.link, 'artistdetail')}
+                                                        >{item.publisher.name}</Link>
+                                                        <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+                                                        <span className='main__header-title__care'>Quan tâm</span>
+                                                    </div>
+                                                    <div className='ms-2 main__header-time'>
+                                                        {handleDateTime(item.publishTime)}
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className='main-action__comment ms-4'>
-                                                <FontAwesomeIcon icon="fa-regular fa-comment" className='me-1' />
-                                                {item.commend}
+                                            <div className='mt-2 main-title'>{item.title}</div>
+                                            <div className='main-thumbnail mt-2'>
+                                                {item.content.type === 'album' ?
+                                                    <div className='main-thumbnail__item' style={{ backgroundImage: `url(${item.content.photos[0].url})` }}></div> :
+                                                    (item.content.type === 'feedVideo' ?
+                                                        <div>
+                                                            <ReactPlayer
+                                                                style={{ borderRadius: '8px' }}
+                                                                url={item.content.source['144p'] || item.content.source['240p'] || item.content.source['360p']
+                                                                 || item.content.source['480p'] || item.content.source['720p'] || item.content.source['1080p']}
+                                                                width={322.4}
+                                                                height={472}
+                                                                controls={true}
+                                                                playing={false}
+                                                            />
+                                                        </div>
+                                                        :
+                                                        <div></div>
+                                                    )
+                                                }
+                                            </div>
+                                            <div className='main-action'>
+                                                <div className='main-action__like'>
+                                                    <FontAwesomeIcon icon="fa-regular fa-heart" className='me-1' />
+                                                    {item.like}
+                                                </div>
+                                                <div className='main-action__comment ms-4'>
+                                                    <FontAwesomeIcon icon="fa-regular fa-comment" className='me-1' />
+                                                    {item.commend}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </Col>
-                            ))}
-                        </Row>
-                    </Container>
+                                ))}
+                            </Masonry>
+                        </div>
+                    </div>
                 </InfiniteScroll>
             }
         </div>

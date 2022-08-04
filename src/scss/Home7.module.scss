@@ -53,6 +53,7 @@
     }
 
     .zingChartBox {
+        flex: 1;
         padding-left: 8px;
         display: flex;
         align-items: center;
@@ -71,6 +72,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .zingChartArtitsBox {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
         }
 
         .zingChartArtits {

@@ -132,6 +132,7 @@ function NewRelease({ data }) {
                                             <div className='new-release-album-info__artist'>
                                                 {album.artists.map(artist => (
                                                     <Link
+                                                        
                                                         to={`${artist.link}/${artist.alias}`}
                                                         onClick={() => handleClickNameArtist(artist.link, 'artistdetail')}
                                                         key={artist.id} className='new-release__song-info__artist-item'>

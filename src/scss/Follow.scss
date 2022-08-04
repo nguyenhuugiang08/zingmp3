@@ -66,6 +66,12 @@
                     color: #dadada;
                 }
             }
+
+            &-time {
+                font-size: 13px;
+                font-weight: 300;
+                color: #ffffff80;
+            }
         }
 
         &-title {
@@ -95,4 +101,23 @@
             margin-top: 12px;
         }
     }
+
+    .my-masonry-grid {
+        display: -webkit-box;
+        /* Not needed if autoprefixing */
+        display: -ms-flexbox;
+        /* Not needed if autoprefixing */
+        display: flex;
+        margin-left: -24px;
+        /* gutter size offset */
+        width: auto;
+    }
+
+    .my-masonry-grid_column {
+        padding-left: 24px;
+        /* gutter size */
+        background-clip: padding-box;
+    }
+
+
 }

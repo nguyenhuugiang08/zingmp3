@@ -5,6 +5,8 @@ import songApi from 'api/songApi'
 import { useSelector } from 'react-redux';
 import PlaySongRight from '../PlaySongRight/PlaySongRight';
 import PlaySongLyric from 'components/PlaySong/PlaySongLyric/PlaySongLyric';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function PlaySongCenter() {
     const dataStore = useSelector(state => state.top100)
@@ -92,21 +94,29 @@ function PlaySongCenter() {
         }
     }, [listSong, index])
 
+    // xử lý play & pause audio
     const handlePlay = () => {
         if (!isPlaying && audioRef.current) {
             audioRef.current.play()
             setIsPlaying(true)
         } else {
-            if (audioRef.current) {
-                audioRef.current.pause()
-                setIsPlaying(false)
-            }
-            else{
-                alert("Dành cho VIP")
-            }
+            audioRef.current.pause()
+            setIsPlaying(false)
         }
     }
 
+    //xử lý thông báo bài hát dành cho tài khoản VIP
+    const notify = () => toast.error("Dành Cho Tài Khoản VIP", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
+    //xử lý thanh thời gian chạy 
     const handleOnchaneSeek = () => {
         if (loading && audioRef.current) {
             seekRef.current.value = 0
@@ -118,6 +128,7 @@ function PlaySongCenter() {
         }
     }
 
+    //xử lý lặp lại bài hát khi click vào nút lặp lại
     const handleClickRepeatBtn = () => {
         repeatBtnRef.current.classList.toggle("play-song__btn--active")
         if (!isRepeat) {
@@ -127,6 +138,7 @@ function PlaySongCenter() {
         }
     }
 
+    // xử lý khi click nút random
     const handleClickRandomBtn = () => {
         randomBtnRef.current.classList.toggle("play-song__btn--active")
         if (!isRandom) {
@@ -136,6 +148,7 @@ function PlaySongCenter() {
         }
     }
 
+    // xử lý tua bài hát
     const handleChange = () => {
         const seekTime = seekRef.current.value / 100 * duration
         if (audioRef.current) {
@@ -145,6 +158,7 @@ function PlaySongCenter() {
         }
     }
 
+    // xử lý next bài hát
     const handleNextSong = () => {
         if (!isRandom) {
             setIndex(index + 1)
@@ -161,6 +175,7 @@ function PlaySongCenter() {
         }
     }
 
+    // xử lý prev bài hát
     const handlePrevSong = () => {
         if (!isRandom) {
             setIndex(index - 1)
@@ -175,8 +190,9 @@ function PlaySongCenter() {
         }
     }
 
+    // xử lý khi kết thúc bài hát
     const handleEndSong = () => {
-        if (isRepeat &&  audioRef.current) {
+        if (isRepeat && audioRef.current) {
             audioRef.current.play()
             setIsPlaying(true)
         } else {
@@ -184,6 +200,7 @@ function PlaySongCenter() {
         }
     }
 
+    // xử lý phát bài hát random khi click nút random - không random lại bài hát cũ
     const handleRandomSong = () => {
         const indexRandom = Math.floor(Math.random() * (listSong.length - 1))
         setIndex(indexRandom)
@@ -191,13 +208,16 @@ function PlaySongCenter() {
         setId(encodeIdPrev)
     }
 
+
+    // xử lý thay đổi âm lượng
     const handleChangeVol = () => {
         setVol(volRef.current.value)
-        if(audioRef.current){
+        if (audioRef.current) {
             audioRef.current.volume = vol
         }
     }
 
+    // xử lý hiện lời bài hát
     const handelDisplayLyric = () => {
         if (!displayLyric) {
             setDisplayLyric(true)
@@ -235,7 +255,7 @@ function PlaySongCenter() {
                         <FontAwesomeIcon icon="fa-solid fa-backward-step" />
                     </button>
                     <button
-                        onClick={handlePlay}
+                        onClick={listSong.length > 0 && listSong[index].isWorldWide ? handlePlay : notify}
                         className="play-song__btn btn-play"
                     >
                         {loading ? <ReactLoading type='spinningBubbles' color='#fff' height={30} width={30} /> :
@@ -309,6 +329,7 @@ function PlaySongCenter() {
                 </button>
             </div>
             {displayLyric ? <PlaySongLyric id={id} thumb={thumb} time={time} /> : <></>}
+            <ToastContainer />
         </>
     )
 }

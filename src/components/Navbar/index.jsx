@@ -24,19 +24,22 @@ const Item = ({ path, icon, content }) => {
 function Navbar() {
    const dataStore = useSelector(state => state.top100)
    const [mounted, setMounted] = useState(false)
- 
+
    useEffect(() => {
-       if (dataStore.length !== 0) {
-           setMounted(dataStore[dataStore.length - 1].isPlay)
-       }
+      if (dataStore.length !== 0) {
+         setMounted(dataStore[dataStore.length - 1].isPlay)
+      }
    }, [dataStore])
    return (
       <div>
-         <div className={styles.navbar}  style={{bottom: `${mounted ? "90px" : ""}`}}>
+         <div className={styles.navbar} style={{ bottom: `${mounted ? "90px" : ""}` }}>
             <Nav pills vertical>
-               <NavItem className={`${styles.navbarItem} ${styles.navbarLogo}`}>
+               <Link
+                  className={`${styles.navbarItem} ${styles.navbarLogo}`}
+                  to='/'
+               >
                   <img src="https://zmp3-static.zadn.vn/skins/zmp3-v6.1/images/backgrounds/logo-dark.svg" alt="" className={styles.img} />
-               </NavItem>
+               </Link>
                <Item path='personal'
                   icon='fa-solid fa-podcast'
                   content='Cá Nhân'
@@ -100,11 +103,11 @@ function Navbar() {
                         icon='fa-solid fa-record-vinyl'
                         content='Bài hát'
                      />
-                      <Item path='playlist'
+                     <Item path='playlist'
                         icon='fa-regular fa-rectangle-list'
                         content='Playlist'
                      />
-                      <Item path='history'
+                     <Item path='history'
                         icon='fa-regular fa-clock'
                         content='Gần đây'
                      />

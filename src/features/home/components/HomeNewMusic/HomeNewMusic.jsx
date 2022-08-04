@@ -9,9 +9,9 @@ import styles from 'scss/Home5.module.scss'
 
 function HomeNewMusic({ data }) {
     const [list, setList] = useState({})
-    
+
     const dispatch = useDispatch()
-    
+
     useEffect(() => {
         if (data.length > 0) {
             setList(data.filter(item => item.sectionType === 'newReleaseChart')[0])
@@ -71,9 +71,10 @@ function HomeNewMusic({ data }) {
                                                         <div key={index} className={styles.home5Artist}>
                                                             <NavItem>
                                                                 <Link
+                                                                    style={{ textDecoration: 'none' }}
                                                                     to={`${artist.link}/${artist.alias}`}
-                                                                    className={styles.home5ArtistItem}
                                                                     onClick={() => handleClickNameArtist(artist.link, 'artistdetail')}
+                                                                    className={styles.home5ArtistItem}
                                                                 >
                                                                     {artist.name},
                                                                 </Link>

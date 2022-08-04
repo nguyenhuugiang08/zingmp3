@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { loadLink } from 'features/linkSlice'
-import style from 'scss/Top100Outstanding.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Autoplay, Navigation } from 'swiper'
-import { SwiperSlide, Swiper } from 'swiper/react'
-import { Nav, NavItem } from 'reactstrap'
+import React, { useEffect, useState } from 'react';
+import { loadLink } from 'features/linkSlice';
+import style from 'scss/Top100Outstanding.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Autoplay, Navigation } from 'swiper';
+import { SwiperSlide, Swiper } from 'swiper/react';
+import { Nav, NavItem } from 'reactstrap';
 
 function VideoType() {
     const [mv, setMv] = useState([])

@@ -23,23 +23,25 @@ function Topic({ data }) {
             <div className='topic-title'>tâm trạng và hoạt động</div>
             <Container>
                 <Row>
-                    {list.map(item => (
+                    {list.map((item, index) => (
                         <Col xs={3} key={item.encodeId} className='mb-3'>
-                            <Link className='topic-wrapper'
-                                to={`${item.link}/${item.encodeId}`}
-                                onClick={() => handleClickLink(item.link, 'hubdetail')}
-                            >
-                                <div className='topic-wrapper__thumbnail'>
-                                    <div className='topic-wrapper__thumbnail-img' style={{ backgroundImage: `url(${item.thumbnailHasText})` }}></div>
-                                </div>
-                                <div className='topic-wrapper-playlist'>
-                                    {item.playlists.map(playlist => (
-                                        <div key={playlist.encodeId} className='topic-wrapper-playlist__box'>
-                                            <div className='topic-wrapper-playlist__box-item' style={{ backgroundImage: `url(${playlist.thumbnail})` }}></div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </Link>
+                            {index > 7 ? <></> :
+                                <Link className='topic-wrapper'
+                                    to={`${item.link}/${item.encodeId}`}
+                                    onClick={() => handleClickLink(item.link, 'hubdetail')}
+                                >
+                                    <div className='topic-wrapper__thumbnail'>
+                                        <div className='topic-wrapper__thumbnail-img' style={{ backgroundImage: `url(${item.thumbnailHasText})` }}></div>
+                                    </div>
+                                    <div className='topic-wrapper-playlist'>
+                                        {item.playlists.map(playlist => (
+                                            <div key={playlist.encodeId} className='topic-wrapper-playlist__box'>
+                                                <div className='topic-wrapper-playlist__box-item' style={{ backgroundImage: `url(${playlist.thumbnail})` }}></div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </Link>
+                            }
                         </Col>
                     ))}
                 </Row>
