@@ -2,6 +2,7 @@ import radioApi from 'api/radioApi'
 import HomeRadio from 'features/home/components/HomeRadio/HomeRadio'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Loading from './Loading'
 import RadioEpisode from './RadioEpisode/RadioEpisode'
 import RadioPostcard from './RadioPodcast/RadioPostcard'
 import RadioPostcardCategory from './RadioPostcardCategory/RadioPostcardCategory'
@@ -47,7 +48,7 @@ function Radio() {
 
   return (
     <div>
-      {loading ? <div>Loading ...</div> :
+      {loading ? <Loading/> :
         <div>
           <HomeRadio data={data} />
           <RadioSchedule />

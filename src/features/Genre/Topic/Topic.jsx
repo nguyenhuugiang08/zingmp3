@@ -1,8 +1,8 @@
-import { loadLink } from 'features/linkSlice'
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Col, Container, Row } from 'reactstrap'
+import React, { useEffect, useState } from 'react';
+import { loadLink } from 'features/linkSlice';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Col, Container, Row } from 'reactstrap';
 
 function Topic({ data }) {
     const [list, setList] = useState([])

@@ -1,35 +1,62 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from 'scss/Header.module.scss'
-import { Navbar, Collapse, Button } from 'reactstrap'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import searchApi from "api/searchApi";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDebounce } from 'use-debounce';
+import recommendKeywordApi from "api/recommendKeywordApi";
+import suggestionKeywordApi from "api/suggestKeywordApi";
+import styles from 'scss/Header.module.scss';
+import { Button } from "reactstrap";
+import ReactLoading from 'react-loading';
 
 function Header() {
-    const [keyword, setKeyWord] = useState('')
-    const [data, setData] = useState({})
-    const [id, setId] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    const [recommendKeyword, setRecommendKeyword] = useState([])
+
+    const [suggestionKeyword, setSuggestionKeyword] = useState('')
+    const [value] = useDebounce(suggestionKeyword, 300)
+    const [suggestionList, setSuggestionList] = useState([])
 
     const navigate = useNavigate()
-    const location = useLocation()
     const inputRef = useRef()
+    const ulRef = useRef()
 
-    // useEffect(() => {
-    //     const getSearch = async () => {
-    //         const params = {
-    //             keyword: keyword
-    //         }
-    //         const response = await searchApi.getAll(params)
-    //         setData(response.data)
-    //     }
+    useEffect(() => {
+        const getRecommendKeyword = async () => {
+            try {
+                setLoading(true)
+                const response = await recommendKeywordApi.getAll()
+                setRecommendKeyword(response.data)
+                setLoading(false)
+            } catch (error) {
+                console.log('falied to fetch to data', error)
+            }
+        }
+        getRecommendKeyword()
+    }, [])
 
-    //     getSearch()
-    // }, [keyword])
+    useEffect(() => {
+        const getSuggestionkeyword = async () => {
+            try {
+                const params = {
+                    keyword: value
+                }
+                setLoading(true)
+                const response = await suggestionKeywordApi.getAll(params)
+                if (Array.isArray(response.data.items)) {
+                    setSuggestionList(response.data.items)
+                }
+                setLoading(false)
+            } catch (error) {
+                console.log('falied to fetch to data', error)
+            }
+        }
+        getSuggestionkeyword()
+    }, [value])
 
     const handleOnKeyUp = (e) => {
-        if(e.which === 13){
-            setKeyWord(id)
+        if (e.which === 13) {
+            return navigate(`/tim-kiem/tat-ca?q=${value}`)
         }
     }
 
@@ -51,24 +78,125 @@ function Header() {
                         <FontAwesomeIcon icon="fa-solid fa-arrow-right-long" />
                     </div>
 
-                    <Navbar
-                        dark
-                        expand="sm"
-                        light
+                    <div
                         className={styles.headerPadding}
                     >
-                        <Collapse navbar>
-                        </Collapse>
                         <input
                             className={styles.headerInput}
                             type="text"
                             placeholder="Nhập tên bài hát, nghệ sĩ hoặc MV..."
                             ref={inputRef}
-                            value={id}
-                            onChange={(e) => setId(e.target.value)}
+                            value={suggestionKeyword}
+                            onChange={(e) => setSuggestionKeyword(e.target.value)}
                             onKeyUp={(e) => handleOnKeyUp(e)}
                         />
-                    </Navbar>
+                        {value ?
+                            <ul className={styles.headerRecommendKeyword} ref={ulRef}>
+                                <div className={styles.headerSearchTitle}>
+                                    Từ khóa liên quan
+                                </div>
+                                <div
+                                    className={`${styles.headerRecommendKeywordItem} d-flex justify-content-start align-items-center`}
+                                    style={{ padding: '8px 10px', borderRadius: '8px' }}
+                                >
+                                    <div className={styles.headerRecommendKeywordIcon}>
+                                        <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
+                                    </div>
+                                    <li>
+                                        Tìm kiếm "{suggestionKeyword}"
+                                    </li>
+                                </div>
+                                {loading ?
+                                    <div className='mv-loading-more'>
+                                        <ReactLoading type='spin' color='#fff' height={'4%'} width={'4%'} />
+                                    </div>
+                                    :
+                                    suggestionList.map((item, index) => (
+                                        <div key={index}>
+                                            {index === 0 ?
+                                                <div>
+                                                    {item.keywords.map((keyword, index) => (
+                                                        <div key={index} className={`${styles.headerRecommendKeywordItem} d-flex justify-content-start align-items-center`} style={{ padding: '8px 10px', borderRadius: '8px' }}>
+                                                            <div className={styles.headerRecommendKeywordIcon}>
+                                                                <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
+                                                            </div>
+                                                            <li>
+                                                                {keyword.keyword}
+                                                            </li>
+                                                        </div>
+                                                    ))}
+
+                                                </div>
+                                                :
+                                                <div style={{ borderTop: '1px solid #ffffff1a', marginTop: '10px', paddingTop: '10px' }}>
+                                                    <div className={styles.headerSearchTitle} >
+                                                        Gợi ý kết quả
+                                                    </div>
+                                                    {item.suggestions.map((suggest, index) => (
+                                                        <div key={index}
+                                                            className={`${styles.headerRecommendKeywordItem} d-flex justify-content-start align-items-center`}
+                                                            style={{ padding: '8px 10px', borderRadius: '8px' }}
+                                                        >
+                                                            <div className={styles.headerSuggestThumbnail}>
+                                                                <div className={styles.headerSuggestThumbnailImg}
+                                                                    style={{ backgroundImage: `url(${suggest.avatar || suggest.thumb})`, borderRadius: `${suggest.type === 4 ? '50%' : '5px'}` }}></div>
+                                                            </div>
+                                                            <div className="ms-2">
+                                                                <div style={{ fontSize: '14px', fontWeight: '500' }}>{suggest.name || suggest.title}</div>
+                                                                {suggest.type === 4 ?
+                                                                    <div style={{ fontSize: '13px', color: '#ffffff80' }}>
+                                                                        Nghệ sĩ • {suggest.followers / 1000}K quan tâm
+                                                                    </div> :
+                                                                    (
+                                                                        suggest.type === 5 ?
+                                                                            <div style={{ fontSize: '13px', color: '#ffffff80' }}>
+                                                                                {suggest.hubGroup}
+                                                                            </div> :
+                                                                            <div className='d-flex justify-content-start align-items-center'>
+                                                                                {suggest.artists.map((artist, index) => (
+                                                                                    <div
+                                                                                        style={{ fontSize: '13px', color: '#ffffff80' }}
+                                                                                        key={index}
+                                                                                    >
+                                                                                        {index < suggest.artists.length - 1 ? <div className="me-1">{artist.name},</div> : `${artist.name}`}
+                                                                                    </div>
+                                                                                ))}
+                                                                            </div>
+                                                                    )
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            }
+                                        </div>
+                                    ))}
+
+                            </ul> :
+                            <ul className={styles.headerRecommendKeyword} ref={ulRef}>
+                                <div className={styles.headerSearchTitle}>
+                                    Đề xuất cho bạn
+                                </div>
+                                {loading ?
+                                    <div className='mv-loading-more'>
+                                        <ReactLoading type='spin' color='#fff' height={'4%'} width={'4%'} />
+                                    </div> :
+                                    <div>
+                                        {recommendKeyword.map((item, index) => (
+                                            <div key={index} className={`${styles.headerRecommendKeywordItem} d-flex justify-content-start align-items-center`} style={{ padding: '8px 10px', borderRadius: '8px' }}>
+                                                <div className={styles.headerRecommendKeywordIcon}>
+                                                    <FontAwesomeIcon icon="fa-solid fa-arrow-trend-up" />
+                                                </div>
+                                                <li>
+                                                    {item.keyword}
+                                                </li>
+                                            </div>
+                                        ))}
+                                    </div>
+                                }
+                            </ul>
+                        }
+                    </div>
                 </div>
 
                 <div className={styles.headerRight}>

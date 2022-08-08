@@ -1,5 +1,5 @@
 .header {
-    background-color: #170f23 ;
+    background-color: #170f23;
     position: fixed;
     left: 240px;
     width: calc(100% - 240px);
@@ -9,6 +9,7 @@
 
     .headerPadding {
         padding: 15px 0;
+        position: relative;
     }
 
     .headerInput {
@@ -20,6 +21,22 @@
         box-shadow: none;
         padding: 16px;
         color: #fff;
+    }
+
+    .headerInput:focus-visible {
+        outline: none;
+    }
+
+    .headerInput:focus {
+        background-color: #432275;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .headerInput:focus ~  .headerRecommendKeyword {
+        display: block;
     }
 
     .haederBtn {
@@ -47,5 +64,61 @@
     .settingImage {
         width: 40px;
         height: 40px;
+    }
+
+    .headerSearchTitle {
+        font-size: 14px;
+        font-weight: 700;
+        padding: 0 10px 8px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .headerRecommendKeyword {
+        position: absolute;
+        overflow: hidden;
+        width: 100%;
+        min-height: 0;
+        background-color: #432275;
+        z-index: 5;
+        display: block;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        box-shadow: 0 4px 6px 0 rgb(32 33 36 / 28%);
+        padding: 13px 10px;
+        color: #fff;
+        list-style: none;
+        display: none;
+        cursor: pointer;
+        overflow-x: hidden;
+        overflow-y: auto;
+        max-height: 600px;
+        transition: all 0.3s ease-in;
+    }
+
+    .headerRecommendKeyword::-webkit-scrollbar {
+        display: none;
+    }
+
+    .headerRecommendKeywordIcon {
+        font-size: 14px;
+        color: #ffffff80;
+        position: relative;
+        top: 3px;
+        margin-right: 10px;
+    }
+
+    .headerRecommendKeywordItem:hover {
+        background-color: #ffffff1a;
+    }
+
+    .headerSuggestThumbnail {
+        width: 40px;
+    }
+
+    .headerSuggestThumbnailImg {
+        padding-top: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
     }
 }

@@ -4,8 +4,8 @@ import { Line } from 'react-chartjs-2';
 import { Col, Container, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import clsx from 'clsx'
-import styles from 'scss/Home7.module.scss'
+import clsx from 'clsx';
+import styles from 'scss/Home7.module.scss';
 import { loadLink } from 'features/linkSlice';
 import { useDispatch } from 'react-redux';
 

@@ -12,6 +12,7 @@ import NewMusic from 'features/NewMusic/NewMusic';
 import Genre from 'features/Genre/Genre';
 import TopicDetail from 'features/Genre/Topic/TopicDetail/TopicDetail';
 import NationsDetail from 'features/Genre/Nations/NationsDetail/NationsDetail';
+import Search from 'components/Search/Search';
 
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
@@ -49,6 +50,7 @@ function Routerall() {
     { path: "MV", component: MV },
     { path: 'new-music', component: NewMusic },
     { path: 'genre', component: Genre },
+    { path: `tim-kiem/tat-ca`, component: Search },
   ]
 
   listPath.map(item => {
