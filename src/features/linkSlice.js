@@ -5,11 +5,11 @@ const link = createSlice({
     initialState: [],
     reducers: {
         loadLink: (state, action) => {
-            state.push(action.payload)
+            state.push(action.payload);
         }
     }
 })
 
-export const { reducer, actions } = link
-export const {loadLink} = actions
-export default reducer
+export const { reducer, actions } = link;
+export const {loadLink} = actions;
+export default reducer;
