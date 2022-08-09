@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const chartHomeApi = {
   getAll: (params) => {
-    const url = '/charthome';
+    const url = '/chart/home';
     return axiosClient.get(url, { params });
   },
 }

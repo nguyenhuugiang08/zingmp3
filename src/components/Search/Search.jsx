@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { parse } from 'query-string';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import searchApi from 'api/searchApi';
 import SearchTypeVideo from './SearchTypeVideo/SearchTypeVideo';
+import SearchAll from './SearchAll/SearchAll';
+import SearchTypeSong from './SearchTypeSong/SearchTypeSong';
+import SearchtypePlaylist from './SearchTypePlaylist/SearchtypePlaylist';
 
 function Search() {
   const { search } = useLocation();
   const query = parse(search);
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
   const [type, setType] = useState('all');
-  const navigate = useNavigate();
 
   useEffect(() => {
     const getDataSearchAll = async () => {
       try {
         const params = {
-          q: query.q,
+          keyword: query.q,
         }
         setLoading(true);
         const response = await searchApi.getAll(params);
         setData(response.data);
         setLoading(false);
       } catch (error) {
-        console.log('falied to fetch data', error)
+        console.log('falied to fetch data', error);
       }
     }
     getDataSearchAll();
@@ -37,9 +39,9 @@ function Search() {
     })
     e.target.style.borderBottom = '2px solid #7200a1';
     setType(role === 'all' ? 'all' : (role === 'song' ? 'song' :
-      (role === 'playlist' ? 'playlist' : (role === 'artist' ? 'artist' : 'video'))))
-    const list = []
-    setData(list)
+      (role === 'playlist' ? 'playlist' : (role === 'artist' ? 'artist' : 'video'))));
+    const list = [];
+    setData(list);
   }
 
   return (
@@ -70,7 +72,12 @@ function Search() {
         </div>
       </div>
       {loading ? <div>loading...</div> :
-        (type === 'video' ? <SearchTypeVideo keyword={query.q} type = {type} /> : <></>)
+        <div>
+          {type === 'all' ? <SearchAll data={data} /> : <></>}
+          {type === 'video' ? <SearchTypeVideo keyword={query.q} type = {type} /> : <></>}
+          {type === 'song' ? <SearchTypeSong keyword={query.q} type = {type} /> : <></>}
+          {type === 'playlist' ? <SearchtypePlaylist keyword={query.q} type = {type} /> : <></>}
+        </div>
       }
     </div>
   )

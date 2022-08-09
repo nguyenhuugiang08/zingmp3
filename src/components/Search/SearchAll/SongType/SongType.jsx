@@ -1,33 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { loadLink } from 'features/linkSlice';
+import { loadCurrentSong } from 'features/top100/top100Slice';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Col, Row } from 'reactstrap';
-import { Autoplay, Pagination } from 'swiper';
-import { SwiperSlide, Swiper } from 'swiper/react';
 import styles from 'scss/Album.module.scss';
-import { loadCurrentSong } from 'features/top100/top100Slice';
-import { loadLink } from 'features/linkSlice';
 
-function SongType() {
-    const artistData = useSelector(state => state.artist)
-    const dispatch = useDispatch()
+function SongType({ list }) {
 
-    const [data, setData] = useState({})
-    const [outstanding, setOutstanding] = useState([])
-
-    useEffect(() => {
-        if (artistData.length > 0) {
-            setData(artistData[artistData.length - 1])
-        }
-    }, [artistData])
-
-    useEffect(() => {
-        if (data.sections && data.sections.length > 0) {
-            setOutstanding(data.sections.filter(item => item.sectionType === 'song')[0].items)
-        }
-    }, [data])
-
+    const dispatch = useDispatch();
+    
     const handleClick = (props) => {
         const action = loadCurrentSong(props)
         dispatch(action)
@@ -37,43 +20,21 @@ function SongType() {
         const action = loadLink(rest)
         dispatch(action)
     }
-
     return (
         <div style={{ color: '#fff' }}>
             <Row>
-                <div className='Artist-outstanding__title'>{data.sections && data.sections.filter(item => item.sectionType === 'song')[0].title}</div>
-                <Col xs={3}>
-                    <Swiper
-                        slidesPerView={1}
-                        slidesPerGroup={1}
-                        loop={true}
-                        loopFillGroupWithBlank={true}
-                        pagination={true}
-                        modules={[Autoplay, Pagination]}
-                        autoplay={{
-                            delay: 3000,
-                            disableOnInteraction: false
-                        }}
-                        className="mySwiper"
-                    >
-                        {outstanding.map((outstanding, index) => (
-                            <SwiperSlide key={index}>
-                                <img className='Artist-outstanding__title-img' src={outstanding.thumbnailM} alt="" />
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                </Col>
-                <Col xs={9}>
-                    <div className='Artist-outstanding__scroll'>
+                <div className='Artist-outstanding__title'>Bài Hát</div>
+                <Col xs={12}>
+                    <div>
                         <div className={`${styles.Album} Artist-outstanding`}>
-                            {outstanding.map((item, index) => (
+                            {list.map((item, index) => (
                                 <div key={index} className={`${styles.albumWrapper}`} style={{ flex: '1' }}>
                                     <div className={styles.albumLeft}>
                                         <div className={styles.albumImagePar}
                                             onClick={() => handleClick({
                                                 encodeId: item.encodeId,
                                                 isPlay: true,
-                                                songs: outstanding,
+                                                songs: list,
                                                 index: index
                                             })}
                                         >

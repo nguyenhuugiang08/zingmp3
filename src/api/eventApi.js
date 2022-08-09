@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const eventApi = {
   getAll: (params) => {
-    const url = '/event';
+    const url = '/events';
     return axiosClient.get(url, { params });
   },
 }

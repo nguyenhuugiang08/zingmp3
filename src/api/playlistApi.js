@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const playlistApi = {
   getAll: (params) => {
-    const url = '/detailplaylist';
+    const url = '/playlist';
     return axiosClient.get(url, { params });
   },
 }

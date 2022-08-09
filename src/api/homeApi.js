@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const homeApi = {
   getAll: (params) => {
-    const url = '/home';
+    const url = '/';
     return axiosClient.get(url, { params });
   },
 }

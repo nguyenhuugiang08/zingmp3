@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const weekChartApi = {
   getAll: (params) => {
-    const url = '/weekchart';
+    const url = '/chart/week';
     return axiosClient.get(url, { params });
   },
 }

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { loadLink } from 'features/linkSlice'
-import style from 'scss/Top100Outstanding.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Col, Container, Nav, NavItem, NavLink, Row } from 'reactstrap'
+import React, { useEffect, useState } from 'react';
+import { loadLink } from 'features/linkSlice';
+import style from 'scss/Top100Outstanding.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Col, Container, Nav, NavItem, Row } from 'reactstrap';
 
 function PlaylistType() {
     const [single, setSingle] = useState([])
@@ -21,13 +21,13 @@ function PlaylistType() {
 
     useEffect(() => {
         if (data.sections && data.sections.length > 0) {
-            setSingle(data.sections.filter(item => item.sectionType === 'playlist'))
+            setSingle(data.sections.filter(item => item.sectionType === 'playlist'));
         }
     }, [data])
 
     const handleClickLink = (...rest) => {
-        const action = loadLink(rest)
-        dispatch(action)
+        const action = loadLink(rest);
+        dispatch(action);
     }
     return (
         <div>
@@ -98,7 +98,7 @@ function PlaylistType() {
                                                                                         to={`${artist.link}/${artist.alias}`}
                                                                                         onClick={() => handleClickLink(artist.link, 'artistdetail')}
                                                                                         className={style.top100OutstandingArtistItem}
-                                                                                        style={{textDecoration: 'none'}}
+                                                                                        style={{ textDecoration: 'none' }}
                                                                                     >
                                                                                         {artist.name},
                                                                                     </Link>
@@ -116,7 +116,6 @@ function PlaylistType() {
                                                                 </div>
                                                             </div>
                                                         ))
-
                                                 }
                                             </Col>
                                         }

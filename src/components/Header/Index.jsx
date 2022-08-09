@@ -65,14 +65,14 @@ function Header() {
             <div className={`${styles.header} d-flex header`}>
                 <div className="d-flex justify-content-center align-items-center">
                     <div
-                        className={`${styles.haederBtn} me-3`}
+                        className={`${styles.headerBtn} me-3`}
                         onClick={() => navigate(-1)}
                     >
                         <FontAwesomeIcon icon="fa-solid fa-arrow-left-long" />
                     </div>
 
                     <div
-                        className={styles.haederBtn}
+                        className={`${styles.headerBtn} me-3`}
                         onClick={() => navigate(1)}
                     >
                         <FontAwesomeIcon icon="fa-solid fa-arrow-right-long" />

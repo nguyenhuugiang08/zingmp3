@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const releaseChartApi = {
   getAll: (params) => {
-    const url = '/chartrelease';
+    const url = '/chart/new-release';
     return axiosClient.get(url, { params });
   },
 }

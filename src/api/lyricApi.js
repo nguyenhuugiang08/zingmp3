@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const lyricApi = {
   getAll: (params) => {
-    const url = '/lyric';
+    const url = '/song/lyrics';
     return axiosClient.get(url, { params });
   },
 }

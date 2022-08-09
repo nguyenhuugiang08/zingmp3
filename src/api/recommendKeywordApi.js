@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const recommendKeywordApi = {
   getAll: (params) => {
-    const url = '/recommendKeyword';
+    const url = '/recommend-keyword';
     return axiosClient.get(url, { params });
   },
 }
