@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from "scss/Navbar.module.scss";
+import "scss/responsive.scss";
 import { useSelector } from "react-redux";
 
 const Item = ({ path, icon, content }) => {
@@ -40,7 +41,7 @@ function Navbar() {
   return (
     <div>
       <div
-        className={styles.navbar}
+        className={`${styles.navbar} navbar-no-response`}
         style={{ bottom: `${mounted ? "90px" : ""}` }}
       >
         <Nav pills vertical>
@@ -48,7 +49,7 @@ function Navbar() {
             <img
               src="https://zmp3-static.zadn.vn/skins/zmp3-v6.1/images/backgrounds/logo-dark.svg"
               alt=""
-              className={styles.img}
+              className={styles.navbarImg}
             />
           </Link>
           <Item path="personal" icon="fa-solid fa-podcast" content="Cá Nhân" />
@@ -118,6 +119,103 @@ function Navbar() {
           <FontAwesomeIcon icon="fa-solid fa-plus" />
           <span className={styles.navbarText}>Tạo playlist mới</span>
         </button>
+      </div>
+      <div
+        className={`${styles.navbar} navbar-responsive`}
+        style={{ bottom: `${mounted ? "90px" : ""}` }}
+      >
+        <Nav pills vertical>
+          <Link className={`${styles.navbarItem} navbar-item`} to="/">
+            <img
+              src="https://zjs.zmdcdn.me/zmp3-desktop/releases/v1.6.24/static/media/icon_zing_mp3_60.f6b51045.svg"
+              alt=""
+              className="navbar-logo"
+            />
+          </Link>
+
+          <NavItem className={`${styles.navbarItem} navbar-item`}>
+            <Link className={styles.navLink} to={"personal"}>
+              <FontAwesomeIcon
+                className="navbar-icon"
+                icon="fa-solid fa-podcast"
+              />
+            </Link>
+          </NavItem>
+
+          <NavItem className={`${styles.navbarItem} navbar-item`}>
+            <Link className={styles.navLink} to={"/"}>
+              <FontAwesomeIcon
+                className="navbar-icon"
+                icon="fa-solid fa-compact-disc"
+              />
+            </Link>
+          </NavItem>
+
+          <NavItem className={`${styles.navbarItem} navbar-item`}>
+            <Link className={styles.navLink} to={"zingchart"}>
+              <FontAwesomeIcon
+                className="navbar-icon"
+                icon="fa-solid fa-chart-line"
+              />
+            </Link>
+          </NavItem>
+
+          <NavItem className={`${styles.navbarItem} navbar-item`}>
+            <Link className={styles.navLink} to={"radio"}>
+              <FontAwesomeIcon
+                className="navbar-icon"
+                icon="fa-solid fa-radio"
+              />
+            </Link>
+          </NavItem>
+
+          <NavItem className={`${styles.navbarItem} navbar-item`}>
+            <Link className={styles.navLink} to={"follow"}>
+              <FontAwesomeIcon
+                className="navbar-icon"
+                icon="fa-solid fa-rectangle-list"
+              />
+            </Link>
+          </NavItem>
+        </Nav>
+        <hr />
+        <Nav pills vertical>
+          <NavItem className={`${styles.navbarItem} navbar-item`}>
+            <Link className={styles.navLink} to={"new-music"}>
+              <FontAwesomeIcon
+                className="navbar-icon"
+                icon="fa-solid fa-music"
+              />
+            </Link>
+          </NavItem>
+
+          <NavItem className={`${styles.navbarItem} navbar-item`}>
+            <Link className={styles.navLink} to={"genre"}>
+              <FontAwesomeIcon
+                className="navbar-icon"
+                icon="fa-solid fa-icons"
+              />
+            </Link>
+          </NavItem>
+
+          <NavItem className={`${styles.navbarItem} navbar-item`}>
+            <Link className={styles.navLink} to={"top100"}>
+              <FontAwesomeIcon
+                className="navbar-icon"
+                icon="fa-solid fa-star"
+              />
+            </Link>
+          </NavItem>
+
+          <NavItem className={`${styles.navbarItem} navbar-item`}>
+            <Link className={styles.navLink} to={"MV"}>
+              <FontAwesomeIcon
+                className="navbar-icon"
+                icon="a-solid fa-circle-play"
+              />
+            </Link>
+          </NavItem>
+        </Nav>
       </div>
     </div>
   );

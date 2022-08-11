@@ -1,0 +1,96 @@
+/* Mobile & tablet */
+@media (min-width: 1023px) {
+    .navbar-responsive {
+        display: none;
+    }
+
+    .navbar-no-responsive {
+        display: block;
+    }
+}
+
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1023px) {
+
+    // responsive navbar
+    .navbar-responsive {
+        display: block;
+        width: 70px;
+    }
+
+    .navbar-logo {
+        width: 45px;
+        height: 45px;
+    }
+
+    .navbar-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 6px 0;
+    }
+
+    .navbar-icon {
+        font-size: 24px;
+    }
+
+    .navbar-no-responsive {
+        display: none;
+    }
+
+    // responsive header
+    .header-btn-upload {
+        display: none;
+    }
+}
+
+/* Mobile  */
+@media (max-width: 739px) {
+
+    // responsive navbar
+    .navbar-responsive {
+        display: block;
+        width: 70px;
+    }
+
+    .navbar-logo {
+        width: 70px;
+        height: 54px;
+    }
+
+    .navbar-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 6px 0;
+    }
+
+    .navbar-icon {
+        font-size: 24px;
+    }
+
+    .navbar-no-responsive {
+        display: none;
+    }
+
+    // responsive header
+    .header-btn {
+        display: none;
+    }
+
+    .header-btn-vip {
+        display: none;
+    }
+
+    .header-btn-upload {
+        display: none;
+    }
+
+    .header-btn-setting {
+        display: none;
+    }
+
+    .header-right {
+        min-width: 50px !important;
+    }
+}

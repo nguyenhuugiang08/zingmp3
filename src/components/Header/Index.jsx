@@ -109,19 +109,27 @@ function Header() {
   return (
     <>
       <div className={`${styles.header} d-flex header`}>
-        <div className="d-flex justify-content-center align-items-center">
+        <div
+          className="d-flex align-items-center"
+          style={{ flex: "1" }}
+        >
           <div
-            className={`${styles.headerBtn} me-3`}
-            onClick={() => navigate(-1)}
+            className="d-flex justify-content-center align-items-center"
+            style={{ maxWidth: "74px" }}
           >
-            <FontAwesomeIcon icon="fa-solid fa-arrow-left-long" />
-          </div>
+            <div
+              className={`${styles.headerBtn} me-3`}
+              onClick={() => navigate(-1)}
+            >
+              <FontAwesomeIcon icon="fa-solid fa-arrow-left-long" />
+            </div>
 
-          <div
-            className={`${styles.headerBtn} me-3`}
-            onClick={() => navigate(1)}
-          >
-            <FontAwesomeIcon icon="fa-solid fa-arrow-right-long" />
+            <div
+              className={`${styles.headerBtn} me-3`}
+              onClick={() => navigate(1)}
+            >
+              <FontAwesomeIcon icon="fa-solid fa-arrow-right-long" />
+            </div>
           </div>
 
           <div className={styles.headerPadding}>
@@ -315,14 +323,14 @@ function Header() {
           </div>
         </div>
 
-        <div className={styles.headerRight}>
-          <div>
+        <div className={`${styles.headerRight} header-right`}>
+          <div className="header-btn">
             <Button className={styles.settingItem}>
               <FontAwesomeIcon icon="fa-solid fa-shirt" />
             </Button>
           </div>
 
-          <div>
+          <div className="header-btn-vip">
             <a href="https://zingmp3.vn/vip?utm_source=desktop&utm_campaign=VIP&utm_medium=sidebar">
               <Button className={styles.settingItem}>
                 <FontAwesomeIcon icon="fa-solid fa-gem" />
@@ -330,13 +338,13 @@ function Header() {
             </a>
           </div>
 
-          <div>
+          <div className="header-btn-upload">
             <Button className={styles.settingItem}>
               <FontAwesomeIcon icon="fa-solid fa-arrow-up-from-bracket" />
             </Button>
           </div>
 
-          <div>
+          <div className="header-btn-setting">
             <Button className={styles.settingItem}>
               <FontAwesomeIcon icon="fa-solid fa-gear" />
             </Button>

@@ -7,14 +7,32 @@
     z-index: 99;
     justify-content: space-between;
 
+    /* Mobile & tablet */
+    @media (min-width: 1023px) {}
+
+    /* Tablet */
+    @media (min-width: 740px) and (max-width: 1023px) {
+        width: calc(100% - 70px);
+        left: 70px;
+        padding: 0 30px;
+    }
+
+    /* Mobile  */
+    @media (max-width: 739px) {
+        width: calc(100% - 70px);
+        left: 70px;
+        padding: 0 30px;
+    }
+
     .headerPadding {
         margin: 15px 0;
         position: relative;
+        flex: 1;
+        max-width: 540px;
     }
 
     .headerInput {
-        width: 540px;
-        // width: 100%;
+        width: 100%;
         height: 40px;
         background-color: #2f2739;
         border-radius: 40px;
@@ -38,8 +56,9 @@
     }
 
     .headerRight {
-        padding: 15px 0;
+        padding: 15px 0 15px 24px;
         display: flex;
+        min-width: 100px;
     }
 
     .settingItem {
