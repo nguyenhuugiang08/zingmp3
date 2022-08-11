@@ -8,12 +8,13 @@
     justify-content: space-between;
 
     .headerPadding {
-        padding: 15px 0;
+        margin: 15px 0;
         position: relative;
     }
 
     .headerInput {
         width: 540px;
+        // width: 100%;
         height: 40px;
         background-color: #2f2739;
         border-radius: 40px;
@@ -25,18 +26,6 @@
 
     .headerInput:focus-visible {
         outline: none;
-    }
-
-    .headerInput:focus {
-        background-color: #432275;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-
-    .headerInput:focus ~  .headerRecommendKeyword {
-        display: block;
     }
 
     .headerBtn {
@@ -92,13 +81,16 @@
         list-style: none;
         display: none;
         cursor: pointer;
-        overflow-x: hidden;
-        overflow-y: auto;
-        max-height: 600px;
+        max-height: auto;
         transition: all 0.3s ease-in;
     }
 
-    .headerRecommendKeyword::-webkit-scrollbar {
+    .headerRecommendKeywordListItem {
+        max-height: calc(100vh - 180px);
+        overflow-y: auto;
+    }
+
+    .headerRecommendKeywordListItem::-webkit-scrollbar {
         display: none;
     }
 

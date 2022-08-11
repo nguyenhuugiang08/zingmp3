@@ -81,7 +81,7 @@ function NewRelease({ data }) {
                     <Container>
                         <Row>
                             {item.song.map((song, index) => (
-                                <Col key={song.encodeId} xs={4}>
+                                <Col key={song.encodeId} xs={12} sm={6} md={4}>
                                     <div className='new-release__song'>
                                         <div className='new-release__song--wrapper'
                                             onClick={() => handleLoadCurrentSong({

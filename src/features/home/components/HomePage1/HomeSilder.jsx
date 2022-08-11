@@ -10,6 +10,7 @@ import ConfirmPlaySong from './confirmplaysong/ConfirmPlaySong';
 import "swiper/css";
 import "swiper/css/navigation";
 import 'scss/Home1.scss'
+import { Col, Row } from 'reactstrap';
 
 function HomeSilder({ data }) {
     const [sliders, setLiders] = useState([])
@@ -51,19 +52,23 @@ function HomeSilder({ data }) {
                     }}
                     className="mySwiper"
                 >
-                    {slider.items.map((item, index) => (
-                        <SwiperSlide key={index}>
-                            <Link
-                                to={(item.type === 3 || item.type === 4) && `${item.link}/${item.encodeId}`}
-                                onClick={item.type === 3 || item.type === 4 ? (() => handleClickLink(item.link, 'album')) : (item.type === 1 ? (() => handleClick({
-                                    encodeId: item.encodeId
-                                })) : "")}
-                            > <img className='swiper-slide-image' src={item.banner} alt="" /></Link>
-                        </SwiperSlide>
-                    ))}
+                    <Row>
+                        {slider.items.map((item, index) => (
+                            <Col xs={1} sm={2} md={3} key={index}>
+                                <SwiperSlide >
+                                    <Link
+                                        to={(item.type === 3 || item.type === 4) && `${item.link}/${item.encodeId}`}
+                                        onClick={item.type === 3 || item.type === 4 ? (() => handleClickLink(item.link, 'album')) : (item.type === 1 ? (() => handleClick({
+                                            encodeId: item.encodeId
+                                        })) : "")}
+                                    > <img className='swiper-slide-image' src={item.banner} alt="" /></Link>
+                                </SwiperSlide>
+                            </Col>
+                        ))}
+                    </Row>
                 </Swiper>
             ))}
-            <ConfirmPlaySong/>
+            <ConfirmPlaySong />
         </div>
     )
 }

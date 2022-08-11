@@ -58,7 +58,11 @@ function Routerall() {
   })
 
   return (
-    <div style={{ width: 'calc(100% - 240px)', position: 'relative', left: '240px', padding: '70px 60px 0', top: '0', marginBottom: `${mounted ? "90px" : ""}`, backgroundColor: '#170f23', minHeight: '100vh' }}>
+    <div style={{
+      width: 'calc(100% - 240px)', position: 'relative',
+      left: '240px', padding: '70px 60px 0', top: '0', marginBottom: `${mounted ? "90px" : ""}`,
+      backgroundColor: '#170f23', minHeight: '100vh'
+    }}>
       <Routes>
         {routes.map((route, index) => {
           const Page = route.component

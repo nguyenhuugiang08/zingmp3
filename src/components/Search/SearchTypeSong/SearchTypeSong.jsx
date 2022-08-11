@@ -9,6 +9,8 @@ import styles from 'scss/Album.module.scss';
 import ReactLoading from 'react-loading';
 import { loadLink } from 'features/linkSlice';
 import { loadCurrentSong } from 'features/top100/top100Slice';
+import Loading from './Loading';
+import formatTime from 'utils/formatTime';
 
 function SearchTypeSong({ keyword, type }) {
     const [hasMore, setHasMore] = useState(false);
@@ -60,7 +62,8 @@ function SearchTypeSong({ keyword, type }) {
 
     return (
         <div className='mt-4'>
-            {loading ? <div>Loading...</div> :
+            <div className='Artist-outstanding__title'>Bài Hát</div>
+            {loading ? <Loading /> :
                 <InfiniteScroll
                     dataLength={data.length} //This is important field to render the next data
                     next={!hasMore && fetchData}
@@ -69,7 +72,6 @@ function SearchTypeSong({ keyword, type }) {
                 >
                     <Container>
                         <Row>
-                            <div className='Artist-outstanding__title'>Bài Hát</div>
                             <Col xs={12}>
                                 <div>
                                     <div className={`${styles.Album} Artist-outstanding`}>
@@ -105,15 +107,14 @@ function SearchTypeSong({ keyword, type }) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <Link className={styles.albumCenter} to={item.album !== undefined && item.album.link}>
+                                                <Link className={styles.albumCenter}
+                                                    to={item.album !== undefined && `${item.album.link}/${item.album.encodeId}`}
+                                                    onClick={() => handleClickLink(item.album.link, 'album')}
+                                                >
                                                     {item.album !== undefined && item.album.title}
                                                 </Link>
                                                 <div className={styles.albumRight}>
-                                                    {Math.floor(item.duration / 60) >= 10 ?
-                                                        Math.floor(item.duration / 60) :
-                                                        `0${Math.floor(item.duration / 60)}`
-                                                    }:
-                                                    {item.duration % 60 >= 10 ? item.duration % 60 : `0${item.duration % 60}`}
+                                                    {formatTime(item.duration)}
                                                 </div>
                                             </div>
                                         ))}

@@ -10,7 +10,7 @@ import styles from 'scss/Album.module.scss';
 function SongType({ list }) {
 
     const dispatch = useDispatch();
-    
+
     const handleClick = (props) => {
         const action = loadCurrentSong(props)
         dispatch(action)
@@ -59,7 +59,10 @@ function SongType({ list }) {
                                             </div>
                                         </div>
                                     </div>
-                                    <Link className={styles.albumCenter} to={item.album !== undefined && item.album.link}>
+                                    <Link className={styles.albumCenter}
+                                        to={item.album !== undefined && `${item.album.link}/${item.album.encodeId}`}
+                                        onClick={() => handleClickLink(item.album.link, 'album')}
+                                    >
                                         {item.album !== undefined && item.album.title}
                                     </Link>
                                     <div className={styles.albumRight}>

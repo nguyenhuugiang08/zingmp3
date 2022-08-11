@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { Col, Container, Nav, NavItem, Row } from 'reactstrap';
 import style from 'scss/Top100Outstanding.module.scss';
 import ReactLoading from 'react-loading';
+import Loading from './Loading';
 
 function SearchtypePlaylist({ keyword, type }) {
     const [hasMore, setHasMore] = useState(false);
@@ -53,23 +54,23 @@ function SearchtypePlaylist({ keyword, type }) {
         dispatch(action);
     }
     return (
-        <div className='mt-4'>
-            {loading ? <div>Loading...</div> :
+        <div className={`${style.top100Outstanding}`}>
+            <div className={style.mainTitle}>
+                <div className={style.top100OutstandingTiltle}>Playlist/Album</div>
+            </div>
+            {loading ? <Loading/> :
                 <InfiniteScroll
                     dataLength={data.length} //This is important field to render the next data
                     next={!hasMore && fetchData}
                     hasMore={true}
                     loader={hasMore ? <></> : <div className='mv-loading-more'><ReactLoading type='spinningBubbles' color='#fff' height={'4%'} width={'4%'} /></div>}
                 >
-                    <div className={style.top100Outstanding}>
-                        <div className={style.mainTitle}>
-                            <div className={style.top100OutstandingTiltle}>Playlist/Album</div>
-                        </div>
+                    <div >
                         <div className={style.top100OutstandingContainer}>
                             <Container>
                                 <Row xs={5}>
                                     {data.map((compo, index) => (
-                                        <div key={index}  className='mb-3'>
+                                        <div key={index} className='mb-3'>
                                             <Col className={style.top100OutstandingCol}>
                                                 <div className={style.top100OutstandingPar}>
                                                     <div className={style.top100OutstandingImage} style={{ backgroundImage: `url(${compo.thumbnail})` }}>

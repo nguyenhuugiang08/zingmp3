@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Navigation } from 'swiper'
-import { SwiperSlide, Swiper } from 'swiper/react'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Navigation } from 'swiper';
+import { SwiperSlide, Swiper } from 'swiper/react';
+import { Col, Row } from 'reactstrap';
 
-import 'scss/Event.scss'
+import 'scss/Event.scss';
 
 function Event({ data }) {
     const [event, setEvent] = useState({})
@@ -35,16 +36,10 @@ function Event({ data }) {
             <div className='eventTitle'>
                 {event.title}
             </div>
-            <Swiper
-                slidesPerView={3}
-                slidesPerGroup={3}
-                navigation={true}
-                modules={[Navigation]}
-                className="event-swiper"
-            >
+            <Row className='event-swiper'>
                 {
-                    event.items && event.items.map((event, index) => (
-                        <SwiperSlide key={index}>
+                    event.items && event.items.map((event) => (
+                        <Col xs={12} sm={6} md={4}>
                             <div className='overflow'>
                                 <img className='swiper-slide-image' src={event.coverHM} alt="Slide Images" />
                                 <div className='eventOpacity'>
@@ -89,10 +84,10 @@ function Event({ data }) {
                                     }
                                 </Link>
                             </div>
-                        </SwiperSlide>
+                        </Col>
                     ))
                 }
-            </Swiper>
+            </Row>
         </div>
     )
 }

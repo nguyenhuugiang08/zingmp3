@@ -7,6 +7,7 @@ import ReactLoading from 'react-loading';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
+import Loading from './Loading';
 
 function SearchTypeVideo({ keyword, type }) {
     const [hasMore, setHasMore] = useState(false);
@@ -55,7 +56,8 @@ function SearchTypeVideo({ keyword, type }) {
 
     return (
         <div>
-            {loading ? <div>Loading...</div> :
+            <div className='mt-4 mb-3' style={{fontSize: '1.4rem', paddingLeft: '12px', fontWeight: '600'}}>MV</div>
+            {loading ? <Loading/> :
                 <InfiniteScroll
                     dataLength={data.length} //This is important field to render the next data
                     next={!hasMore && fetchData}

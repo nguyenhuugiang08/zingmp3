@@ -6,6 +6,8 @@ import SearchTypeVideo from './SearchTypeVideo/SearchTypeVideo';
 import SearchAll from './SearchAll/SearchAll';
 import SearchTypeSong from './SearchTypeSong/SearchTypeSong';
 import SearchtypePlaylist from './SearchTypePlaylist/SearchtypePlaylist';
+import SearchTypeArtist from './SearchTypeArtist/SearchTypeArtist';
+import Loading from './Loading';
 
 function Search() {
   const { search } = useLocation();
@@ -40,8 +42,6 @@ function Search() {
     e.target.style.borderBottom = '2px solid #7200a1';
     setType(role === 'all' ? 'all' : (role === 'song' ? 'song' :
       (role === 'playlist' ? 'playlist' : (role === 'artist' ? 'artist' : 'video'))));
-    const list = [];
-    setData(list);
   }
 
   return (
@@ -71,12 +71,13 @@ function Search() {
           </div>
         </div>
       </div>
-      {loading ? <div>loading...</div> :
+      {loading ? <Loading/> :
         <div>
           {type === 'all' ? <SearchAll data={data} /> : <></>}
           {type === 'video' ? <SearchTypeVideo keyword={query.q} type = {type} /> : <></>}
           {type === 'song' ? <SearchTypeSong keyword={query.q} type = {type} /> : <></>}
           {type === 'playlist' ? <SearchtypePlaylist keyword={query.q} type = {type} /> : <></>}
+          {type === 'artist' ? <SearchTypeArtist keyword={query.q} type = {type} /> : <></>}
         </div>
       }
     </div>

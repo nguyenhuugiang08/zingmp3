@@ -7,6 +7,7 @@ import PlaySongRight from '../PlaySongRight/PlaySongRight';
 import PlaySongLyric from 'components/PlaySong/PlaySongLyric/PlaySongLyric';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import formatTime from 'utils/formatTime';
 
 function PlaySongCenter() {
     const dataStore = useSelector(state => state.top100)
@@ -284,9 +285,7 @@ function PlaySongCenter() {
                 </div>
                 <div className='play-song__duration'>
                     <span className='play-song__duration-time-left'>
-                        {loading ? '00' : (Math.floor(time / 60) >= 10 ? Math.floor(time / 60) :
-                            `0${Math.floor(time / 60)}`)}
-                        :{loading ? '00' : (time % 60 > 9 ? Math.ceil(time % 60) : `0${Math.ceil(time % 60)}`)}
+                        {loading ? '00:00' : formatTime(time)}
                     </span>
                     <div className='play-song__duration-center'>
                         <input
@@ -295,8 +294,8 @@ function PlaySongCenter() {
                             onChange={handleChange}
                         />
                     </div>
-                    <span className='play-song__duration-time-right'>{Math.floor(duration / 60) > 10 ? Math.floor(duration / 60) : `0${Math.floor(duration / 60)}`}
-                        :{duration % 60 > 10 ? duration % 60 : `0${duration % 60}`}
+                    <span className='play-song__duration-time-right'>
+                        {formatTime(duration)}
                     </span>
                 </div>
             </div>
