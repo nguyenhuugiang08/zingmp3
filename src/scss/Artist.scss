@@ -1,11 +1,9 @@
-.mySwiper {
+.artistThumb {
+    width: 100%;
+    border-radius: 50%;
+}
 
-    .swiper-slide {
-        .swiper-slide-image {
-            width: 100%;
-            border-radius: 8px;
-        }
-    }
+.artist-swiper {
 
     .swiper-button-prev {
         color: #fff;
@@ -32,9 +30,7 @@
     }
 
     /* Mobile & tablet */
-    @media (min-width: 1023px) {
-
-    }
+    @media (min-width: 1023px) {}
 
     /* Tablet */
     @media (min-width: 740px) and (max-width: 1023px) {
@@ -42,16 +38,16 @@
             width: 44px;
             height: 44px;
         }
-    
+
         .swiper-button-next {
             width: 44px;
             height: 44px;
         }
-    
+
         .swiper-button-prev:after {
             font-size: 1.2rem;
         }
-    
+
         .swiper-button-next:after {
             font-size: 1.2rem;
         }
@@ -63,16 +59,16 @@
             width: 40px;
             height: 40px;
         }
-    
+
         .swiper-button-next {
             width: 40px;
             height: 40px;
         }
-    
+
         .swiper-button-prev:after {
             font-size: 1rem;
         }
-    
+
         .swiper-button-next:after {
             font-size: 1rem;
         }

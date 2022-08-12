@@ -19,9 +19,9 @@
 
     /* Mobile  */
     @media (max-width: 739px) {
-        width: calc(100% - 70px);
-        left: 70px;
-        padding: 0 30px;
+        width: 100%;
+        left: 0;
+        padding: 0 10px;
     }
 
     .headerPadding {
@@ -133,5 +133,9 @@
         padding-top: 100%;
         background-size: cover;
         background-repeat: no-repeat;
+    }
+
+    .headerMenu {
+        display: none;
     }
 }

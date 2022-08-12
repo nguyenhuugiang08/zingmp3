@@ -33,8 +33,8 @@ function HomeNewMusic({ data }) {
             <div className={styles.home5}>
                 <div className={styles.home5Tiltle}>{list.title}</div>
                 <div className={styles.home5Container}>
-                    <Container>
-                        <Row xs={5}>
+                    <Container fluid>
+                        <Row xs={2} md={3} lg={4} xl={5}>
                             {list.items && list.items.map((compo, index) => (
                                 <div key={index}>
                                     {index >= 5 ? <></> :

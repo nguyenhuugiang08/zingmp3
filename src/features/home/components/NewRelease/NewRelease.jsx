@@ -107,7 +107,7 @@ function NewRelease({ data }) {
       {newRelease.items &&
         newRelease.items.map((item, index) => (
           <div key={index}>
-            <Container>
+            <Container fluid>
               <Row>
                 {item.song.map((song, index) => (
                   <Col key={song.encodeId} xs={12} lg={6} xl={4}>

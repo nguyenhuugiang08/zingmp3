@@ -34,27 +34,28 @@
             transition: all ease-in 0.5s;
         }
 
-        .swiper-button-prev {
-            color: #fff;
-            right: 50px;
-            left: auto;
-            top: -26px;
-        }
+    }
 
-        .swiper-button-prev::after {
-            font-size: 1.2rem;
-        }
+    .swiper-button-prev {
+        color: #fff !important;
+        right: 50px;
+        left: auto;
+        top: -26px;
+    }
 
-        .swiper-button-next {
-            color: #fff;
-            right: 0;
-            left: auto;
-            top: -26px;
-        }
+    .swiper-button-prev::after {
+        font-size: 1.2rem;
+    }
 
-        .swiper-button-next::after {
-            font-size: 1.2rem;
-        }
+    .swiper-button-next {
+        color: #fff;
+        right: 0;
+        left: auto;
+        top: -26px;
+    }
+
+    .swiper-button-next::after {
+        font-size: 1.2rem;
     }
 
     .eventOpacity {

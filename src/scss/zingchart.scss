@@ -148,7 +148,24 @@
         left: 0;
         z-index: 0;
         background-color: #201335e6;
-        margin: 0 calc(59px*-1);
+        margin: 0 -59px;
+    }
+
+    /* Mobile & tablet */
+    @media (min-width: 1024px) {}
+
+    /* Tablet */
+    @media (min-width: 740px) and (max-width: 1023px) {
+        &-blur {
+            margin: 0 -30px;
+        }
+    }
+
+    /* Mobile  */
+    @media (max-width: 739px) {
+        &-blur {
+            margin: 0 -10px;
+        }
     }
 
     &-header {

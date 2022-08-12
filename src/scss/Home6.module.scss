@@ -92,7 +92,7 @@
         opacity: 0.4;
         transition: all 1.2s ease;
     }
-    
+
     .home6Wrapper {
         position: absolute;
         z-index: 99;
@@ -111,9 +111,9 @@
     }
 
     .home6Live {
-       position: absolute;
-       top: 52%;
-       left: 38%;
+        position: absolute;
+        top: 52%;
+        left: 38%;
     }
 
     .svg {
@@ -123,5 +123,34 @@
         width: 100%;
         height: 100%;
         transform: rotate(-90deg);
+    }
+
+    /* Mobile & tablet */
+    @media (min-width: 1024px) {}
+
+    /* Tablet */
+    @media (min-width: 740px) and (max-width: 1023px) {
+        .home6Wrapper {
+            top: 40%;
+            left: 64%;
+            width: 46px;
+            height: 46px;
+        }
+    }
+
+    /* Mobile  */
+    @media (max-width: 739px) {
+        .home6Wrapper {
+            top: 32%;
+            left: 64%;
+            width: 42px;
+            height: 42px;
+        }
+
+        .home6Live {
+            top: 46%;
+            left: 38%;
+        }
+
     }
 }

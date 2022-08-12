@@ -8,6 +8,7 @@ import styles from "scss/Header.module.scss";
 import { Button } from "reactstrap";
 import ReactLoading from "react-loading";
 import formatFollow from "utils/formatFollow";
+import Menu from "./components/Menu";
 
 function Header() {
   const [loading, setLoading] = useState(false);
@@ -106,15 +107,31 @@ function Header() {
     }, 200);
   };
 
+  // xử lý hiện menu navbar trên moblie
+  const handleDisplayMenuNavbar = () => {
+    const overlayElement = document.querySelector(".menu-overlay");
+    const menuElement = document.querySelector(".menu");
+    overlayElement.style.display = "block";
+    menuElement.style.left = "0";
+  };
+
   return (
     <>
       <div className={`${styles.header} d-flex header`}>
-        <div
-          className="d-flex align-items-center"
-          style={{ flex: "1" }}
-        >
+        <div className="d-flex align-items-center" style={{ flex: "1" }}>
+          <div className={`${styles.headerMenu} header-menu`}>
+            <div>
+              <FontAwesomeIcon
+                className={`${styles.headerBtn} me-3`}
+                icon="fa-solid fa-bars"
+                style={{ position: "relative", top: "1px" }}
+                onClick={handleDisplayMenuNavbar}
+              />
+            </div>
+            <Menu />
+          </div>
           <div
-            className="d-flex justify-content-center align-items-center"
+            className="d-flex justify-content-center align-items-center header-navigate"
             style={{ maxWidth: "74px" }}
           >
             <div
@@ -350,7 +367,7 @@ function Header() {
             </Button>
           </div>
 
-          <div className={styles.settingItem}>
+          <div className="header-btn-avatar">
             <img
               className={styles.settingImage}
               src="https://vnn-imgs-f.vgcloud.vn/2021/09/07/09/chu-meo-noi-tieng-mang-xa-hoi-voi-phong-cach-thoi-trang-sanh-dieu.jpeg"

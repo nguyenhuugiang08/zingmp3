@@ -48,8 +48,8 @@ function Top100() {
           <div key={index}>
             <div className={styles.top100Tiltle}>{item.title}</div>
             <div className={styles.top100Container}>
-              <Container>
-                <Row xs={5}>
+              <Container fluid>
+                <Row xs={2} md={3} lg={4} xl={5}>
                   {item.items.map((compo, index) => (
                     <div key={index}>
                       {index >= 5 ? <></> :

@@ -17,10 +17,10 @@ function RadioPostcardCategory({ list }) {
       {categoryPodcast.map(item => (
         <div key={item.sectionId}>
           <div className='category-podcast__title mb-3'>{item.title}</div>
-          <Container>
-            <Row xs={5}>
+          <Container fluid>
+            <Row xs={2} md={3} lg={4} xl={5}>
               {item.items.map((podcast, index) => (
-                <Link to={'/'} key={podcast.id}>
+                <Link to={'/'} key={podcast.id} className="mb-3">
                   {index >= 5 ? <></> :
                     <div className='category-podcast__wrapper'>
                       <div className='category-podcast__wrapper__img' style={{ backgroundImage: `url(${podcast.thumbnail})` }}></div>

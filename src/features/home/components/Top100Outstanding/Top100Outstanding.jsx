@@ -30,8 +30,8 @@ function Top100Outstanding({ data }) {
                 </Link>
             </div>
             <div className={styles.top100OutstandingContainer}>
-                <Container>
-                    <Row xs={5}>
+                <Container fluid>
+                    <Row xs={2} md={3} lg={4} xl={5}>
                         {outstanding.items && outstanding.items.map((compo, index) => (
                             <div key={index}>
                                 {index >= 5 ? <></> :

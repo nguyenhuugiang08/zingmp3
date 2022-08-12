@@ -17,8 +17,8 @@ function RadioPostcard({ list }) {
       {postcard.map((podcard, index) => (
         <div key={index}>
           <div className='podcard-title'>{podcard.title}</div>
-          <Container>
-            <Row xs={5}>
+          <Container fluid>
+            <Row xs={2} md={3} lg={4} xl={5}>
               {podcard.items.map((item, index) => (
                 <div key={item.encodeId}>
                   {index >= 5 ? <></> :

@@ -27,8 +27,8 @@ function HomeXnor({ data }) {
                 <div>
                     <div className={styles.home5Tiltle}>{chooses.title}</div>
                     <div className={styles.home5Container}>
-                        <Container>
-                            <Row xs={5}>
+                        <Container fluid>
+                            <Row xs={2} md={3} lg={4} xl={5}>
                                 {chooses.items && chooses.items.map((compo, index) => (
                                     <div key={index}>
                                         {index >= 5 ? <></> :

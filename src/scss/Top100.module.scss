@@ -9,9 +9,9 @@
         overflow: hidden;
         font-size: 16px;
         font-weight: 500;
-        padding: 4px 0 ;
+        padding: 4px 0;
     }
-    
+
     .top100Image {
         padding-top: 100%;
         background-position: center;
@@ -19,26 +19,26 @@
         border-radius: 8px;
         transition: all 0.8s ease;
     }
-    
+
     .top100Container {
         padding: 16px 0 30px;
     }
-    
+
     .top100Tiltle {
         padding-left: 12px;
         font-size: 1.4rem;
         font-weight: 600;
     }
-    
+
     .top100Col {
         padding-bottom: 30px;
         overflow: hidden;
     }
-    
+
     .top100Artist {
         display: flex;
     }
-    
+
     .top100ArtistItem {
         padding: 0 !important;
         font-size: 14px;
@@ -47,19 +47,26 @@
         margin-right: 4px;
         text-decoration: none;
     }
-    
+
     .top100ArtistItem:hover {
         text-decoration: underline;
         color: #c662ef !important;
     }
-    
+
     .top100Banner {
         position: relative;
         opacity: 0.3;
         border-radius: 3px;
         padding-bottom: 30px;
+        overflow: hidden;
     }
-    
+
+    @media (max-width: 739px) {
+        .top100Banner {
+            height: 120px;
+        }
+    }
+
     .top100Par {
         position: relative;
         cursor: pointer;
@@ -74,9 +81,9 @@
         opacity: 0.4;
         transition: all 1.2s ease;
     }
-    
+
     .top100Child {
-        position:absolute;
+        position: absolute;
         display: flex;
         width: 100%;
         justify-content: space-around;
@@ -99,5 +106,5 @@
         top: -6px;
         color: #fff;
     }
-    
+
 }

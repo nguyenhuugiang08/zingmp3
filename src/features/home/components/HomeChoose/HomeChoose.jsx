@@ -27,8 +27,8 @@ function HomeChoose({ data }) {
         <div>
           <div className={styles.home4Tiltle}>{chooses.title}</div>
           <div className={styles.home4Container}>
-            <Container>
-              <Row xs={1} md={2} lg={3} xl={5}>
+            <Container fluid>
+              <Row xs={2} md={3} lg={4} xl={5}>
                 {chooses.items && chooses.items.map((compo, index) => (
                   <div key={index}>
                     <Col className={styles.home4Col}>

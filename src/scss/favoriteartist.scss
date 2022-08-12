@@ -38,7 +38,8 @@
             flex-direction: column;
             position: absolute;
             bottom: 16px;
-            left: 30px;
+            left: 50%;
+            transform: translateX(-50%);
 
             &__name {
                 font-weight: 700;
@@ -58,6 +59,31 @@
                     background-size: cover;
                     background-repeat: no-repeat;
                     border-radius: 5px;
+                }
+            }
+
+            /* Mobile & tablet */
+            @media (min-width: 1024px) {}
+
+            /* Tablet */
+            @media (min-width: 740px) and (max-width: 1023px) {
+
+                &__container {
+                    width: 46px;
+                    height: 46px;
+                }
+            }
+
+            /* Mobile  */
+            @media (max-width: 739px) {
+
+                &__name {
+                    font-size: 18px;
+                }
+
+                &__container {
+                    width: 40px;
+                    height: 40px;
                 }
             }
 

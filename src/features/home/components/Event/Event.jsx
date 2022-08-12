@@ -53,7 +53,7 @@ function Event({ data }) {
       >
         {event.items &&
           event.items.map((event, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} className='swiper-slide'>
               <div className="overflow">
                 <img
                   className="swiper-slide-image"
