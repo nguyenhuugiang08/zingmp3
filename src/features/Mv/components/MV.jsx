@@ -116,10 +116,10 @@ function MV() {
       <div >
         <div className='wrapper'>
           <div className='wrapper-filter wrapper-mv'>MV</div>
-          <div className='wrapper-filter wrapper-filter--item wrapper-vn ms-4 wrapper--active' onClick={e => handleFilter(e, 'vn')}>việt nam</div>
-          <div className='wrapper-filter wrapper-filter--item wrapper-usuk ms-5' onClick={e => handleFilter(e, 'usuk')}>us-uk</div>
-          <div className='wrapper-filter wrapper-filter--item wrapper-kpop ms-5' onClick={e => handleFilter(e, 'kpop')}>kpop</div>
-          <div className='wrapper-filter wrapper-filter--item wrapper-concert ms-5' onClick={e => handleFilter(e, 'concert')}>hòa tấu</div>
+          <div className='wrapper-filter wrapper-filter--item wrapper-vn  wrapper--active' onClick={e => handleFilter(e, 'vn')}>việt nam</div>
+          <div className='wrapper-filter wrapper-filter--item wrapper-usuk ' onClick={e => handleFilter(e, 'usuk')}>us-uk</div>
+          <div className='wrapper-filter wrapper-filter--item wrapper-kpop ' onClick={e => handleFilter(e, 'kpop')}>kpop</div>
+          <div className='wrapper-filter wrapper-filter--item wrapper-concert ' onClick={e => handleFilter(e, 'concert')}>hòa tấu</div>
         </div>
         <div className='mv-filter'>
           <div className='mv-filter__all me-3'
@@ -133,9 +133,9 @@ function MV() {
           <div className='mv-filter__listen'><FontAwesomeIcon icon="fa-solid fa-list-ol" /><span className='ms-2'>Nghe Nhiều</span></div>
         </div>
         <div className='category d-none'>
-          <Container>
+          <Container fluid>
             <Row >
-              <Col xs={4} className='category-wrapper'>
+              <Col xs={12} md={6} lg={4} className='category-wrapper'>
                 <Row>
                   {categories.map(category => (
                     <Col xs={6}>
@@ -158,10 +158,10 @@ function MV() {
             hasMore={true}
             loader={!hasMore ? <></> : <div className='mv-loading-more'><ReactLoading type='spinningBubbles' color='#fff' height={'4%'} width={'4%'} /></div>}
           >
-            <Container>
+            <Container fluid>
               <Row >
                 {mvData.map(mv => (
-                  <Col xs={4} className="mb-4" key={mv.encodeId}>
+                  <Col xs={12} md={6} lg={4} className="mb-4" key={mv.encodeId}>
                     <div className='mv-wrapper'>
                       <div className='mv-wrapper-first'>
                         <div className='mv-wrapper-first__img' style={{ backgroundImage: `url(${mv.thumbnailM})` }}></div>

@@ -19,12 +19,12 @@ function Nations({ data }) {
     }
 
     return (
-        <div className='nation mt-5'>
+        <div className='nation'>
             <div className='nation-title'>quốc gia</div>
-            <Container>
+            <Container fluid>
                 <Row>
                     {list.map(item => (
-                        <Col xs={3} key={item.encodeId} className='mb-3'>
+                        <Col xs={6} md={6} lg={4} xl={3} key={item.encodeId} className='mb-3'>
                             <Link className='nation-wrapper'
                                 to={`${item.link}/${item.encodeId}`}
                                 onClick={() => handleClickLink(item.link, 'nationdetail')}

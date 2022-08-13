@@ -42,6 +42,15 @@
     .header-btn-upload {
         display: none;
     }
+
+    // genre
+    .genre-banner {
+        height: 220px;
+    }
+
+    .genre-duration {
+        display: none;
+    }
 }
 
 /* Mobile  */
@@ -165,5 +174,10 @@
         &-rank {
             display: none;
         }
+    }
+
+    // genre
+    .genre-banner {
+        height: 120px;
     }
 }

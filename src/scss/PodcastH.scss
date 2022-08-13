@@ -88,9 +88,9 @@
     .podcastH-swiper {
         overflow: visible;
         position: relative;
-    
+
         .swiper-slide {
-    
+
             .overflow {
                 overflow: hidden;
                 margin-bottom: 8px;
@@ -98,38 +98,91 @@
                 cursor: pointer;
                 border-radius: 8px;
             }
-    
+
             .swiper-slide-image {
                 width: 366px;
                 transition: all ease-in 0.5s;
             }
         }
-    
+
         .overflow:hover .swiper-slide-image {
             transform: scale(1.05);
             transition: all ease-in 0.5s;
         }
-    
+
         .swiper-button-prev {
             color: #fff;
             right: 50px;
             left: auto;
             top: -26px;
         }
-    
+
         .swiper-button-prev::after {
             font-size: 1.2rem;
         }
-    
+
         .swiper-button-next {
             color: #fff;
             right: 0;
             left: auto;
             top: -26px;
         }
-    
+
         .swiper-button-next::after {
             font-size: 1.2rem;
+        }
+    }
+
+    /* Mobile & tablet */
+    @media (min-width: 1023px) {}
+
+    /* Tablet */
+    @media (min-width: 740px) and (max-width: 1023px) {
+        &-wrapper {
+            justify-content: flex-start;
+
+            &-left {
+                width: 100px;
+            }
+
+            &-right {
+                width: 420px;
+                margin-left: 16px;
+
+                &__description {
+                    -webkit-line-clamp: 2;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    /* Mobile  */
+    @media (max-width: 739px) {
+        &-wrapper {
+
+            &-left {
+                width: 60px;
+            }
+
+            &-right {
+                width: 220px;
+
+                &__name {
+                    font-size: 13px;
+                    font-weight: 500;
+                }
+
+                &__title {
+                    font-size: 13px;
+                    font-weight: 500;
+                }
+
+                &__description {
+                    -webkit-line-clamp: 2;
+                    font-size: 14px;
+                }
+            }
         }
     }
 }

@@ -31,7 +31,7 @@ function Genre() {
   return (
     <div>
       {loading ? <Loading /> :
-        <div className='mt-4'>
+        <div className='mt-2'>
           <Swiper
             slidesPerView={1}
             slidesPerGroup={1}
@@ -49,7 +49,7 @@ function Genre() {
                 <Link
                   to={'/'}
                 >
-                  <img src={banner.cover} alt="" />
+                  <img className='genre-banner' src={banner.cover} alt="" />
                 </Link>
               </SwiperSlide>
             ))}

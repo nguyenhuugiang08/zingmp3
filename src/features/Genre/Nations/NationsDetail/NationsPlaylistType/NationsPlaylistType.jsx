@@ -31,11 +31,11 @@ function NationsPlaylistType({ data }) {
             </div>
             {list.map((section, index) => (
                 <div className='genre-detail-wrapper' key={index}>
-                    <Container>
+                    <Container fluid>
                         <div className={`${styles.mainTitle} `}>
                             <div className={`${styles.top100OutstandingTiltle} ps-0 mb-3`}>{section.title}</div>
                         </div>
-                        <Row xs={5}>
+                        <Row xs={2} md={3} lg={4} xl={5}>
                             {section.items.map((item, index) => (
                                 <div key={item.encodeId}>
                                     <Col className={styles.top100OutstandingCol}>

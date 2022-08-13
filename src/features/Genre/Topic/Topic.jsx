@@ -21,10 +21,10 @@ function Topic({ data }) {
     return (
         <div className='topic mt-5'>
             <div className='topic-title'>tâm trạng và hoạt động</div>
-            <Container>
+            <Container fluid>
                 <Row>
                     {list.map((item, index) => (
-                        <Col xs={3} key={item.encodeId} className='mb-3'>
+                        <Col xs={6} md={4} xl={3} key={item.encodeId} className='mb-3'>
                             {index > 7 ? <></> :
                                 <Link className='topic-wrapper'
                                     to={`${item.link}/${item.encodeId}`}

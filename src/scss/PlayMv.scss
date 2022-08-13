@@ -161,10 +161,34 @@
                     color: #7200a1;
                 }
             }
+
+            &-title {
+                display: -webkit-box;
+                overflow: hidden;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+            }
         }
 
         &__content::-webkit-scrollbar {
             display: none;
+        }
+
+        /* Mobile & tablet */
+        @media (min-width: 1024px) {}
+
+        /* Tablet */
+        @media (min-width: 740px) and (max-width: 1023px) {
+            &__content {
+                height: 540px;
+            }
+        }
+
+        /* Mobile  */
+        @media (max-width: 739px) {
+            &__content {
+                height: 300px;
+            }
         }
     }
 
@@ -199,12 +223,12 @@
                         display: none;
                         animation: identifier 0.3s linear;
                     }
-                    
+
                     @keyframes identifier {
                         from {
                             width: 0%;
                         }
-                        
+
                         to {
                             width: 100%;
                         }
@@ -238,6 +262,54 @@
             }
 
         }
+
+        /* Mobile & tablet */
+        @media (min-width: 1024px) {}
+
+        /* Tablet */
+        @media (min-width: 740px) and (max-width: 1023px) {}
+
+        /* Mobile  */
+        @media (max-width: 739px) {
+            &-custom {
+                font-size: 1rem;
+                padding: 4px 6px 10px 6px;
+                left: 1em;
+
+                &-left {
+                    margin-left: 0px;
+
+                    &__item {
+                        margin: 0 6px;
+
+                        &-input {
+                            height: 2px;
+                            display: none !important;
+                        }
+                    }
+
+                    &__duration {
+                        font-size: 12px !important;
+                    }
+                }
+
+                &-right {
+                    margin-left: 12px;
+
+                    &__item {
+                        margin: 0 6px;
+                    }
+                }
+
+                &-progress {
+                    &-input {
+                        width: calc(100% - 1.8rem);
+                        height: 3px;
+                    }
+                }
+
+            }
+        }
     }
 
     @keyframes mounted {
@@ -245,7 +317,7 @@
             opacity: 0;
             top: 100vh;
         }
-    
+
         to {
             opacity: 1;
             top: 0;

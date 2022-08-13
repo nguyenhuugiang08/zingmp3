@@ -48,8 +48,8 @@ function TopicDetail() {
                     </div>
                     {data.sections && data.sections.map(section => (
                         <div className='genre-detail-wrapper'>
-                            <Container>
-                                <Row xs={5}>
+                            <Container fluid>
+                                <Row xs={2} md={3} lg={4} xl={5}>
                                     {section.items.map((item, index) => (
                                         <div key={item.encodeId}>
                                             <Col className={styles.top100OutstandingCol}>

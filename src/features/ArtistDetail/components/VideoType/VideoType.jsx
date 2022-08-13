@@ -56,7 +56,7 @@ function VideoType() {
                     }}
                     className="mySwiper"
                 >
-                    {mv.map((mv, index) => (
+                    {mv && mv.map((mv, index) => (
                         <SwiperSlide key={index}>
                             <div className={style.top100OutstandingCol}>
                                 <div className={style.top100OutstandingPar}>

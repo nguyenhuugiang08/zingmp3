@@ -6,6 +6,7 @@ import { Col, Row } from 'reactstrap'
 import styles from 'scss/Album.module.scss'
 import { loadCurrentSong } from 'features/top100/top100Slice'
 import { loadLink } from 'features/linkSlice'
+import formatTime from 'utils/formatTime'
 
 function NationsSongType({ data }) {
     const dispatch = useDispatch()
@@ -32,7 +33,7 @@ function NationsSongType({ data }) {
                 <Row key={index}>
                     <div className='Artist-outstanding__title'>{song.title}</div>
                     {song.items.map((item, index) => (
-                        <Col xs={4}>
+                        <Col xs={12} md={6} lg={4}>
                             <div className={`${styles.Album} py-0`} style={{ borderRadius: '5px', overflow: 'hidden' }}>
                                 <div key={item.encodeId} className={`${styles.albumWrapper}`} >
                                     <div className={styles.albumLeft} style={{ flex: '1' }}>
@@ -69,12 +70,8 @@ function NationsSongType({ data }) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className={styles.albumRight}>
-                                        {Math.floor(item.duration / 60) >= 10 ?
-                                            Math.floor(item.duration / 60) :
-                                            `0${Math.floor(item.duration / 60)}`
-                                        }:
-                                        {item.duration % 60 >= 10 ? item.duration % 60 : `0${item.duration % 60}`}
+                                    <div className={`${styles.albumRight} chart-right genre-duration`}>
+                                        {formatTime(item.duration)}
                                     </div>
                                 </div>
                             </div>

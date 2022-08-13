@@ -31,8 +31,8 @@ function ListGenre({ data }) {
                         </Link>
                     </div>
                     <div className={styles.top100OutstandingContainer}>
-                        <Container>
-                            <Row xs={5}>
+                        <Container fluid>
+                            <Row xs={2} md={3} lg={4} xl={5}>
                                 {genre.playlists.map((playlist, index) => (
                                     <div key={playlist.encodeId}>
                                         {index >= 5 ? <></> :

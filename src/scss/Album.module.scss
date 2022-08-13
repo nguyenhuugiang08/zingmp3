@@ -29,6 +29,8 @@
             width: 50%;
         }
 
+
+
         .albumTitleCenter {
             flex-basis: auto;
             flex-grow: 1;
@@ -83,6 +85,7 @@
         color: #88848E !important;
         margin-right: 4px;
         text-decoration: none;
+        display: block;
     }
 
     .albumArtistItem:hover {
@@ -165,7 +168,7 @@
             }
 
             .albumImagePar:hover .albumIconChild {
-              display: flex;
+                display: flex;
             }
 
             .albumImage {
@@ -194,7 +197,17 @@
                 flex-direction: column;
 
                 .albumSongArtist {
-                    display: flex;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    overflow: hidden;
+                    -webkit-box-orient: vertical;
+                }
+
+                .albumSongTitle {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    overflow: hidden;
+                    -webkit-box-orient: vertical;
                 }
             }
         }
