@@ -196,15 +196,41 @@
     /* Tablet */
     @media (min-width: 740px) and (max-width: 1023px) {
         margin: 0 -30px;
+
+        &__img {
+            padding-top: 36%;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
     }
 
     /* Mobile  */
     @media (max-width: 739px) {
         margin: 0 -10px;
+
+        &__img {
+            padding-top: 40%;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
     }
 }
 
 .genre-detail-wrapper {
     position: relative;
     top: -16px;
+    padding-bottom: 30px;
+
+    /* Mobile & tablet */
+    @media (min-width: 1023px) {}
+
+    /* Tablet */
+    @media (min-width: 740px) and (max-width: 1023px) {
+        padding-bottom: 26px;
+    }
+
+    /* Mobile  */
+    @media (max-width: 739px) {
+        padding-bottom: 20px;
+    }
 }

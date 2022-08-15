@@ -3,7 +3,7 @@ import { loadLink } from "features/linkSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "scss/Top100Outstanding.module.scss";
-import { Col, Container, Nav, NavItem, Row } from "reactstrap";
+import { Nav, NavItem } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NationsSongType from "../NationsSongType/NationsSongType";
 import NationsVideoType from "../NationsVideoType/NationsVideoType";
@@ -38,6 +38,11 @@ function NationsPlaylistType({ data }) {
       </div>
       {list.map((section, index) => (
         <div className="genre-detail-wrapper" key={index}>
+          <div className={`${styles.mainTitle} `}>
+            <div className={`${styles.top100OutstandingTiltle} ps-0 mb-3`}>
+              {section.title}
+            </div>
+          </div>
           <Swiper
             slidesPerView={2}
             spaceBetween={10}
@@ -60,14 +65,9 @@ function NationsPlaylistType({ data }) {
             }}
             className="mySwiper"
           >
-            <div className={`${styles.mainTitle} `}>
-              <div className={`${styles.top100OutstandingTiltle} ps-0 mb-3`}>
-                {section.title}
-              </div>
-            </div>
             {section.items.map((item, index) => (
               <div key={item.encodeId}>
-                <div className={styles.top100OutstandingCol}>
+                <div>
                   {index > 4 ? (
                     <></>
                   ) : (
@@ -101,7 +101,7 @@ function NationsPlaylistType({ data }) {
                           {item.artists &&
                             item.artists.map((artist, index) => (
                               <div
-                                key={index}
+                                key={artist.id}
                                 className={styles.top100OutstandingArtist}
                               >
                                 <NavItem>
@@ -118,7 +118,7 @@ function NationsPlaylistType({ data }) {
                                       styles.top100OutstandingArtistItem
                                     }
                                   >
-                                    {artist.name},
+                                    {index < item.artists.length - 1 ? `${artist.name},` : `${artist.name}`}
                                   </Link>
                                 </NavItem>
                               </div>

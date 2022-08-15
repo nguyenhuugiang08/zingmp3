@@ -35,7 +35,7 @@ function NationsSongType({ data }) {
                     {song.items.map((item, index) => (
                         <Col xs={12} md={6} lg={4}>
                             <div className={`${styles.Album} py-0`} style={{ borderRadius: '5px', overflow: 'hidden' }}>
-                                <div key={item.encodeId} className={`${styles.albumWrapper}`} >
+                                <div key={item.encodeId} className={`${styles.albumWrapper} hot-song`} >
                                     <div className={styles.albumLeft} style={{ flex: '1' }}>
                                         <div className={styles.albumImagePar}
                                             onClick={() => handleClick({
@@ -60,11 +60,11 @@ function NationsSongType({ data }) {
                                             </div>
                                             <div className={styles.albumSongArtist}>
                                                 {item.artists !== undefined && item.artists.map((artist, index) => (
-                                                    <Link className={styles.albumArtistItem} key={index}
+                                                    <Link className={styles.albumArtistItem} key={artist.id}
                                                         to={`${artist.link}/${artist.alias}`}
                                                         onClick={() => handleClickLink(artist.link, 'artistdetail')}
                                                     >
-                                                        {index > 0 ? `, ${artist.name}` : artist.name}
+                                                        {index < item.artists.length - 1 ? `${artist.name},` : `${artist.name}`}
                                                     </Link>
                                                 ))}
                                             </div>

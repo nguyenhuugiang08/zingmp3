@@ -3,8 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { loadLink } from "features/linkSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Col, Row } from "reactstrap";
 import style from "scss/Top100Outstanding.module.scss";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper";
+import formatFollow from "utils/formatFollow";
 
 function NationsArtistType({ data }) {
   const [list, setList] = useState([]);
@@ -23,21 +25,42 @@ function NationsArtistType({ data }) {
   };
   return (
     <div className={`${style.top100Outstanding} mt-0`}>
-      {list.map((artist, index) => (
-        <div className="genre-detail-wrapper" key={index}>
+      {list.map((artist) => (
+        <div className="genre-detail-wrapper" key={artist.sectionId}>
           <div className={`${style.mainTitle} `}>
             <div className={`${style.top100OutstandingTiltle} mb-3`}>
               {artist.title}
             </div>
           </div>
-          <Row xs={2} md={3} lg={4} xl={5}>
+          <Swiper
+            slidesPerView={2}
+            spaceBetween={10}
+            slidesPerGroup={1}
+            pagination={true}
+            modules={[Pagination]}
+            breakpoints={{
+              739: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+              },
+              1023: {
+                slidesPerView: 4,
+                spaceBetween: 30,
+              },
+              1400: {
+                slidesPerView: 5,
+                spaceBetween: 30,
+              },
+            }}
+            className="mySwiper"
+          >
             {artist.items.map((item, index) => (
               <div key={item.encodeId}>
-                <Col className={style.top100OutstandingCol}>
+                <div>
                   {index > 4 ? (
                     <></>
                   ) : (
-                    <div>
+                    <SwiperSlide>
                       <div
                         className={style.top100OutstandingPar}
                         style={{ borderRadius: "50%" }}
@@ -71,16 +94,14 @@ function NationsArtistType({ data }) {
                         <div className={style.top100OutstandingTitle}>
                           {item.name}
                         </div>
-                        <div>
-                          {Math.floor(item.totalFollow / 1000)}K quan tâm
-                        </div>
+                        <div className="follower">{formatFollow(item.totalFollow)}</div>
                       </div>
-                    </div>
+                    </SwiperSlide>
                   )}
-                </Col>
+                </div>
               </div>
             ))}
-          </Row>
+          </Swiper>
         </div>
       ))}
     </div>
