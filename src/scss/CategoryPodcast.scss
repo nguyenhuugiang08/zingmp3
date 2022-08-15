@@ -21,11 +21,29 @@
             overflow: hidden;
             transition: all 0.8s ease;
         }
-    
+
         &__img:hover {
             transition: all 1.2s ease;
             opacity: 0.8;
             transform: scale(1.1);
+        }
+    }
+}
+
+/* Mobile & tablet */
+@media (min-width: 1024px) {}
+
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1023px) {}
+
+/* Mobile  */
+@media (max-width: 739px) {
+    .category-podcast {
+        margin-top: 20px;
+
+        &__title {
+            padding-left: 0;
+            font-size: 1.2rem;
         }
     }
 }

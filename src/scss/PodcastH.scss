@@ -159,6 +159,13 @@
 
     /* Mobile  */
     @media (max-width: 739px) {
+        margin-top: 20px;
+        padding: 0 10px;
+
+        &-title {
+            font-size: 1.2rem;
+        }
+
         &-wrapper {
 
             &-left {
@@ -182,6 +189,21 @@
                     -webkit-line-clamp: 2;
                     font-size: 14px;
                 }
+            }
+        }
+
+        .podcastH-swiper {
+
+            .swiper-button-prev {
+                right: 32px;
+            }
+
+            .swiper-button-prev::after {
+                font-size: 1rem;
+            }
+
+            .swiper-button-next::after {
+                font-size: 1rem;
             }
         }
     }

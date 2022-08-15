@@ -44,8 +44,8 @@ function NewMusic() {
   };
 
   return (
-    <div className={styles.Album}>
-      <div style={{ fontSize: "42px", fontWeight: "700" }} className="mb-4">
+    <div className={`${styles.Album} new-music`}>
+      <div style={{ fontSize: "42px", fontWeight: "700" }} className="mb-3 new-music-title">
         Nhạc Mới
       </div>
       {loading ? (

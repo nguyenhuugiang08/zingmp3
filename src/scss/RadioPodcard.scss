@@ -13,7 +13,7 @@
         cursor: pointer;
         text-decoration: none;
         color: #fff;
-        
+
         &-box {
             border-radius: 8px;
             overflow: hidden;
@@ -47,8 +47,30 @@
             color: #7200a1;
         }
     }
-    
-    &-wrapper:hover{
+
+    &-wrapper:hover {
         color: #fff;
+    }
+
+    /* Mobile & tablet */
+    @media (min-width: 1024px) {}
+
+    /* Tablet */
+    @media (min-width: 740px) and (max-width: 1023px) {}
+
+    /* Mobile  */
+    @media (max-width: 739px) {
+        &-title {
+            padding-left: 0;
+            font-size: 1.2rem;
+        }
+
+        &-wrapper {
+            margin-top: 12px;
+
+            &__title {
+                font-size: 14px;
+            }
+        }
     }
 }
