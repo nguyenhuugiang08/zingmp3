@@ -6,13 +6,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        
+
         a {
             text-decoration: none;
             color: #798791;
             font-size: 0.8rem;
             font-weight: 500;
-           
+
             span {
                 margin-right: 4px;
             }
@@ -27,9 +27,9 @@
         overflow: hidden;
         font-size: 16px;
         font-weight: 500;
-        padding: 4px 0 ;
+        padding: 4px 0;
     }
-    
+
     .top100OutstandingImage {
         padding-top: 100%;
         background-position: center;
@@ -56,45 +56,46 @@
         border-radius: 50%;
         transition: all 0.8s ease;
     }
-    
+
     .top100OutstandingContainer {
         padding: 16px 0 30px;
     }
-    
+
     .top100OutstandingTiltle {
         padding-left: 12px;
         font-size: 1.4rem;
         font-weight: 600;
     }
-    
+
     .top100OutstandingCol {
         padding-bottom: 15px;
         overflow: hidden;
     }
-    
+
     .top100OutstandingArtist {
         display: flex;
     }
-    
+
     .top100OutstandingArtistItem {
         padding: 0 !important;
         font-size: 14px;
         font-weight: 500;
         color: #88848E !important;
         margin-right: 4px;
+        display: block;
     }
-    
+
     .top100OutstandingArtistItem:hover {
         text-decoration: underline;
         color: #c662ef !important;
     }
-    
+
     .top100OutstandingBanner {
         position: relative;
         opacity: 0.4;
         border-radius: 3px;
     }
-    
+
     .top100OutstandingPar {
         position: relative;
         overflow: hidden;
@@ -117,9 +118,9 @@
         opacity: 0.4;
         transition: all 1.2s ease;
     }
-    
+
     .top100OutstandingChild {
-        position:absolute;
+        position: absolute;
         display: flex;
         width: 100%;
         justify-content: space-around;
@@ -142,5 +143,55 @@
         top: -6px;
         color: #fff;
     }
-    
+
+    /* Mobile & tablet */
+    @media (min-width: 1024px) {}
+
+    /* Tablet */
+    @media (min-width: 740px) and (max-width: 1023px) {}
+
+    /* Mobile  */
+    @media (max-width: 739px) {
+        padding-top: 20px;
+
+        .mainTitle {
+
+            a {
+                display: none;
+            }
+        }
+
+        .top100OutstandingTitle {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .top100OutstandingContainer {
+            padding: 12px 0 16px;
+        }
+
+        .top100OutstandingTiltle {
+            padding-left: 0px;
+            font-size: 1.2rem;
+        }
+
+        .top100OutstandingCol {
+            padding-bottom: 10px;
+        }
+
+        .top100OutstandingArtist {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .top100OutstandingArtistItem {
+            font-size: 12px;
+            width: 100%;
+            display: block;
+        }
+    }
+
 }

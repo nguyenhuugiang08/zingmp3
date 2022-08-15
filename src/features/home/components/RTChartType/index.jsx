@@ -18,7 +18,7 @@ import styles from "scss/Home7.module.scss";
 import { loadLink } from "features/linkSlice";
 import { useDispatch } from "react-redux";
 
-function HomeChart({ data }) {
+function RTChartType({ data }) {
   const [chart, setChart] = useState({});
   const [time, setTime] = useState([]);
   const [counts, setConuts] = useState({});
@@ -67,7 +67,7 @@ function HomeChart({ data }) {
     }
   }, [counts]);
 
-  const arrTime = time.map((time) => `${time.hour}:00`);
+  const arrTime = time.map((time) => `${time.hour}`);
   arrTime.map((item, index) => {
     if (index % 2 !== 0) {
       arrTime[index] = "";
@@ -233,7 +233,7 @@ function HomeChart({ data }) {
               <span>Xem Thêm</span>
             </Link>
           </Col>
-          <Col md={12} lg={8} className="chart-no-responsive">
+          <Col lg={8} className="chart-no-responsive">
             <Line ref={chartRef} options={options} data={dataChart} />
           </Col>
         </Row>
@@ -242,4 +242,4 @@ function HomeChart({ data }) {
   );
 }
 
-export default HomeChart;
+export default RTChartType;

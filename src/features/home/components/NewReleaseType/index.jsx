@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
 import "scss/newrelease.scss";
 
-function NewRelease({ data }) {
+function NewReleaseType({ data }) {
   const [newRelease, setNewRelease] = useState({});
 
   const dispatch = useDispatch();
@@ -231,4 +231,4 @@ function NewRelease({ data }) {
   );
 }
 
-export default NewRelease;
+export default NewReleaseType;

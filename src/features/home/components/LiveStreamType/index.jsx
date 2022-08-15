@@ -7,7 +7,7 @@ import styles from "scss/Home6.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
-function HomeRadio({ data }) {
+function LiveStreamType({ data }) {
   const [list, setList] = useState({});
 
   useEffect(() => {
@@ -129,4 +129,4 @@ function HomeRadio({ data }) {
   );
 }
 
-export default HomeRadio;
+export default LiveStreamType;

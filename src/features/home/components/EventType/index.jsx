@@ -5,7 +5,7 @@ import { SwiperSlide, Swiper } from "swiper/react";
 
 import "scss/Event.scss";
 
-function Event({ data }) {
+function EventType({ data }) {
   const [event, setEvent] = useState({});
 
   useEffect(() => {
@@ -120,4 +120,4 @@ function Event({ data }) {
   );
 }
 
-export default Event;
+export default EventType;

@@ -7,6 +7,12 @@
     .navbar-no-responsive {
         display: block;
     }
+
+    .header-navigate {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 /* Tablet */
@@ -41,6 +47,12 @@
     // responsive header
     .header-btn-upload {
         display: none;
+    }
+
+    .header-navigate {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     // genre
@@ -174,6 +186,10 @@
         &-rank {
             display: none;
         }
+    }
+
+    .chart-no-responsive {
+        display: none;
     }
 
     // genre

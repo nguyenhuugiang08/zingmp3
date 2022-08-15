@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import followApi from 'api/followApi';
-import Artist from 'features/home/components/artistSpotlight/Artist';
+import Artist from 'features/home/components/ArtistSpotlightType';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useDispatch, useSelector } from 'react-redux';

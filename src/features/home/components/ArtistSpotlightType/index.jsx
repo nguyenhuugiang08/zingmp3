@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { loadLink } from "features/linkSlice";
 import "scss/Artist.scss";
 
-function Artist({ data }) {
+function ArtistSpotlightType({ data }) {
   const [artists, setArtist] = useState([]);
   const dispatch = useDispatch();
 
@@ -67,4 +67,4 @@ function Artist({ data }) {
   );
 }
 
-export default Artist;
+export default ArtistSpotlightType;

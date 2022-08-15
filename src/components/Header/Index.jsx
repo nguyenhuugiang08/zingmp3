@@ -131,7 +131,7 @@ function Header() {
             <Menu />
           </div>
           <div
-            className="d-flex justify-content-center align-items-center header-navigate"
+            className="header-navigate"
             style={{ maxWidth: "74px" }}
           >
             <div

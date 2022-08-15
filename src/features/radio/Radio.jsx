@@ -1,5 +1,5 @@
 import radioApi from 'api/radioApi'
-import HomeRadio from 'features/home/components/HomeRadio/HomeRadio'
+import HomeRadio from 'features/home/components/LiveStreamType'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from './Loading'

@@ -39,16 +39,16 @@
     .home5Artist {
         display: flex;
     }
-    
+
     .home5ArtistItem {
         padding: 0 !important;
         font-size: 14px;
         font-weight: 500;
         color: #88848E !important;
         margin-right: 4px;
-       
+
     }
-    
+
     .home5ArtistItem:hover {
         text-decoration: underline;
         color: #c662ef !important;
@@ -107,5 +107,45 @@
         transform: scale(1.1);
         opacity: 0.4;
         transition: all 1.2s ease;
+    }
+
+    /* Mobile & tablet */
+    @media (min-width: 1024px) {}
+
+    /* Tablet */
+    @media (min-width: 740px) and (max-width: 1023px) {}
+
+    /* Mobile  */
+    @media (max-width: 739px) {
+
+        .home5Title {
+            font-size: 14px;
+            padding: 4px 0;
+        }
+
+        .home5Container {
+            padding: 12px 0 0;
+        }
+
+        .home5Tiltle {
+            padding-left: 0;
+            font-size: 1.2rem;
+        }
+
+        .home5Col {
+            padding-bottom: 20px;
+        }
+
+        .home5Artist {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
+        }
+
+        .home5ArtistItem {
+            font-size: 12px;
+          
+        }
     }
 }

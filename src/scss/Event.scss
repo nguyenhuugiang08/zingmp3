@@ -138,4 +138,49 @@
     .action:hover {
         color: #fff;
     }
+
+}
+
+/* Mobile & tablet */
+@media (min-width: 1024px) {}
+
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1023px) {}
+
+/* Mobile  */
+@media (max-width: 739px) {
+    .eventTitle {
+        font-size: 1.2rem;
+        padding-bottom: 12px;
+    }
+
+    .event-swiper {
+
+        .swiper-button-prev {
+            right: 40px;
+            top: -22px;
+        }
+
+        .swiper-button-prev::after {
+            font-size: 1rem;
+        }
+
+        .swiper-button-next {
+            top: -22px;
+        }
+
+        .swiper-button-next::after {
+            font-size: 1rem;
+        }
+
+        .eventMainTitle {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .action {
+            padding: 6px 16px;
+            font-size: 12px;
+        }
+    }
 }
