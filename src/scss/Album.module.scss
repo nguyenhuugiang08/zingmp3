@@ -241,10 +241,10 @@
 }
 
 /* Mobile & tablet */
-@media (min-width: 1024px) {}
+@media (max-width: 1133px) {}
 
 /* Tablet */
-@media (min-width: 740px) and (max-width: 1023px) {}
+@media (min-width: 740px) and (max-width: 1133px) {}
 
 /* Mobile  */
 @media (max-width: 739px) {
@@ -266,10 +266,6 @@
             padding: 10px;
             font-size: 12px;
             margin-top: 20px;
-        }
-
-        .albumThumbWrapper {
-           
         }
 
         .albumThumb {

@@ -44,7 +44,7 @@ function EventType({ data }) {
             slidesPerView: 2,
             spaceBetween: 20,
           },
-          1023: {
+          1024: {
             slidesPerView: 3,
             spaceBetween: 30,
           },

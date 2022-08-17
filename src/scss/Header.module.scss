@@ -8,19 +8,19 @@
     justify-content: space-between;
 
     /* Mobile & tablet */
-    @media (min-width: 1023px) {}
-
-    /* Tablet */
-    @media (min-width: 740px) and (max-width: 1023px) {
+    @media (max-width: 1133px) {
         width: calc(100% - 70px);
         left: 70px;
         padding: 0 30px;
     }
 
+    /* Tablet */
+    @media (min-width: 740px) and (max-width: 1133px) {}
+
     /* Mobile  */
     @media (max-width: 739px) {
         width: 100%;
-        left: 0;
+        left: -2px;
         padding: 0 10px;
     }
 

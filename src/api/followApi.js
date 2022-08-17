@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const followApi = {
   getAll: (params) => {
-    const url = '/follow';
+    const url = '/newfeeds';
     return axiosClient.get(url, { params });
   },
 }

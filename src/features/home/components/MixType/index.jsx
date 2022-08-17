@@ -83,7 +83,10 @@ function MixType({ data }) {
                   </div>
                   <div className="d-flex justify-content-center align-items-center">
                     {artist.song.items.map((song, index) => (
-                      <div key={song.encodeId}>
+                      <div
+                        style={{ flex: `${index >= 3 ? "0" : "1"}` }}
+                        key={song.encodeId}
+                      >
                         {index >= 3 ? (
                           <></>
                         ) : (

@@ -30,10 +30,10 @@
     }
 
     /* Mobile & tablet */
-    @media (min-width: 1023px) {}
+    @media (max-width: 1133px) {}
 
     /* Tablet */
-    @media (min-width: 740px) and (max-width: 1023px) {
+    @media (min-width: 740px) and (max-width: 1133px) {
         .swiper-button-prev {
             width: 44px;
             height: 44px;

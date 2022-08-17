@@ -41,7 +41,7 @@ function Navbar() {
   return (
     <div>
       <div
-        className={`${styles.navbar} navbar-no-response`}
+        className={`${styles.navbar} navbar-no-responsive`}
         style={{ bottom: `${mounted ? "90px" : ""}` }}
       >
         <Nav pills vertical>

@@ -119,5 +119,18 @@
         background-clip: padding-box;
     }
 
+    /* Mobile & tablet */
+    @media (max-width: 1133px) {}
 
+    /* Tablet */
+    @media (min-width: 740px) and (max-width: 1133px) {}
+
+    /* Mobile  */
+    @media (max-width: 739px) {
+        margin-top: 20px;
+
+        &-filter {
+            display: none;
+        }
+    }
 }
