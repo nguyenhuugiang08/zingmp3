@@ -120,6 +120,11 @@ function PlayMv({ encodeId }) {
   // xử lý khi thay đôi volume
   const handleChangeVolume = (e) => {
     setStatus({ ...status, volume: e.target.value });
+    const min = e.target.min;
+    const max = e.target.max;
+    const val = e.target.value;
+    e.target.style.backgroundSize =
+      ((val - min) * 100) / (max - min) + "% 100%";
   };
 
   //xử lý khi ấn mute
@@ -156,13 +161,15 @@ function PlayMv({ encodeId }) {
 
   // xử lý tua video
   const handleRewind = (e) => {
+    const min = e.target.min;
+    const max = e.target.max;
+    const val = e.target.value;
+
     if (videoRef.current) {
-      let currentTime = (e.target.value * videoRef.current.getDuration()) / 100;
+      let currentTime = (val * videoRef.current.getDuration()) / 100;
       videoRef.current.seekTo(currentTime);
-      setStatus({
-        ...status,
-        time: currentTime,
-      });
+      e.target.style.backgroundSize =
+        ((val - min) * 100) / (max - min) + "% 100%";
     }
   };
 
@@ -175,6 +182,10 @@ function PlayMv({ encodeId }) {
         100,
     });
     progressRef.current.value = time;
+    progressRef.current.style.backgroundSize =
+      ((progressRef.current.value - progressRef.current.min) * 100) /
+        (progressRef.current.max - progressRef.current.min) +
+      "% 100%";
   };
 
   //xử lý nhấn space để play & pause video
@@ -184,17 +195,17 @@ function PlayMv({ encodeId }) {
     }
   });
 
+  //xử lý hide control
+  const handleHideControl = () => {
+    playerRef.current.classList.add("d-none");
+    playerRef.current.classList.remove("d-block");
+  };
+
   //xử lý display control
   const handleDisplayControl = () => {
     playerRef.current.classList.add("d-block");
     playerRef.current.classList.remove("d-none");
     playerVideoRef.current.style.cursor = "pointer";
-  };
-
-  //xử lý hide control
-  const handleHideControl = () => {
-    playerRef.current.classList.add("d-none");
-    playerRef.current.classList.remove("d-block");
   };
 
   //xử lý click vào video nào phát video đó
@@ -207,7 +218,7 @@ function PlayMv({ encodeId }) {
     volumeRef.current.style.display = "block";
   };
 
-  // xử lý hover icon display volume
+  // xử lý hover icon hide volume
   const handleHideVolume = () => {
     volumeRef.current.style.display = "none";
   };
@@ -352,7 +363,9 @@ function PlayMv({ encodeId }) {
                                 className="player-custom-left__item player-custom-left__duration"
                                 style={{ fontSize: "14px" }}
                               >
-                                {loading ? "00:00" : formatTime(time)}
+                                {loading
+                                  ? "00:00"
+                                  : formatTime((time * data.duration) / 100)}
                                 {` `} | {` `}
                                 {formatTime(data.duration)}
                               </div>

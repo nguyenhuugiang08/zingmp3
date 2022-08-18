@@ -7,7 +7,7 @@ const formatFollow = (follow) => {
             return `${Math.floor(follow / 1000)}K quan tâm`;
         }
         else {
-            return `${Math.floor(follow / 1000000)}M quan tâm`;
+            return `${(follow / 1000000).toFixed(1)}M quan tâm`;
         }
     }
 }

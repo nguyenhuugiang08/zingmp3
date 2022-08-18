@@ -1,6 +1,6 @@
 import Home from "features/home/components/Home";
 import Top100 from "features/top100/components/top100/Top100";
-import Anbuml from "features/top100/components/pages/Album";
+import Anbuml from "components/Album";
 import Personal from "features/Personal/components/Personal/Personal";
 import Zingchart from "features/zingchart/components/Zingchart";
 import Radio from "features/radio/Radio";

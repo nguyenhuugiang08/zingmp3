@@ -8,10 +8,11 @@ import { useDispatch } from "react-redux";
 import { loadCurrentSong } from "features/top100/top100Slice";
 import Loading from "./Loading";
 import suggestPlaylistApi from "api/SuggestPlaylistApi";
-import Artistjoin from "./Artistjoin";
-import PlaylistSuggest from "./PlaylistSuggest";
+import Artistjoin from "./components/Artistjoin";
+import PlaylistSuggest from "./components/PlaylistSuggest";
 import { loadLink } from "features/linkSlice";
 import formatTime from "utils/formatTime";
+import formatFollow from "utils/formatFollow";
 
 function Anbuml() {
   const { encodeId } = useParams();
@@ -82,7 +83,7 @@ function Anbuml() {
       }
     );
 
-    thumbAnimate.play();
+    thumbAnimate.pause();
   };
 
   const d = new Date();
@@ -133,7 +134,7 @@ function Anbuml() {
                   ))}
                 </div>
                 <div className={styles.albumLike}>
-                  {playlist.like} người yêu thích
+                  {formatFollow(playlist.like)} người yêu thích
                 </div>
                 <button className={styles.albumBtn}>
                   <FontAwesomeIcon
@@ -193,7 +194,9 @@ function Anbuml() {
                           </div>
                         </div>
                         <div className={styles.albumArtistMain}>
-                          <div>{song.title}</div>
+                          <div className={styles.albumSongTitle}>
+                            {song.title}
+                          </div>
                           <div className={styles.albumSongArtist}>
                             {song.artists !== undefined &&
                               song.artists.map((artist, index) => (
