@@ -4,13 +4,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
-import { getInfoArtistApi } from "../getiArtistSlice";
+import { getInfoArtistApi } from "./getiArtistSlice";
 import { loadCurrentSong } from "features/top100/top100Slice";
-import SongType from "./SongType/SongType";
-import VideoType from "./VideoType/VideoType";
-import ArtistType from "./ArtistType/ArtistType";
+import SongType from "./components/SongType/SongType";
+import VideoType from "./components/VideoType/VideoType";
+import ArtistType from "./components/ArtistType/ArtistType";
 import "scss/ArtistDetail.scss";
-import PlaylistType from "./PlaylistType/PlaylistType";
+import PlaylistType from "./components/PlaylistType/PlaylistType";
 import Loading from "./Loading";
 
 function ArtistDetail() {

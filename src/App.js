@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
-import PlaySong from 'components/PlaySong/PlaySong';
+import PlaySong from 'components/PlaySong';
 import Routerall from 'routers';
 library.add(fas, far)
 

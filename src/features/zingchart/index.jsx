@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Container, Row } from "reactstrap";
-import { getZingchartApi } from "../getZingchartSlice";
+import { getZingchartApi } from "./getZingchartSlice";
 import { loadCurrentSong } from "features/top100/top100Slice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";

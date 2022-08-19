@@ -27,8 +27,6 @@ function Top100Outstanding({ data }) {
     dispatch(action);
   };
 
-  console.log(playlists);
-
   return (
     <div>
       {playlists.map((playlist) => (

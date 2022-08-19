@@ -42,7 +42,7 @@ function SongType() {
         <div style={{ color: '#fff' }}>
             <Row>
                 <div className='Artist-outstanding__title'>{data.sections && data.sections.filter(item => item.sectionType === 'song')[0].title}</div>
-                <Col xs={3}>
+                <Col xs={12} md={12} lg={3}>
                     <Swiper
                         slidesPerView={1}
                         slidesPerGroup={1}
@@ -63,7 +63,7 @@ function SongType() {
                         ))}
                     </Swiper>
                 </Col>
-                <Col xs={9}>
+                <Col xs={12} md={12} lg={9}>
                     <div className='Artist-outstanding__scroll'>
                         <div className={`${styles.Album} Artist-outstanding`}>
                             {outstanding.map((item, index) => (

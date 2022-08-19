@@ -103,57 +103,69 @@ function Anbuml() {
         <div className={styles.Album}>
           <Container>
             <Row>
-              <Col xs={12} md={4} lg={3}>
-                <div className={styles.albumThumbWrapper}>
+              <Col xs={12} md={12} lg={3} className="overflow-hidden">
+                <div className={styles.albumMain}>
                   <div
-                    ref={thumbRef}
-                    className={styles.albumThumb}
-                    style={{ backgroundImage: `url(${playlist.thumbnailM})` }}
-                  ></div>
-                </div>
-                <div className={styles.albumTitle}>{playlist.title}</div>
-                <div className={styles.albumTime}>
-                  Cập nhật : {d.getDate()}/
-                  {d.getMonth() + 1 > 10
-                    ? d.getMonth() + 1
-                    : `0${d.getMonth() + 1}`}
-                  /{d.getFullYear()}
-                </div>
-                <div className={styles.albumArtist}>
-                  {artist.map((artist, index) => (
-                    <Link
-                      key={index}
-                      className={styles.albumArtistItem}
-                      to={`${artist.link}/${artist.alias}`}
-                      onClick={() =>
-                        handleClickLink(artist.link, "artistdetail")
-                      }
-                    >
-                      {artist.name},
-                    </Link>
-                  ))}
-                </div>
-                <div className={styles.albumLike}>
-                  {formatFollow(playlist.like)} người yêu thích
-                </div>
-                <button className={styles.albumBtn}>
-                  <FontAwesomeIcon
-                    className={styles.albumIcon}
-                    icon="fa-solid fa-play"
-                  />
-                  <div>TIẾP TỤC PHÁT</div>
-                </button>
-                <div className={styles.albumAction}>
-                  <div className={styles.albumActionIcon}>
-                    {" "}
-                    <FontAwesomeIcon icon="fa-regular fa-heart" />
+                    style={{
+                      flex: "1",
+                    }}
+                  >
+                    <div
+                      ref={thumbRef}
+                      className={styles.albumThumb}
+                      style={{ backgroundImage: `url(${playlist.thumbnailM})` }}
+                    ></div>
                   </div>
-                  <div className={styles.albumActionIcon}>
-                    <FontAwesomeIcon icon="fa-solid fa-ellipsis" />
+                  <div className={styles.albumInfoPlaylist}>
+                    <div>
+                      <div className={styles.albumTitle}>{playlist.title}</div>
+                      <div className={styles.albumTime}>
+                        Cập nhật : {d.getDate()}/
+                        {d.getMonth() + 1 > 10
+                          ? d.getMonth() + 1
+                          : `0${d.getMonth() + 1}`}
+                        /{d.getFullYear()}
+                      </div>
+                      <div className={styles.albumArtist}>
+                        {artist.map((artist, index) => (
+                          <Link
+                            key={index}
+                            className={styles.albumArtistItem}
+                            to={`${artist.link}/${artist.alias}`}
+                            onClick={() =>
+                              handleClickLink(artist.link, "artistdetail")
+                            }
+                          >
+                            {artist.name},
+                          </Link>
+                        ))}
+                      </div>
+                      <div className={styles.albumLike}>
+                        {formatFollow(playlist.like)} người yêu thích
+                      </div>
+                    </div>
+                    <div className={styles.albumActions}>
+                      <button className={styles.albumBtn}>
+                        <FontAwesomeIcon
+                          className={styles.albumIcon}
+                          icon="fa-solid fa-play"
+                        />
+                        <div>TIẾP TỤC PHÁT</div>
+                      </button>
+                      <div className={styles.albumAction}>
+                        <div className={styles.albumActionIcon}>
+                          {" "}
+                          <FontAwesomeIcon icon="fa-regular fa-heart" />
+                        </div>
+                        <div className={styles.albumActionIcon}>
+                          <FontAwesomeIcon icon="fa-solid fa-ellipsis" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </Col>
-              <Col xs={12} md={8} lg={9}>
+              <Col xs={12} md={12} lg={9}>
                 <div className={styles.albumScroll}>
                   <div className={styles.albumDescription}>
                     <span className={styles.albumPreface}>Lời tựa </span>{" "}
