@@ -4,7 +4,7 @@ import style from "scss/Top100Outstanding.module.scss";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Autoplay, Navigation } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { Nav, NavItem } from "reactstrap";
 
@@ -41,16 +41,25 @@ function VideoType({ data }) {
       </div>
       <div className={style.top100OutstandingContainer}>
         <Swiper
-          slidesPerView={3}
-          spaceBetween={30}
+          slidesPerView={1}
+          spaceBetween={10}
           slidesPerGroup={1}
           loop={true}
           loopFillGroupWithBlank={true}
-          navigation={true}
-          modules={[Autoplay, Navigation]}
+          modules={[Autoplay, Pagination]}
           autoplay={{
             delay: 3000,
             disableOnInteraction: false,
+          }}
+          breakpoints={{
+            739: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1023: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
           }}
           className="mySwiper"
         >

@@ -51,14 +51,15 @@ function ArtistDetail() {
         <Loading />
       ) : (
         <div className="main">
-          <div className="Artist-blur"></div>
           <div
             className="Artist-thumbnail"
             style={{ backgroundImage: `url(${data.thumbnail})` }}
-          ></div>
+          >
+            <div className="Artist-blur"></div>
+          </div>
           <div className="Artist-detail">
             <Container>
-              <Row>
+              <Row className="Artist-detail__info">
                 <Col xs={12} md={7}>
                   <div className="Artist-detail__name">{data.name}</div>
                   <div className="Artist-detail__biography">
@@ -137,7 +138,7 @@ function ArtistDetail() {
               data.sections.includes(
                 data.sections.filter((item) => item.sectionType === "song")[0]
               ) ? (
-                <SongType data={data}/>
+                <SongType data={data} />
               ) : (
                 <></>
               )}
@@ -145,7 +146,7 @@ function ArtistDetail() {
               data.sections.includes(
                 data.sections.filter((item) => item.sectionType === "video")[0]
               ) ? (
-                <VideoType data={data}/>
+                <VideoType data={data} />
               ) : (
                 <></>
               )}
@@ -155,7 +156,7 @@ function ArtistDetail() {
                   (item) => item.sectionType === "playlist"
                 )[0]
               ) ? (
-                <PlaylistType data={data}/>
+                <PlaylistType data={data} />
               ) : (
                 <></>
               )}
@@ -163,7 +164,7 @@ function ArtistDetail() {
               data.sections.includes(
                 data.sections.filter((item) => item.sectionType === "artist")[0]
               ) ? (
-                <ArtistType data={data}/>
+                <ArtistType data={data} />
               ) : (
                 <></>
               )}

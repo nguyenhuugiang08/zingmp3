@@ -8,6 +8,7 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import styles from "scss/Album.module.scss";
 import { loadCurrentSong } from "app/currentSongSilce";
 import { loadLink } from "app/linkSlice";
+import formatTime from "utils/formatTime";
 
 function SongType({ data }) {
   const [outstanding, setOutstanding] = useState([]);
@@ -96,7 +97,7 @@ function SongType({ data }) {
                       </div>
                     </div>
                     <div className={styles.albumArtistMain}>
-                      <div>{item.title}</div>
+                      <div className={styles.albumSongTitle}>{item.title}</div>
                       <div className={styles.albumSongArtist}>
                         {item.artists !== undefined &&
                           item.artists.map((artist, index) => (
@@ -115,19 +116,13 @@ function SongType({ data }) {
                     </div>
                   </div>
                   <Link
-                    className={styles.albumCenter}
+                    className={`${styles.albumCenter} chart-center`}
                     to={item.album !== undefined && item.album.link}
                   >
                     {item.album !== undefined && item.album.title}
                   </Link>
-                  <div className={styles.albumRight}>
-                    {Math.floor(item.duration / 60) >= 10
-                      ? Math.floor(item.duration / 60)
-                      : `0${Math.floor(item.duration / 60)}`}
-                    :
-                    {item.duration % 60 >= 10
-                      ? item.duration % 60
-                      : `0${item.duration % 60}`}
+                  <div className={`${styles.albumRight} chart-right`}>
+                    {formatTime(item.duration)}
                   </div>
                 </div>
               ))}
