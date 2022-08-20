@@ -1,4 +1,4 @@
-import Home from "features/home/components/Home";
+import Home from "features/home/components";
 import Top100 from "features/top100/components/top100";
 import Anbuml from "components/Album";
 import Personal from "features/Personal/components/Personal/Personal";
@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 
 function Routerall() {
   const path = useSelector((state) => state.link);
-  const dataStore = useSelector((state) => state.top100);
+  const dataStore = useSelector((state) => state.currentSong);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

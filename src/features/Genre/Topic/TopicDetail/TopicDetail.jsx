@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import hubDetailApi from 'api/hubDetailApi';
-import { loadLink } from 'features/linkSlice';
+import { loadLink } from 'app/linkSlice';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';

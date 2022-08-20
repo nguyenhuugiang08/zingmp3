@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import infoSongApi from "api/infoSongApi";
 import playlistApi from "api/playlistApi";
-import { loadCurrentSong } from "features/top100/top100Slice";
+import { loadCurrentSong } from "app/currentSongSilce";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "scss/confirmplaysong.scss";

@@ -6,7 +6,7 @@ import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import style from "scss/Top100Outstanding.module.scss";
 import { useDispatch } from "react-redux";
-import { loadLink } from "features/linkSlice";
+import { loadLink } from "app/linkSlice";
 
 function VideoType({ list }) {
   const dispatch = useDispatch();

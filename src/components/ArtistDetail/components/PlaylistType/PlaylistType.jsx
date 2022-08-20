@@ -1,25 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { loadLink } from "features/linkSlice";
+import { loadLink } from "app/linkSlice";
 import style from "scss/Top100Outstanding.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Nav, NavItem } from "reactstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 
-function PlaylistType() {
+function PlaylistType({ data }) {
   const [single, setSingle] = useState([]);
-  const artistData = useSelector((state) => state.artist);
 
   const dispatch = useDispatch();
-  const [data, setData] = useState({});
-
-  useEffect(() => {
-    if (artistData.length > 0) {
-      setData(artistData[artistData.length - 1]);
-    }
-  }, [artistData]);
 
   useEffect(() => {
     if (data.sections && data.sections.length > 0) {
@@ -35,8 +27,8 @@ function PlaylistType() {
   };
   return (
     <div>
-      {single.map((playlist, index) => (
-        <div key={index} className={style.top100Outstanding}>
+      {single.map((playlist) => (
+        <div key={playlist.encodeId} className={style.top100Outstanding}>
           <div className={style.mainTitle}>
             <div className={style.top100OutstandingTiltle}>
               {playlist.title}
@@ -70,7 +62,7 @@ function PlaylistType() {
               className="mySwiper"
             >
               {playlist.items.map((compo, index) => (
-                <div key={index}>
+                <div key={compo.encodeId}>
                   {index >= 5 ? (
                     <></>
                   ) : (

@@ -1,26 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { loadLink } from "features/linkSlice";
+import { loadLink } from "app/linkSlice";
 import style from "scss/Top100Outstanding.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Col, Container, Row } from "reactstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import formatFollow from "utils/formatFollow";
 
-function ArtistType() {
+function ArtistType({ data }) {
   const [like, setLike] = useState([]);
-  const artistData = useSelector((state) => state.artist);
 
   const dispatch = useDispatch();
-  const [data, setData] = useState({});
-
-  useEffect(() => {
-    if (artistData.length > 0) {
-      setData(artistData[artistData.length - 1]);
-    }
-  }, [artistData]);
 
   useEffect(() => {
     if (data.sections && data.sections.length > 0) {
@@ -71,7 +62,7 @@ function ArtistType() {
           className="mySwiper"
         >
           {like.map((like, index) => (
-            <div key={index}>
+            <div key={like.id}>
               {index >= 5 ? (
                 <></>
               ) : (

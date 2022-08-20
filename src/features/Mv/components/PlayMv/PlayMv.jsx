@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Container, Row } from "reactstrap";
 import screenfull from "screenfull";
 import "scss/PlayMv.scss";
-import { loadLink } from "features/linkSlice";
+import { loadLink } from "app/linkSlice";
 import { useDispatch } from "react-redux";
 import formatTime from "utils/formatTime";
 

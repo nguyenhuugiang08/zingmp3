@@ -5,7 +5,7 @@ import { Col, Container, Row } from 'reactstrap'
 import ReactLoading from 'react-loading';
 import "scss/PlaySongLyric.scss"
 import { useDispatch, useSelector } from 'react-redux';
-import { getLyricApi } from '../getLyric';
+import { getLyricApi } from '../../../app/getLyric';
 
 function PlaySongLyric({ id, thumb, time }) {
   const [sentences, setSentences] = useState([])

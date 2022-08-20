@@ -1,22 +1,21 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import artistApi from "api/artistApi";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
-import { getInfoArtistApi } from "./getiArtistSlice";
-import { loadCurrentSong } from "features/top100/top100Slice";
+import { loadCurrentSong } from "app/currentSongSilce";
 import SongType from "./components/SongType/SongType";
 import VideoType from "./components/VideoType/VideoType";
 import ArtistType from "./components/ArtistType/ArtistType";
-import "scss/ArtistDetail.scss";
 import PlaylistType from "./components/PlaylistType/PlaylistType";
 import Loading from "./Loading";
+import formatFollow from "utils/formatFollow";
+import "scss/ArtistDetail.scss";
 
 function ArtistDetail() {
   const { encodeId } = useParams();
   const dispatch = useDispatch();
-  const artistData = useSelector((state) => state.artist);
 
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({});
@@ -27,18 +26,12 @@ function ArtistDetail() {
         name: encodeId,
       };
       setLoading(true);
-      const respone = await artistApi.getAll(params);
-      dispatch(getInfoArtistApi(respone.data));
+      const response = await artistApi.getAll(params);
+      setData(response.data);
       setLoading(false);
     };
     getInfoArtist();
   }, [encodeId]);
-
-  useEffect(() => {
-    if (artistData.length > 0) {
-      setData(artistData[artistData.length - 1]);
-    }
-  }, [artistData]);
 
   const handleClick = (props) => {
     const action = loadCurrentSong(props);
@@ -57,12 +50,16 @@ function ArtistDetail() {
       {loading ? (
         <Loading />
       ) : (
-        <div>
+        <div className="main">
           <div className="Artist-blur"></div>
+          <div
+            className="Artist-thumbnail"
+            style={{ backgroundImage: `url(${data.thumbnail})` }}
+          ></div>
           <div className="Artist-detail">
             <Container>
               <Row>
-                <Col xs={7}>
+                <Col xs={12} md={7}>
                   <div className="Artist-detail__name">{data.name}</div>
                   <div className="Artist-detail__biography">
                     {data.biography || data.sortBiography}
@@ -94,14 +91,14 @@ function ArtistDetail() {
                     </div>
                     <div className="ms-3 Artist-detail__care">
                       QUAN TÂM <span className="mx-1">•</span>{" "}
-                      {Math.floor(data.totalFollow / 1000)}K
+                      {formatFollow(data.totalFollow)}
                     </div>
                   </div>
                   <div>
                     <i class="icon ic-zing-choice"></i>
                   </div>
                 </Col>
-                <Col xs={5}>
+                <Col xs={12} md={5}>
                   <div className="d-flex justify-content-end">
                     <img
                       className="Artist-detail__img"
@@ -113,7 +110,7 @@ function ArtistDetail() {
               </Row>
               <Row>
                 <div className="Artist-detail__filter ">
-                  <div className="Artist-detail__filter-wrapper d-flex justify-content-between align-items-center">
+                  <div className="Artist-detail__filter-wrapper d-flex justify-content-start align-items-center">
                     <div className="Artist-detail__filter-wrapper-cate Artist-detail__filter-wrapper-cate--active">
                       TỔNG QUAN
                     </div>
@@ -140,7 +137,7 @@ function ArtistDetail() {
               data.sections.includes(
                 data.sections.filter((item) => item.sectionType === "song")[0]
               ) ? (
-                <SongType />
+                <SongType data={data}/>
               ) : (
                 <></>
               )}
@@ -148,7 +145,7 @@ function ArtistDetail() {
               data.sections.includes(
                 data.sections.filter((item) => item.sectionType === "video")[0]
               ) ? (
-                <VideoType />
+                <VideoType data={data}/>
               ) : (
                 <></>
               )}
@@ -158,7 +155,7 @@ function ArtistDetail() {
                   (item) => item.sectionType === "playlist"
                 )[0]
               ) ? (
-                <PlaylistType />
+                <PlaylistType data={data}/>
               ) : (
                 <></>
               )}
@@ -166,7 +163,7 @@ function ArtistDetail() {
               data.sections.includes(
                 data.sections.filter((item) => item.sectionType === "artist")[0]
               ) ? (
-                <ArtistType />
+                <ArtistType data={data}/>
               ) : (
                 <></>
               )}

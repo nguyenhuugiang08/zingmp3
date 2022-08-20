@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { loadLink } from "features/linkSlice";
+import { loadLink } from "app/linkSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

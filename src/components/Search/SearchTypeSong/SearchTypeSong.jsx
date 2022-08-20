@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
 import styles from 'scss/Album.module.scss';
 import ReactLoading from 'react-loading';
-import { loadLink } from 'features/linkSlice';
-import { loadCurrentSong } from 'features/top100/top100Slice';
+import { loadLink } from 'app/linkSlice';
+import { loadCurrentSong } from 'app/currentSongSilce';
 import Loading from './Loading';
 import formatTime from 'utils/formatTime';
 

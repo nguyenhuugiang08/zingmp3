@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getHomeApi } from "../getHomeSlice";
 
 import homeApi from "api/homeApi";
 import HomeSilder from "./HomePage1/HomeSilder";
@@ -15,15 +13,12 @@ function Home() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const homeData = useSelector((state) => state.homeData);
-  const dispatch = useDispatch();
-
   useEffect(() => {
     const getHome = async () => {
       try {
         setLoading(true);
         const response = await homeApi.getAll();
-        dispatch(getHomeApi(response.data));
+        setData(response.data.items);
         setLoading(false);
       } catch (error) {
         console.log("Failed to fetch data: ", error);
@@ -33,11 +28,6 @@ function Home() {
     getHome();
   }, []);
 
-  useEffect(() => {
-    if (homeData.length > 0) {
-      setData(homeData[0].items);
-    }
-  }, [homeData]);
   return (
     <div>
       {loading ? (

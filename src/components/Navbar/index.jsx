@@ -30,7 +30,7 @@ const Item = ({ path, icon, content }) => {
 };
 
 function Navbar() {
-  const dataStore = useSelector((state) => state.top100);
+  const dataStore = useSelector((state) => state.currentSong);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

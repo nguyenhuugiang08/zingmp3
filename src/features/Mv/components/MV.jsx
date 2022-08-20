@@ -8,7 +8,7 @@ import ReactLoading from "react-loading";
 import Loading from "./Loading";
 import PlayMv from "./PlayMv/PlayMv";
 import "scss/Mv.scss";
-import { loadLink } from "features/linkSlice";
+import { loadLink } from "app/linkSlice";
 import { useDispatch } from "react-redux";
 import categoryApi from "api/categoryMV";
 

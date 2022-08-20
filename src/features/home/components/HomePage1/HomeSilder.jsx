@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper";
 import { Link } from "react-router-dom";
-import { loadLink } from "features/linkSlice";
+import { loadLink } from "app/linkSlice";
 import { useDispatch } from "react-redux";
-import { getId } from "./getidSlice";
+import { getId } from "../../../../app/getidSlice";
 import ConfirmPlaySong from "./confirmplaysong/ConfirmPlaySong";
 
 import "swiper/css";

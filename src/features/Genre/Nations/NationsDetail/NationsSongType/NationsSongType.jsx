@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Col, Row } from 'reactstrap'
 import styles from 'scss/Album.module.scss'
-import { loadCurrentSong } from 'features/top100/top100Slice'
-import { loadLink } from 'features/linkSlice'
+import { loadCurrentSong } from 'app/currentSongSilce'
+import { loadLink } from 'app/linkSlice'
 import formatTime from 'utils/formatTime'
 
 function NationsSongType({ data }) {

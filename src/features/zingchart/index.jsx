@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Container, Row } from "reactstrap";
-import { getZingchartApi } from "./getZingchartSlice";
-import { loadCurrentSong } from "features/top100/top100Slice";
+import { getZingchartApi } from "../../app/getZingchartSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import { loadLink } from "features/linkSlice";
 
 import chartHomeApi from "api/chartHomeApi";
 import Loading from "./Loading";
@@ -13,6 +11,8 @@ import styles from "scss/Album.module.scss";
 import "scss/zingchart.scss";
 import "scss/responsive.scss";
 import formatTime from "utils/formatTime";
+import { loadLink } from "app/linkSlice";
+import { loadCurrentSong } from "app/currentSongSilce";
 
 function Zingchart() {
   const [loading, setLoading] = useState(false);

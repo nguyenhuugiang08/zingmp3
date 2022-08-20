@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { loadLink } from "features/linkSlice";
+import { loadLink } from "app/linkSlice";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";

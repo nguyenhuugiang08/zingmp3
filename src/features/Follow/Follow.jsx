@@ -3,14 +3,15 @@ import followApi from "api/followApi";
 import Artist from "features/home/components/ArtistSpotlightType";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import ReactLoading from "react-loading";
 import "scss/Follow.scss";
 import { Link } from "react-router-dom";
-import { loadLink } from "features/linkSlice";
+import { loadLink } from "app/linkSlice";
 import ReactPlayer from "react-player";
 import Masonry from "react-masonry-css";
 import Loading from "./Loading";
+import homeApi from "api/homeApi";
 
 function Follow() {
   const [data, setData] = useState([]);
@@ -20,7 +21,6 @@ function Follow() {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(false);
 
-  const homeData = useSelector((state) => state.homeData);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -51,10 +51,19 @@ function Follow() {
   }, [id, page]);
 
   useEffect(() => {
-    if (homeData.length > 0) {
-      setData(homeData[0].items);
-    }
-  }, [homeData]);
+    const getHome = async () => {
+      try {
+        setLoading(true);
+        const response = await homeApi.getAll();
+        setData(response.data.items);
+        setLoading(false);
+      } catch (error) {
+        console.log("Failed to fetch data: ", error);
+      }
+    };
+
+    getHome();
+  }, []);
 
   //xử lý lọc theo thể loại nhạc
   const handleFilterType = (e, type) => {

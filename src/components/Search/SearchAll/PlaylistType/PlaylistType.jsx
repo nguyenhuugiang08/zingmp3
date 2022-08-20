@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Col, Container, Nav, NavItem, Row } from 'reactstrap';
 import style from 'scss/Top100Outstanding.module.scss';
-import { loadLink } from 'features/linkSlice';
+import { loadLink } from 'app/linkSlice';
 
 function PlaylistType({ list }) {
     const dispatch = useDispatch();

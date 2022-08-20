@@ -4,27 +4,19 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
 
-import top100Reducer from "features/top100/top100Slice";
-import linkReducer from "features/linkSlice";
-import homeReducer from "features/home/getHomeSlice";
-import zingchartReducer from "features/zingchart/getZingchartSlice";
-import playlistReducer from "features/zingchart/components/getPlaylistData";
-import idReducer from "features/home/components/HomePage1/getidSlice";
-import lyricReducer from "components/PlaySong/getLyric";
-import artistReducer from "components/ArtistDetail/getiArtistSlice";
-import radioReducer from "features/radio/radioSlice";
-import mountedReducer from "features/Mv/getMounted";
+import currentSongReducer from "app/currentSongSilce";
+import linkReducer from "app/linkSlice";
+import zingchartReducer from "app/getZingchartSlice";
+import idReducer from "app/getidSlice";
+import lyricReducer from "app/getLyric";
+import mountedReducer from "app/getMounted";
 
 const rootReducer = combineReducers({
-  top100: top100Reducer,
+  currentSong: currentSongReducer,
   link: linkReducer,
-  homeData: homeReducer,
   zingchartData: zingchartReducer,
-  playlist: playlistReducer,
   id: idReducer,
   lyric: lyricReducer,
-  artist: artistReducer,
-  radio: radioReducer,
   mounted: mountedReducer,
 });
 

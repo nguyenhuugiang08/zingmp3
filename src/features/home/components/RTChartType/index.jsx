@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import styles from "scss/Home7.module.scss";
-import { loadLink } from "features/linkSlice";
+import { loadLink } from "app/linkSlice";
 import { useDispatch } from "react-redux";
 
 function RTChartType({ data }) {

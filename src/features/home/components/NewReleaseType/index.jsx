@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { loadLink } from "features/linkSlice";
-import { loadCurrentSong } from "features/top100/top100Slice";
+import { loadLink } from "app/linkSlice";
+import { loadCurrentSong } from "app/currentSongSilce";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";

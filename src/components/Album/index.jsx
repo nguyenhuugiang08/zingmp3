@@ -5,12 +5,12 @@ import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "scss/Album.module.scss";
 import { useDispatch } from "react-redux";
-import { loadCurrentSong } from "features/top100/top100Slice";
+import { loadCurrentSong } from "app/currentSongSilce";
 import Loading from "./Loading";
 import suggestPlaylistApi from "api/SuggestPlaylistApi";
 import Artistjoin from "./components/Artistjoin";
 import PlaylistSuggest from "./components/PlaylistSuggest";
-import { loadLink } from "features/linkSlice";
+import { loadLink } from "app/linkSlice";
 import formatTime from "utils/formatTime";
 import formatFollow from "utils/formatFollow";
 

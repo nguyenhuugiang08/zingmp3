@@ -3,7 +3,7 @@ import { Navigation } from "swiper";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loadLink } from "features/linkSlice";
+import { loadLink } from "app/linkSlice";
 import "scss/Artist.scss";
 
 function ArtistSpotlightType({ data }) {

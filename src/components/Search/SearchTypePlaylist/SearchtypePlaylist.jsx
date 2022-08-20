@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import searchTypeApi from 'api/searchTypeApi';
-import { loadLink } from 'features/linkSlice';
+import { loadLink } from 'app/linkSlice';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useDispatch } from 'react-redux';

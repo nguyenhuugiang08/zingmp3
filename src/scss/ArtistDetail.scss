@@ -61,8 +61,8 @@
     &__filter {
         margin-bottom: 30px;
         margin-top: 30px !important;
-        padding-right: 180px !important;
-        padding-left: 180px !important;
+        max-width: max-content !important;
+        margin: auto;
 
         &-wrapper {
             background-color: #ffffff1a;
@@ -125,10 +125,115 @@
 
 /* Mobile  */
 @media (max-width: 739px) {
-    .Artist-outstanding__title {
-        padding-left: 0;
-        font-size: 1.2rem;
-        margin-bottom: 12px;
-        margin-top: 20px !important;
+    .main {
+        flex-grow: 1;
+        margin: 0 auto;
+        position: relative;
+        width: 100%;
+
+        .Artist-thumbnail {
+            padding-top: 10%;
+            border-radius: 8px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0 -10px;
+        }
+
+        .Artist-detail {
+            margin-top: 20px;
+
+            &__name {
+                font-size: 32px;
+            }
+
+            &__biography {
+                display: none;
+            }
+
+            &__more {
+                display: none;
+            }
+
+            &__play {
+                font-size: 12px;
+                padding: 4px 20px;
+            }
+
+            &__care {
+                font-size: 12px;
+                padding: 4px 20px;
+            }
+
+            &__img {
+                display: none;
+            }
+
+            &__filter {
+                margin-bottom: 20px;
+                margin-top: 20px !important;
+
+                &-wrapper {
+
+                    &-cate {
+                        font-size: 12px;
+                        line-height: 1;
+                        color: #dadada;
+                        padding: 6px 20px;
+                        cursor: pointer;
+                    }
+
+                    &-cate:nth-child(4) {
+                        display: none;
+                    }
+
+                    &-cate:nth-child(5) {
+                        display: none;
+                    }
+
+                    &-cate:nth-child(6) {
+                        display: none;
+                    }
+
+                    &-cate:nth-child(7) {
+                        display: none;
+                    }
+                }
+
+            }
+        }
+
+        .Artist-outstanding {
+            padding-top: 0;
+        }
+
+        .Artist-outstanding__title {
+            padding-left: 0;
+            font-size: 1.2rem;
+            margin-top: 20px !important;
+            margin-bottom: 12px;
+
+            &-img {
+                border-radius: 8px;
+            }
+        }
+
+        .Artist-outstanding__scroll {
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: 240px;
+            transition: all 0.3s ease-in;
+            position: relative;
+            cursor: pointer;
+
+        }
+
+        .Artist-outstanding__scroll::-webkit-scrollbar {
+            display: none;
+        }
     }
 }

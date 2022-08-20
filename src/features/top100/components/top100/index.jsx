@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import top100Api from 'api/top100Api'
-import { loadLink } from 'features/linkSlice'
+import { loadLink } from 'app/linkSlice'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'

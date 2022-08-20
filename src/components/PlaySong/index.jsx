@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import "scss/PlaySong.scss"
-import PlaySongCenter from './PlaySongCenter/PlaySongCenter';
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import "scss/PlaySong.scss";
+import PlaySongCenter from "./PlaySongCenter/PlaySongCenter";
 
 function PlaySong() {
-    const dataStore = useSelector(state => state.top100)
-    
-    const [mounted, setMounted] = useState(false)
+  const dataStore = useSelector((state) => state.currentSong);
 
-    useEffect(() => {
-        if (dataStore.length !== 0) {
-            setMounted(dataStore[dataStore.length - 1].isPlay)
-        }
-    }, [dataStore])
+  const [mounted, setMounted] = useState(false);
 
-    return (
-        <div>
-            {mounted &&
-                <div className='play-song'>
-                    <PlaySongCenter
-                    />
-                </div>}
+  useEffect(() => {
+    if (dataStore.length !== 0) {
+      setMounted(dataStore[dataStore.length - 1].isPlay);
+    }
+  }, [dataStore]);
+
+  return (
+    <div>
+      {mounted && (
+        <div className="play-song">
+          <PlaySongCenter />
         </div>
-    )
+      )}
+    </div>
+  );
 }
 
-export default PlaySong
+export default PlaySong;
