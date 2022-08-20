@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import formatTime from 'utils/formatTime';
 
 function PlaySongCenter() {
-    const dataStore = useSelector(state => state.top100)
+    const dataStore = useSelector(state => state.currentSong)
 
     const [loading, setLoading] = useState(false)
     const [id, setId] = useState('')
