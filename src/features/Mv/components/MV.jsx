@@ -11,6 +11,7 @@ import "scss/Mv.scss";
 import { loadLink } from "app/linkSlice";
 import { useDispatch } from "react-redux";
 import categoryApi from "api/categoryMV";
+import { loadCurrentSong } from "app/currentSongSilce";
 
 function MV() {
   const [mvData, setMvData] = useState([]);
@@ -96,9 +97,8 @@ function MV() {
   const handleSendEncodeId = (id) => {
     setEncodeId(id);
     setMounted(true);
-    window.addEventListener("scroll", (e) => {
-      e.preventDefault();
-    });
+    const action = loadCurrentSong({ isPlay: false });
+    dispatch(action);
   };
 
   const handleClosePlayer = () => {

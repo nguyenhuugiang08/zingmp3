@@ -446,7 +446,7 @@
         }
 
         .albumArtist {
-            display: none;
+            display: none !important;
         }
 
         .albumLike {
@@ -464,7 +464,7 @@
         }
 
         .albumAction {
-            display: none;
+            display: none !important;
         }
 
         .albumWrapper {

@@ -73,17 +73,6 @@ function Anbuml() {
   const handleClick = (props) => {
     const action = loadCurrentSong(props);
     dispatch(action);
-    thumbRef.current.style.borderRadius = "50%";
-
-    const thumbAnimate = thumbRef.current.animate(
-      [{ transform: " rotate(360deg) " }],
-      {
-        duration: 10000,
-        iterations: Infinity,
-      }
-    );
-
-    thumbAnimate.pause();
   };
 
   const d = new Date();

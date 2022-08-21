@@ -151,23 +151,6 @@
         margin: 0 -59px;
     }
 
-    /* Mobile & tablet */
-    @media (max-width: 1133px) {}
-
-    /* Tablet */
-    @media (min-width: 740px) and (max-width: 1133px) {
-        &-blur {
-            margin: 0 -30px;
-        }
-    }
-
-    /* Mobile  */
-    @media (max-width: 739px) {
-        &-blur {
-            margin: 0 -10px;
-        }
-    }
-
     &-header {
         position: relative;
         z-index: 1;
@@ -252,4 +235,42 @@
 
 .zingchart_filter--active {
     border-bottom: 3px solid #7200a1;
+}
+
+/* Mobile & tablet */
+@media (max-width: 1133px) {}
+
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1133px) {
+    .zingchart_rank {
+        &-blur {
+            margin: 0 -30px;
+        }
+    }
+}
+
+/* Mobile  */
+@media (max-width: 739px) {
+    .zingchart_rank {
+        
+        &-blur {
+            margin: 0 -10px;
+        }
+
+        &-header {
+
+            &-title {
+                font-size: 32px;
+            }
+        }
+    }
+
+    .zingchart_filter {
+        font-size: 14px;
+        font-weight: 400;
+    }
+    
+    .zingchart_filter--active {
+        border-bottom: 2px solid #7200a1;
+    }
 }
