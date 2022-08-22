@@ -1,7 +1,9 @@
+import PlaySongMobile from "components/PlaySongMoblile";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import "scss/PlaySong.scss";
-import PlaySongCenter from "./PlaySongCenter/PlaySongCenter";
+import "scss/_playsongmobile.scss";
+import PlaySongCenter from "./PlaySongCenter";
 
 function PlaySong() {
   const dataStore = useSelector((state) => state.currentSong);
@@ -17,8 +19,22 @@ function PlaySong() {
   return (
     <div>
       {mounted && (
-        <div className="play-song">
-          <PlaySongCenter />
+        <div
+          style={{
+            position: "fixed",
+            top: "0",
+            left: "0",
+            height: "100%",
+            width: "100%",
+            zIndex: "101",
+          }}
+        >
+          <div className="play-song">
+            <PlaySongCenter />
+          </div>
+          <div className="play-song-mobile">
+            <PlaySongMobile />
+          </div>
         </div>
       )}
     </div>

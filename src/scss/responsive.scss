@@ -63,6 +63,25 @@
     .genre-duration {
         display: none;
     }
+
+     //wrapper
+     .search-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start !important;
+
+        &-title {
+            margin-left: 24px !important;
+        }
+
+        &-filter {
+            display: flex;
+
+            &--item {
+                margin-left: 24px !important;
+            }
+        }
+    }
 }
 
 /* Mobile  */
@@ -216,5 +235,24 @@
         font-size: 12px;
         color: #88848E;
         font-weight: 500;
+    }
+
+    //wrapper
+    .search-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start !important;
+
+        &-title {
+            margin-left: 16px !important;
+        }
+
+        &-filter {
+            display: flex;
+
+            &--item {
+                margin-left: 16px !important;
+            }
+        }
     }
 }

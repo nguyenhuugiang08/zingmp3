@@ -265,10 +265,10 @@
 }
 
 /* Mobile & tablet */
-@media (min-width: 1024px) {}
+@media (max-width: 1113px) {}
 
 /* Tablet */
-@media (min-width: 740px) and (max-width: 1023px) {}
+@media (min-width: 740px) and (max-width: 1113px) {}
 
 /* Mobile  */
 @media (max-width: 739px) {

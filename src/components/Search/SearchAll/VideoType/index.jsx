@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { Nav, NavItem } from "reactstrap";
@@ -7,13 +7,29 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import style from "scss/Top100Outstanding.module.scss";
 import { useDispatch } from "react-redux";
 import { loadLink } from "app/linkSlice";
+import { loadCurrentSong } from "app/currentSongSilce";
+import PlayMv from "features/Mv/components/PlayMv/PlayMv";
 
 function VideoType({ list }) {
+  const [mounted, setMounted] = useState(false);
+  const [encodeId, setEncodeId] = useState("");
+
   const dispatch = useDispatch();
 
   const handleClickLink = (...rest) => {
     const action = loadLink(rest);
     dispatch(action);
+  };
+
+  const handleSendEncodeId = (id) => {
+    setEncodeId(id);
+    setMounted(true);
+    const action = loadCurrentSong({ isPlay: false });
+    dispatch(action);
+  };
+
+  const handleClosePlayer = () => {
+    setMounted(false);
   };
   return (
     <div>
@@ -23,8 +39,8 @@ function VideoType({ list }) {
         </div>
         <div className={style.top100OutstandingContainer}>
           <Swiper
-            slidesPerView={3}
-            spaceBetween={30}
+            slidesPerView={1}
+            spaceBetween={10}
             slidesPerGroup={1}
             loop={true}
             loopFillGroupWithBlank={true}
@@ -34,10 +50,20 @@ function VideoType({ list }) {
               delay: 3000,
               disableOnInteraction: false,
             }}
+            breakpoints={{
+              739: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              1023: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+              },
+            }}
             className="mySwiper"
           >
-            {list.map((mv, index) => (
-              <SwiperSlide key={index}>
+            {list.map((mv) => (
+              <SwiperSlide key={mv.encodeId}>
                 <div className={style.top100OutstandingCol}>
                   <div className={style.top100OutstandingPar}>
                     <div
@@ -45,13 +71,12 @@ function VideoType({ list }) {
                       style={{ backgroundImage: `url(${mv.thumbnail})` }}
                     ></div>
                     <div className={style.top100OutstandingChild}>
-                      <Link
+                      <div
                         className={style.top100OutstandingPlay}
-                        to={`${mv.link}/${mv.encodeId}`}
-                        onClick={() => handleClickLink(mv.link, "mv")}
+                        onClick={() => handleSendEncodeId(mv.encodeId)}
                       >
                         <FontAwesomeIcon icon="fa-solid fa-play" />
-                      </Link>
+                      </div>
                     </div>
                   </div>
                   <div className=" d-flex justify-content-start align-items-center mt-1">
@@ -108,6 +133,19 @@ function VideoType({ list }) {
           </Swiper>
         </div>
       </div>
+      {!mounted ? (
+        <></>
+      ) : (
+        <div>
+          <div
+            className="playmv-container-header__icon"
+            onClick={handleClosePlayer}
+          >
+            <FontAwesomeIcon icon="fa-solid fa-xmark" />
+          </div>
+          <PlayMv encodeId={encodeId} />
+        </div>
+      )}
     </div>
   );
 }

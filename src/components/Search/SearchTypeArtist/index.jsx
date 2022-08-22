@@ -53,6 +53,7 @@ function SearchTypeArtist({ keyword, type }) {
     const action = loadLink(rest);
     dispatch(action);
   };
+
   return (
     <div className={`${style.top100Outstanding}`}>
       <div className={style.mainTitle}>
@@ -83,7 +84,7 @@ function SearchTypeArtist({ keyword, type }) {
           <div>
             <div className={style.top100OutstandingContainer}>
               <Container>
-                <Row xs={5}>
+                <Row xs={2} md={3} lg={4} xl={5}>
                   {data.map((artist, index) => (
                     <div key={index}>
                       <Col className={style.top100OutstandingCol}>
@@ -120,7 +121,7 @@ function SearchTypeArtist({ keyword, type }) {
                           <div className={style.top100OutstandingTitle}>
                             {artist.name}
                           </div>
-                          <div>{formatFollow(artist.totalFollow)}</div>
+                          <div>{formatFollow(artist.totalFollow)} quan tâm</div>
                         </div>
                       </Col>
                     </div>

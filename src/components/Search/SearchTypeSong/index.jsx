@@ -94,7 +94,7 @@ function SearchTypeSong({ keyword, type }) {
                                                         </div>
                                                     </div>
                                                     <div className={styles.albumArtistMain}>
-                                                        <div>{item.title}</div>
+                                                        <div className={styles.albumSongTitle}>{item.title}</div>
                                                         <div className={styles.albumSongArtist}>
                                                             {item.artists !== undefined && item.artists.map((artist, index) => (
                                                                 <Link className={styles.albumArtistItem} key={index}
@@ -107,13 +107,13 @@ function SearchTypeSong({ keyword, type }) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <Link className={styles.albumCenter}
+                                                <Link className={`${styles.albumCenter} chart-center`}
                                                     to={item.album !== undefined && `${item.album.link}/${item.album.encodeId}`}
                                                     onClick={() => handleClickLink(item.album.link, 'album')}
                                                 >
                                                     {item.album !== undefined && item.album.title}
                                                 </Link>
-                                                <div className={styles.albumRight}>
+                                                <div className={`${styles.albumRight} chart-right`}>
                                                     {formatTime(item.duration)}
                                                 </div>
                                             </div>

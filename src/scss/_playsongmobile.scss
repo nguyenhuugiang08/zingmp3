@@ -1,0 +1,35 @@
+.play-song-mobile {
+    display: none;
+
+    /* Mobile & tablet */
+    @media (max-width: 1133px) {}
+
+    /* Tablet */
+    @media (min-width: 740px) and (max-width: 1133px) {}
+
+    /* Mobile  */
+    @media (max-width: 739px) {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-image: linear-gradient(#120822, #432275, #170f23);
+
+        &__main {
+
+            &-thumbnail {
+                padding: 20px 40px;
+
+                &-img {
+                    background-size: cover;
+                    padding-top: 100%;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+}

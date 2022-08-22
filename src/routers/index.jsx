@@ -12,7 +12,7 @@ import NewMusic from "features/NewMusic/NewMusic";
 import Genre from "features/Genre/Genre";
 import TopicDetail from "features/Genre/Topic/TopicDetail/TopicDetail";
 import NationsDetail from "features/Genre/Nations/NationsDetail/NationsDetail";
-import Search from "components/Search/Search";
+import Search from "components/Search";
 import "scss/content.scss";
 
 import { useSelector } from "react-redux";

@@ -1,8 +1,8 @@
 import React from "react";
-import ArtistType from "./ArtistType/ArtistType";
-import PlaylistType from "./PlaylistType/PlaylistType";
-import SongType from "./SongType/SongType";
-import VideoType from "./VideoType/VideoType";
+import ArtistType from "./ArtistType";
+import PlaylistType from "./PlaylistType";
+import SongType from "./SongType";
+import VideoType from "./VideoType";
 
 function SearchAll({ data }) {
   return (
