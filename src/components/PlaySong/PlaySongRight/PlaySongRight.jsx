@@ -29,9 +29,9 @@ function PlaySongRight({ urlImage, title, artists }) {
               to={`${artist.link}/${artist.alias}`}
               onClick={() => handleClickLink(artist.link, "artistdetail")}
               className="play-song__right-singer"
-              key={index}
+              key={artist.id}
             >
-              {artist.name}
+              {index < artists.length - 1 ? `${artist.name},` : `${artist.name}`}
             </Link>
           ))}
         </div>

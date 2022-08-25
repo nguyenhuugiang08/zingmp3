@@ -20,68 +20,72 @@ import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function Routerall() {
-  const path = useSelector((state) => state.link);
-  const dataStore = useSelector((state) => state.currentSong);
-  const [mounted, setMounted] = useState(false);
+    const path = useSelector((state) => state.link);
+    const dataStore = useSelector((state) => state.currentSong);
+    const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    if (dataStore.length !== 0) {
-      setMounted(dataStore[dataStore.length - 1].isPlay);
-    }
-  }, [dataStore]);
+    useEffect(() => {
+        if (dataStore.length !== 0) {
+            setMounted(dataStore[dataStore.length - 1].isPlay);
+        }
+    }, [dataStore]);
 
-  const listPath = path.map((path) => {
-    return {
-      path: `${path[0]}/:encodeId`,
-      component:
-        path[1] === "chart"
-          ? Chartdetail
-          : path[1] === "artistdetail"
-          ? ArtistDetail
-          : path[1] === "mv"
-          ? MV
-          : path[1] === "hubdetail"
-          ? TopicDetail
-          : path[1] === "nationdetail"
-          ? NationsDetail
-          : Anbuml,
-    };
-  });
+    const listPath = path.map((path) => {
+        return {
+            path: `${path[0]}/:encodeId`,
+            component:
+                path[1] === "chart"
+                    ? Chartdetail
+                    : path[1] === "artistdetail"
+                    ? ArtistDetail
+                    : path[1] === "mv"
+                    ? MV
+                    : path[1] === "hubdetail"
+                    ? TopicDetail
+                    : path[1] === "nationdetail"
+                    ? NationsDetail
+                    : Anbuml,
+        };
+    });
 
-  const routes = [
-    { path: "/", component: Home },
-    { path: "top100", component: Top100 },
-    { path: "personal", component: Personal },
-    { path: "zingchart", component: Zingchart },
-    { path: "radio", component: Radio },
-    { path: "follow", component: Follow },
-    { path: "MV", component: MV },
-    { path: "new-music", component: NewMusic },
-    { path: "genre", component: Genre },
-    { path: `tim-kiem/tat-ca`, component: Search },
-  ];
+    const routes = [
+        { path: "/", component: Home },
+        { path: "top100", component: Top100 },
+        { path: "personal", component: Personal },
+        { path: "zingchart", component: Zingchart },
+        { path: "radio", component: Radio },
+        { path: "follow", component: Follow },
+        { path: "MV", component: MV },
+        { path: "new-music", component: NewMusic },
+        { path: "genre", component: Genre },
+        { path: `tim-kiem/tat-ca`, component: Search },
+    ];
 
-  listPath.map((item) => {
-    routes.push(item);
-  });
+    listPath.map((item) => {
+        routes.push(item);
+    });
 
-  return (
-    <div
-      className="content-app"
-      style={{
-        marginBottom: `${mounted ? "90px" : ""}`,
-      }}
-    >
-      <Routes>
-        {routes.map((route, index) => {
-          const Page = route.component;
-          return (
-            <Route key={index} path={route.path} element={<Page />}></Route>
-          );
-        })}
-      </Routes>
-    </div>
-  );
+    return (
+        <div
+            className="content-app"
+            style={{
+                marginBottom: `${mounted ? "90px" : ""}`,
+            }}
+        >
+            <Routes>
+                {routes.map((route, index) => {
+                    const Page = route.component;
+                    return (
+                        <Route
+                            key={index}
+                            path={route.path}
+                            element={<Page />}
+                        ></Route>
+                    );
+                })}
+            </Routes>
+        </div>
+    );
 }
 
 export default Routerall;

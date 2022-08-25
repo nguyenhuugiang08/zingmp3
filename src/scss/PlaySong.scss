@@ -1,5 +1,5 @@
 .play-song {
-    position: fixed;
+    position: absolute;
     width: 100%;
     bottom: 0;
     padding: 10px 20px;
@@ -20,7 +20,9 @@
     width: 33.33%;
 
     &-singers {
-        display: flex;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     &-singer {
@@ -273,7 +275,180 @@
 /* Mobile  */
 @media (max-width: 739px) {
     .play-song {
-        display: none;
+        height: 62px;
+        padding: 5px 20px;
+
+        &__right {
+            height: auto;
+            width: 80%;
+
+            &-title {
+                font-size: 14px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            &-box {
+                width: 48px;
+                border-radius: 50%;
+            }
+
+            &-wrapper {
+                overflow: hidden;
+                flex: 1;
+            }
+
+            &-wrapper-btn {
+                display: none;
+            }
+        }
+
+        &__center {
+            width: 20%;
+        }
+
+        &__duration {
+            position: absolute;
+            top: -8px;
+            height: 2px;
+            left: 0;
+            right: 0;
+
+            &-time-left {
+                display: none;
+            }
+
+            &-time-right {
+                display: none;
+            }
+
+            &-input {
+                -webkit-appearance: none;
+                margin-right: 15px;
+                width: 100%;
+                height: 2px;
+                background: rgba(255, 255, 255, 0.6);
+                border-radius: 5px;
+                background-image: linear-gradient(#7200a1, #7200a1);
+                background-size: 0% 100%;
+                background-repeat: no-repeat;
+                cursor: pointer;
+            }
+
+            /* Input Thumb */
+            &-input::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                height: 2px;
+                width: 2px;
+                border-radius: 50%;
+                background: #7200a1;
+                cursor: pointer;
+                transition: background .3s ease-in-out;
+                position: relative;
+                left: -1px;
+            }
+
+            &-input::-moz-range-thumb {
+                -webkit-appearance: none;
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                background: #7200a1;
+                cursor: pointer;
+                box-shadow: 0 0 2px 0 #555;
+                transition: background .3s ease-in-out;
+                position: relative;
+                left: -1px;
+            }
+
+            &-input::-ms-thumb {
+                -webkit-appearance: none;
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                background: #7200a1;
+                cursor: pointer;
+                box-shadow: 0 0 2px 0 #555;
+                transition: background .3s ease-in-out;
+                position: relative;
+                left: -1px;
+            }
+
+            &-input::-webkit-slider-thumb:hover {
+                background: #7200a1;
+            }
+
+            &-input::-moz-range-thumb:hover {
+                background: #7200a1;
+            }
+
+            &-input::-ms-thumb:hover {
+                background: #7200a1;
+            }
+
+            /* Input Track */
+            input[type=range]::-webkit-slider-runnable-track {
+                -webkit-appearance: none;
+                box-shadow: none;
+                border: none;
+                background: transparent;
+            }
+
+            input[type=range]::-moz-range-track {
+                -webkit-appearance: none;
+                box-shadow: none;
+                border: none;
+                background: transparent;
+            }
+
+            &-input::-ms-track {
+                -webkit-appearance: none;
+                box-shadow: none;
+                border: none;
+                background: transparent;
+            }
+        }
+
+        &__left {
+            display: none;
+            width: 0%;
+        }
+
+        &__btn {
+
+            &-random {
+                display: none;
+            }
+
+            &-repeat {
+                display: none;
+            }
+        }
+
+        &-loading {
+            width: 10px !important;
+        }
+    }
+
+    .play-song__btn:hover {
+        background-color: transparent;
+    }
+
+    .btn-play {
+        background-color: #120C1C;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+    }
+    
+    .btn-play:hover {
+        color: #fff;
+        background-color: transparent;
     }
 
 }

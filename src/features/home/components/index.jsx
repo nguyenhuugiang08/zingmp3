@@ -10,45 +10,46 @@ import EventType from "./EventType";
 import NewReleaseType from "./NewReleaseType";
 
 function Home() {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const getHome = async () => {
-      try {
-        setLoading(true);
-        const response = await homeApi.getAll();
-        setData(response.data.items);
-        setLoading(false);
-      } catch (error) {
-        console.log("Failed to fetch data: ", error);
-      }
-    };
+    useEffect(() => {
+        const getHome = async () => {
+            try {
+                setLoading(true);
+                const response = await homeApi.getAll();
+                setData(response.data.items);
+                setLoading(false);
+            } catch (error) {
+                console.log("Failed to fetch data: ", error);
+            }
+        };
 
-    getHome();
-  }, []);
+        getHome();
+    }, []);
 
-  return (
-    <div>
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-          <HomeSilder data={data} />
-          <Homeheard data={data} />
-          <NewReleaseType data={data} />
-          <PlaylistType data={data} />
-          <LiveStreamType data={data} />
-          {data.length > 0 &&
-          data.filter((item) => item.sectionType === "event").length > 0 ? (
-            <EventType data={data} />
-          ) : (
-            <></>
-          )}
-        </>
-      )}
-    </div>
-  );
+    return (
+        <div>
+            {loading ? (
+                <Loading />
+            ) : (
+                <>
+                    <HomeSilder data={data} />
+                    <Homeheard data={data} />
+                    <NewReleaseType data={data} />
+                    <PlaylistType data={data} />
+                    <LiveStreamType data={data} />
+                    {data.length > 0 &&
+                        data.filter((item) => item.sectionType === "event").length >
+                        0 ? (
+                        <EventType data={data} />
+                    ) : (
+                        <></>
+                    )}
+                </>
+            )}
+        </div>
+    );
 }
 
 export default Home;
