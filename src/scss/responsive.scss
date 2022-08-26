@@ -1,24 +1,29 @@
-/* Mobile & tablet */
-@media (min-width: 1133px) {
-    .navbar-responsive {
-        display: none;
-    }
-
-    .navbar-no-responsive {
-        display: block;
-    }
-
-    .header-navigate {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    // player song 
-    .player {
-        z-index: -1;
-    }
+.navbar-responsive {
+    display: none;
 }
+
+.navbar-no-responsive {
+    display: block;
+}
+
+.header-navigate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// player song 
+.player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 90px;
+    width: 100%;
+    z-index: 80;
+}
+
+/* Mobile & tablet */
+@media (max-width: 1133px) {}
 
 /* Tablet */
 @media (min-width: 740px) and (max-width: 1133px) {
@@ -86,11 +91,6 @@
                 margin-left: 24px !important;
             }
         }
-    }
-
-    // player song 
-    .player {
-        z-index: -1;
     }
 }
 
@@ -273,6 +273,6 @@
         left: 0;
         height: 62px;
         width: 100%;
-        z-index: 80;
+        z-index: 70;
     }
 }

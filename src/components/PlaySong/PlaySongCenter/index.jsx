@@ -4,7 +4,7 @@ import ReactLoading from "react-loading";
 import songApi from "api/songApi";
 import { useSelector } from "react-redux";
 import PlaySongRight from "../PlaySongRight/PlaySongRight";
-import PlaySongLyric from "components/PlaySong/PlaySongLyric/PlaySongLyric";
+import PlaySongLyric from "components/PlaySong/PlaySongLyric";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import formatTime from "utils/formatTime";
@@ -316,7 +316,7 @@ function PlaySongCenter() {
                 <button className='play-song__btn' onClick={handelDisplayLyric}>
                     <FontAwesomeIcon icon='fa-solid fa-microphone' />
                 </button>
-                <button className='play-song__btn'>
+                <button className='play-song__btn play-song__btn-window'>
                     <FontAwesomeIcon icon='fa-regular fa-window-restore' />
                 </button>
                 <button className='play-song__btn'>
