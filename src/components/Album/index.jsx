@@ -21,7 +21,7 @@ function Anbuml() {
     const [suggestPlaylist, setSuggestPlaylist] = useState({});
     const [playlistSong, setPlaylistSong] = useState({});
     const [songs, setSongs] = useState([]);
-    const [artist, setArtist] = useState([]);
+    const [artists, setArtists] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
@@ -66,7 +66,7 @@ function Anbuml() {
 
     useEffect(() => {
         if (playlist.artists) {
-            setArtist(playlist.artists);
+            setArtists(playlist.artists);
         }
     }, [playlist]);
 
@@ -125,7 +125,7 @@ function Anbuml() {
                                                 /{d.getFullYear()}
                                             </div>
                                             <div className={styles.albumArtist}>
-                                                {artist.map((artist, index) => (
+                                                {artists.map((artist, index) => (
                                                     <Link
                                                         key={index}
                                                         className={
@@ -139,7 +139,7 @@ function Anbuml() {
                                                             )
                                                         }
                                                     >
-                                                        {artist.name},
+                                                        {index < artists.length -1 ? `${artist.name},` : `${artist.name}`}
                                                     </Link>
                                                 ))}
                                             </div>

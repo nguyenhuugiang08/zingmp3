@@ -140,11 +140,12 @@
             &-sentences {
                 display: flex;
                 justify-content: center;
+                text-align: center;
             }
         }
 
         &__img {
-           display: none;
+            display: none;
         }
 
         &__btn {
@@ -154,4 +155,8 @@
 }
 
 /* Mobile  */
-@media (max-width: 739px) {}
+@media (max-width: 739px) {
+    .play-song-lyric {
+        display: none;
+    }
+}

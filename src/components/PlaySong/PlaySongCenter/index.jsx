@@ -205,6 +205,10 @@ function PlaySongCenter() {
         if (audioRef.current) {
             audioRef.current.volume = vol;
         }
+        volRef.current.style.backgroundSize =
+            ((volRef.current.value - volRef.current.min) * 100) /
+                (volRef.current.max - volRef.current.min) +
+            "% 100%";
     };
 
     // xử lý hiện lời bài hát
@@ -329,6 +333,7 @@ function PlaySongCenter() {
                     step={0.01}
                     className='play-song__left-vol'
                     ref={volRef}
+                    value={vol}
                     onChange={handleChangeVol}
                     onClick={handleChangeVol}
                 />

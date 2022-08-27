@@ -54,7 +54,7 @@ function Routerall() {
         { path: "personal", component: Personal },
         { path: "zingchart", component: Zingchart },
         { path: "radio", component: Radio },
-        { path: "follow", component: Follow },
+        { path: "the-loai-nghe-si", component: Follow },
         { path: "MV", component: MV },
         { path: "new-music", component: NewMusic },
         { path: "genre", component: Genre },

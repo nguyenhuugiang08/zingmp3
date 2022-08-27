@@ -5,9 +5,11 @@ import { Col, Container, Row } from "reactstrap";
 import ReactLoading from "react-loading";
 import "scss/PlaySongLyric.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { getLyricApi } from "../../../app/getLyric";
+import LyricHasTime from "./components/LyricHasTime";
+import LyricNoTime from "./components/LyricNoTime";
 
 function PlaySongLyric({ id, thumb, time }) {
+    const [data, setData] = useState({});
     const [sentences, setSentences] = useState([]);
     const [loading, setLoading] = useState(false);
     const [mode, setMode] = useState(false);
@@ -25,7 +27,7 @@ function PlaySongLyric({ id, thumb, time }) {
                 };
                 setLoading(true);
                 const response = await lyricApi.getAll(params);
-                dispatch(getLyricApi(response.data));
+                setData(response.data);
                 setLoading(false);
             };
             getLyric();
@@ -33,10 +35,14 @@ function PlaySongLyric({ id, thumb, time }) {
     }, [id]);
 
     useEffect(() => {
-        if (lyric.length > 0) {
-            setSentences(lyric[lyric.length - 1].sentences);
+        if (data.sentences) {
+            setSentences(data.sentences);
         }
-    }, [lyric]);
+
+        if (data.lyric) {
+            setSentences(data.lyric);
+        }
+    }, [data]);
 
     const handleChangeCategory = (e) => {
         let activeElement = document.querySelectorAll(
@@ -48,19 +54,7 @@ function PlaySongLyric({ id, thumb, time }) {
         e.target.style.backgroundColor = "#6D5C79";
     };
 
-    const handleUnmountedLyric = () => {
-        lyricRef.current.style.display = "none";
-    };
-
-    const handleAutoScroll = (index) => {
-        if (sentencesRef.current) {
-            sentencesRef.current.parentElement.scrollTop =
-                scrollDistance * index;
-        }
-    };
-
     const lyricRef = useRef();
-    const sentencesRef = useRef();
     const circleRef = useRef();
     const modeRef = useRef();
     const imgRef = useRef();
@@ -217,18 +211,12 @@ function PlaySongLyric({ id, thumb, time }) {
                             </div>
                         </div>
                     </div>
-                    <div
-                        className='play-song__btn'
-                        onClick={handleUnmountedLyric}
-                    >
-                        <FontAwesomeIcon icon='fa-solid fa-angle-down' />
-                    </div>
                 </div>
             </div>
             <div className='play-song-lyric__main'>
                 <Container fluid>
                     <Row xs={2}>
-                        <Col xs={5}>
+                        <Col xs={12} lg={5}>
                             <div>
                                 <img
                                     className='play-song-lyric__img'
@@ -247,45 +235,15 @@ function PlaySongLyric({ id, thumb, time }) {
                                         style={{ padding: 200 + "px" }}
                                     />
                                 ) : (
-                                    sentences &&
-                                    sentences.map((sentence, index) => (
-                                        <div
-                                            key={index}
-                                            ref={sentencesRef}
-                                            className={`play-song-lyric__center-sentences
-                      ${
-                          index >= 1 &&
-                          (
-                              sentence.words[sentence.words.length - 1]
-                                  .endTime / 1000
-                          ).toFixed(3) -
-                              time.toFixed(3) <
-                              0.1
-                              ? handleAutoScroll(index)
-                              : ""
-                      }
-                    `}
-                                        >
-                                            {sentence.words.map(
-                                                (word, index) => (
-                                                    <div
-                                                        key={index}
-                                                        className={`play-song-lyric__center-words
-                            ${
-                                (word.startTime / 1000).toFixed(3) -
-                                    time.toFixed(3) <
-                                0.1
-                                    ? "play-song-lyric__center-words--active"
-                                    : ""
-                            }`}
-                                                    >
-                                                        {`${word.data}`}
-                                                    </div>
-                                                )
-                                            )}
-                                        </div>
-                                    ))
-                                )}
+                                    Array.isArray(sentences) ?
+                                        <LyricHasTime
+                                            sentences={sentences}
+                                            scrollDistance={scrollDistance}
+                                            time={time}
+                                        /> :
+                                        <LyricNoTime  sentences={sentences}/>
+                                    )
+                                }
                             </div>
                         </Col>
                     </Row>

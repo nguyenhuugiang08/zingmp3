@@ -8,7 +8,6 @@ import currentSongReducer from "app/currentSongSilce";
 import linkReducer from "app/linkSlice";
 import zingchartReducer from "app/getZingchartSlice";
 import idReducer from "app/getidSlice";
-import lyricReducer from "app/getLyric";
 import mountedReducer from "app/getMounted";
 
 const rootReducer = combineReducers({
@@ -16,7 +15,6 @@ const rootReducer = combineReducers({
   link: linkReducer,
   zingchartData: zingchartReducer,
   id: idReducer,
-  lyric: lyricReducer,
   mounted: mountedReducer,
 });
 
