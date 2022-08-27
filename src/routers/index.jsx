@@ -65,11 +65,13 @@ function Routerall() {
         routes.push(item);
     });
 
+    const mediaQueryMobile = window.matchMedia("(max-width: 739px)")
+
     return (
         <div
             className="content-app"
             style={{
-                marginBottom: `${mounted ? "90px" : ""}`,
+                marginBottom: `${mounted ? `${mediaQueryMobile.matches ? "62px" : "90px"}` : ""}`,
             }}
         >
             <Routes>
