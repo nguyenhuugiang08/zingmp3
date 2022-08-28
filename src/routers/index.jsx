@@ -1,17 +1,17 @@
-import Home from "features/home/components";
-import Top100 from "features/top100/components/top100";
+import Home from "features/home";
+import Top100 from "features/top100";
 import Anbuml from "components/Album";
 import Personal from "features/Personal/components/Personal/Personal";
 import Zingchart from "features/zingchart";
-import Radio from "features/radio/Radio";
+import Radio from "features/radio";
 import Chartdetail from "features/zingchart/components/chartdetail/Chartdetail";
-import MV from "features/Mv/components/MV";
+import MV from "features/Mv";
 import ArtistDetail from "components/ArtistDetail";
 import Follow from "features/Follow/Follow";
-import NewMusic from "features/NewMusic/NewMusic";
-import Genre from "features/Genre/Genre";
-import TopicDetail from "features/Genre/Topic/TopicDetail/TopicDetail";
-import NationsDetail from "features/Genre/Nations/NationsDetail/NationsDetail";
+import NewMusic from "features/NewMusic";
+import Genre from "features/Genre";
+import TopicDetail from "features/Genre/components/Topic/TopicDetail/TopicDetail";
+import NationsDetail from "features/Genre/components/Nations/NationsDetail";
 import Search from "components/Search";
 import "scss/content.scss";
 

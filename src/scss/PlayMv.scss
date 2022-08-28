@@ -354,6 +354,7 @@
                     -webkit-appearance: none;
                     margin-right: 15px;
                     width: calc(100% - 1.8rem);
+                    margin-left: 0.9rem;
                     height: 4px;
                     background: rgba(255, 255, 255, 0.6);
                     border-radius: 5px;
@@ -449,7 +450,6 @@
         @media (max-width: 739px) {
             &-custom {
                 font-size: 1rem;
-                padding: 4px 6px 10px 6px;
                 left: 1em;
 
                 &-left {
@@ -478,9 +478,11 @@
                 }
 
                 &-progress {
+                    position: relative;
+                    bottom: 0;
+
                     &-input {
-                        width: calc(100% - 1.8rem);
-                        height: 3px;
+                        height: 2px;
                     }
                 }
 

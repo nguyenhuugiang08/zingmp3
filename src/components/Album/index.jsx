@@ -26,6 +26,7 @@ function Anbuml() {
 
     const dispatch = useDispatch();
 
+    // call api lấy dữ liệu playlist
     useEffect(() => {
         const getPlayList = async () => {
             const params = {
@@ -39,6 +40,8 @@ function Anbuml() {
         getPlayList();
     }, [encodeId]);
 
+
+    // call api lấy các playlist liên quan
     useEffect(() => {
         const getPlayList = async () => {
             const params = {
@@ -70,6 +73,7 @@ function Anbuml() {
         }
     }, [playlist]);
 
+    // xử lý phát bài hát khi click 
     const handleClick = (props) => {
         const action = loadCurrentSong(props);
         dispatch(action);
@@ -80,6 +84,7 @@ function Anbuml() {
     let sumDuration = 0;
     songs.map((item) => (sumDuration += item.duration * 1));
 
+    // xử lý chuyển trang
     const handleClickLink = (...rest) => {
         const action = loadLink(rest);
         dispatch(action);

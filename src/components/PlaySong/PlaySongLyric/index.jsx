@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 import ReactLoading from "react-loading";
 import "scss/PlaySongLyric.scss";
-import { useDispatch, useSelector } from "react-redux";
 import LyricHasTime from "./components/LyricHasTime";
 import LyricNoTime from "./components/LyricNoTime";
 
@@ -15,9 +14,6 @@ function PlaySongLyric({ id, thumb, time }) {
     const [mode, setMode] = useState(false);
     const [display, setDisplay] = useState(false);
     const [scrollDistance, setScrollDistance] = useState(80);
-
-    const dispatch = useDispatch();
-    const lyric = useSelector((state) => state.lyric);
 
     useEffect(() => {
         if (id) {
@@ -85,16 +81,12 @@ function PlaySongLyric({ id, thumb, time }) {
     const handleClickMode = () => {
         if (!mode) {
             let index = Math.floor(
-                Math.random() *
-                    (lyric[lyric.length - 1].defaultIBGUrls.length - 1)
+                Math.random() * (data.defaultIBGUrls.length - 1)
             );
             circleRef.current.style.marginLeft = "13px";
             circleRef.current.style.animation = "lightMode linear 0.2s";
             modeRef.current.style.backgroundColor = "#7200a1";
-            imgRef.current.src = `${
-                lyric.length > 0 &&
-                lyric[lyric.length - 1].defaultIBGUrls[index]
-            }`;
+            imgRef.current.src = `${data.defaultIBGUrls[index]}`;
             setMode(true);
         } else {
             circleRef.current.style.marginLeft = "0px";
@@ -234,16 +226,15 @@ function PlaySongLyric({ id, thumb, time }) {
                                         height={40}
                                         style={{ padding: 200 + "px" }}
                                     />
+                                ) : Array.isArray(sentences) ? (
+                                    <LyricHasTime
+                                        sentences={sentences}
+                                        scrollDistance={scrollDistance}
+                                        time={time}
+                                    />
                                 ) : (
-                                    Array.isArray(sentences) ?
-                                        <LyricHasTime
-                                            sentences={sentences}
-                                            scrollDistance={scrollDistance}
-                                            time={time}
-                                        /> :
-                                        <LyricNoTime  sentences={sentences}/>
-                                    )
-                                }
+                                    <LyricNoTime sentences={sentences} />
+                                )}
                             </div>
                         </Col>
                     </Row>

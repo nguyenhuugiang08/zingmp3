@@ -2,15 +2,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import ReactLoading from "react-loading";
 import songApi from "api/songApi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PlaySongRight from "../PlaySongRight/PlaySongRight";
 import PlaySongLyric from "components/PlaySong/PlaySongLyric";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import formatTime from "utils/formatTime";
+import { loadCurrentSong } from "app/currentSongSilce";
 
 function PlaySongCenter() {
     const dataStore = useSelector((state) => state.currentSong);
+    const dispatch = useDispatch();
 
     const [loading, setLoading] = useState(false);
     const [id, setId] = useState("");
@@ -44,27 +46,29 @@ function PlaySongCenter() {
     }, [dataStore]);
 
     useEffect(() => {
-        try {
-            const getPath = async () => {
-                const params = {
-                    id: id,
+        if (dataStore.length !== 0) {
+            try {
+                const getPath = async () => {
+                    const params = {
+                        id: dataStore[dataStore.length - 1].encodeId,
+                    };
+                    setLoading(true);
+                    const response = await songApi.getAll(params);
+                    if (response.msg === "Success") {
+                        setPathSong(response.data["128"]);
+                        setIsPlaying(true);
+                    } else {
+                        setPathSong("");
+                        setIsPlaying(false);
+                    }
+                    setLoading(false);
                 };
-                setLoading(true);
-                const response = await songApi.getAll(params);
-                if (response.msg === "Success") {
-                    setPathSong(response.data["128"]);
-                    setIsPlaying(true);
-                } else {
-                    setPathSong("");
-                    setIsPlaying(false);
-                }
-                setLoading(false);
-            };
-            getPath();
-        } catch (error) {
-            console.log("error", error);
+                getPath();
+            } catch (error) {
+                console.log("error", error);
+            }
         }
-    }, [id]);
+    }, [dataStore]);
 
     useEffect(() => {
         if (listSong.length !== 0) {
@@ -152,17 +156,23 @@ function PlaySongCenter() {
     // xử lý next bài hát
     const handleNextSong = () => {
         if (!isRandom) {
-            setIndex(index + 1);
+            setIndex((prev) => prev + 1);
+            let encodeIdNext = "";
             if (index >= listSong.length - 1) {
                 setIndex(0);
-                const encodeIdNext = listSong[0].encodeId;
+                encodeIdNext = listSong[0].encodeId;
                 setId(encodeIdNext);
             } else {
-                const encodeIdNext = listSong[index + 1].encodeId;
+                encodeIdNext = listSong[index + 1].encodeId;
                 setId(encodeIdNext);
             }
-        } else {
-            handleRandomSong();
+            const action = loadCurrentSong({
+                encodeId: encodeIdNext,
+                isPlay: true,
+                songs: listSong,
+                index: index >= listSong.length - 1 ? 0 : index + 1,
+            });
+            dispatch(action);
         }
     };
 
@@ -170,14 +180,22 @@ function PlaySongCenter() {
     const handlePrevSong = () => {
         if (!isRandom) {
             setIndex(index - 1);
+            let encodeIdPrev = "";
             if (index <= 0) {
                 setIndex(listSong.length - 1);
-                const encodeIdPrev = listSong[listSong.length - 1].encodeId;
+                encodeIdPrev = listSong[listSong.length - 1].encodeId;
                 setId(encodeIdPrev);
             } else {
-                const encodeIdPrev = listSong[index - 1].encodeId;
+                encodeIdPrev = listSong[index - 1].encodeId;
                 setId(encodeIdPrev);
             }
+            const action = loadCurrentSong({
+                encodeId: encodeIdPrev,
+                isPlay: true,
+                songs: listSong,
+                index: index <= 0 ? listSong.length - 1 : index - 1,
+            });
+            dispatch(action);
         }
     };
 
@@ -197,6 +215,13 @@ function PlaySongCenter() {
         setIndex(indexRandom);
         const encodeIdPrev = listSong[indexRandom].encodeId;
         setId(encodeIdPrev);
+        const action = loadCurrentSong({
+            encodeId: encodeIdPrev,
+            isPlay: true,
+            songs: listSong,
+            index: indexRandom,
+        });
+        dispatch(action);
     };
 
     // xử lý thay đổi âm lượng
@@ -304,6 +329,7 @@ function PlaySongCenter() {
                             max={100}
                             step={1}
                             ref={seekRef}
+                            value={(time / duration) * 100 || 0}
                             className='play-song__duration-input'
                             onChange={handleChange}
                         />

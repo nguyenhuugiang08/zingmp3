@@ -69,7 +69,7 @@ function Menu() {
             />
             <Item path="radio" icon="fa-solid fa-radio" content="Radio" />
             <Item
-              path="follow"
+              path="the-loai-nghe-si"
               icon="fa-solid fa-rectangle-list"
               content="Theo Dõi"
             />
