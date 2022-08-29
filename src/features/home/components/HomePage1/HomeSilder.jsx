@@ -4,15 +4,24 @@ import { Autoplay, Navigation } from "swiper";
 import { Link } from "react-router-dom";
 import { loadLink } from "app/linkSlice";
 import { useDispatch } from "react-redux";
-import { getId } from "../../../../app/getidSlice";
 import ConfirmPlaySong from "./confirmplaysong/ConfirmPlaySong";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "scss/Home1.scss";
+import Modal from "components/Modal";
+import Portal from "components/Portal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import infoSongApi from "api/infoSongApi";
+import playlistApi from "api/playlistApi";
+import { loadCurrentSong } from "app/currentSongSilce";
 
 function HomeSilder({ data }) {
     const [sliders, setLiders] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
+    const [encodeId, setEncodeId] = useState("");
+    const [infoSong, setInfoSong] = useState({});
+    const [array, setarray] = useState([]);
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -21,16 +30,60 @@ function HomeSilder({ data }) {
         }
     }, [data]);
 
+    useEffect(() => {
+        const getInfoSong = async () => {
+            try {
+                const params = {
+                    id: encodeId,
+                };
+                const respone = await infoSongApi.getAll(params);
+                setInfoSong(respone.data);
+            } catch (error) {
+                console.log("error", error);
+            }
+        };
+        getInfoSong();
+
+        return () => {
+            setInfoSong({});
+        };
+    }, [encodeId]);
+
+    useEffect(() => {
+        if (infoSong && infoSong.album) {
+            const getplaylist = async () => {
+                const params = {
+                    id: infoSong.album.encodeId,
+                };
+                const respone = await playlistApi.getAll(params);
+                let newList = [
+                    ...respone.data.song.items,
+                    ...respone.data.sections[0].items,
+                ];
+                setarray(newList);
+            };
+            getplaylist();
+        }
+    }, [infoSong]);
+
     const handleClickLink = (...rest) => {
         const action = loadLink(rest);
         dispatch(action);
     };
 
-    const handleClick = ({ encodeId }) => {
-        const action = getId(encodeId);
+    function openModal({ encodeId }) {
+        setEncodeId(encodeId);
+        setIsOpen(true);
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
+
+    const handleCloseModalAndPlaySong = (props) => {
+        const action = loadCurrentSong(props);
         dispatch(action);
-        let ConfirmPlaySongElement = document.querySelector(".overlay_confirm");
-        ConfirmPlaySongElement.style.display = "block";
+        setIsOpen(false);
     };
 
     return (
@@ -77,7 +130,7 @@ function HomeSilder({ data }) {
                                               )
                                         : item.type === 1
                                         ? () =>
-                                              handleClick({
+                                              openModal({
                                                   encodeId: item.encodeId,
                                               })
                                         : ""
@@ -94,7 +147,34 @@ function HomeSilder({ data }) {
                     ))}
                 </Swiper>
             ))}
-            <ConfirmPlaySong />
+            <Modal isOpen={isOpen}>
+                <ConfirmPlaySong encodeId={encodeId} />
+                <Portal containerId='modal-close'>
+                    <div onClick={closeModal}>BỎ QUA</div>
+                </Portal>
+                <Portal containerId='modal-play'>
+                    <div
+                        onClick={() =>
+                            handleCloseModalAndPlaySong({
+                                encodeId: encodeId,
+                                isPlay: true,
+                                songs: array,
+                                index: array.indexOf(
+                                    array.find(
+                                        (item) => item.encodeId === encodeId
+                                    )
+                                ),
+                            })
+                        }
+                    >
+                        <FontAwesomeIcon
+                            className='me-2'
+                            icon='fa-solid fa-play'
+                        />
+                        PHÁT BÀI HÁT
+                    </div>
+                </Portal>
+            </Modal>
         </div>
     );
 }

@@ -203,6 +203,7 @@ function PlaySongLyric({ id, thumb, time }) {
                             </div>
                         </div>
                     </div>
+                    <div id="close-lyric-song"></div>
                 </div>
             </div>
             <div className='play-song-lyric__main'>

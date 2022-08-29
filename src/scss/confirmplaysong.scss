@@ -1,5 +1,4 @@
-.overlay_confirm {
-    display: none;
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -86,19 +85,19 @@
                 margin-top: 10px;
                 color: #32323d;
             }
-
-            &_cancel {
-                font-size: 14px;
-                padding: 8px 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-weight: 400;
-                margin: 0 auto;
-                cursor: pointer;
-                width: 100%;
-                margin-top: 10px;
-            }
         }
+    }
+
+    #modal-close {
+        font-size: 14px;
+        padding: 8px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 400;
+        margin: 0 auto;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 10px;
     }
 }

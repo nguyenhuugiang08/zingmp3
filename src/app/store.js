@@ -6,15 +6,13 @@ import thunk from "redux-thunk";
 
 import currentSongReducer from "app/currentSongSilce";
 import linkReducer from "app/linkSlice";
-import zingchartReducer from "app/getZingchartSlice";
-import idReducer from "app/getidSlice";
-import mountedReducer from "app/getMounted";
+import zingchartReducer from "app/zingchartSlice";
+import mountedReducer from "app/mountedSlice";
 
 const rootReducer = combineReducers({
   currentSong: currentSongReducer,
   link: linkReducer,
   zingchartData: zingchartReducer,
-  id: idReducer,
   mounted: mountedReducer,
 });
 

@@ -40,7 +40,6 @@ function Anbuml() {
         getPlayList();
     }, [encodeId]);
 
-
     // call api lấy các playlist liên quan
     useEffect(() => {
         const getPlayList = async () => {
@@ -73,7 +72,7 @@ function Anbuml() {
         }
     }, [playlist]);
 
-    // xử lý phát bài hát khi click 
+    // xử lý phát bài hát khi click
     const handleClick = (props) => {
         const action = loadCurrentSong(props);
         dispatch(action);
@@ -89,6 +88,9 @@ function Anbuml() {
         const action = loadLink(rest);
         dispatch(action);
     };
+    const handleOpenNotificationVIP = () => {
+        
+    };
     return (
         <div>
             {loading ? (
@@ -100,8 +102,8 @@ function Anbuml() {
                             <Col
                                 xs={12}
                                 md={12}
-                                lg={3}
-                                className="overflow-hidden"
+                                xl={3}
+                                className='overflow-hidden'
                             >
                                 <div className={styles.albumMain}>
                                     <div
@@ -130,23 +132,28 @@ function Anbuml() {
                                                 /{d.getFullYear()}
                                             </div>
                                             <div className={styles.albumArtist}>
-                                                {artists.map((artist, index) => (
-                                                    <Link
-                                                        key={index}
-                                                        className={
-                                                            styles.albumArtistItem
-                                                        }
-                                                        to={`${artist.link}/${artist.alias}`}
-                                                        onClick={() =>
-                                                            handleClickLink(
-                                                                artist.link,
-                                                                "artistdetail"
-                                                            )
-                                                        }
-                                                    >
-                                                        {index < artists.length -1 ? `${artist.name},` : `${artist.name}`}
-                                                    </Link>
-                                                ))}
+                                                {artists.map(
+                                                    (artist, index) => (
+                                                        <Link
+                                                            key={index}
+                                                            className={
+                                                                styles.albumArtistItem
+                                                            }
+                                                            to={`${artist.link}/${artist.alias}`}
+                                                            onClick={() =>
+                                                                handleClickLink(
+                                                                    artist.link,
+                                                                    "artistdetail"
+                                                                )
+                                                            }
+                                                        >
+                                                            {index <
+                                                            artists.length - 1
+                                                                ? `${artist.name},`
+                                                                : `${artist.name}`}
+                                                        </Link>
+                                                    )
+                                                )}
                                             </div>
                                             <div className={styles.albumLike}>
                                                 {formatFollow(playlist.like)}{" "}
@@ -157,7 +164,7 @@ function Anbuml() {
                                             <button className={styles.albumBtn}>
                                                 <FontAwesomeIcon
                                                     className={styles.albumIcon}
-                                                    icon="fa-solid fa-play"
+                                                    icon='fa-solid fa-play'
                                                 />
                                                 <div>TIẾP TỤC PHÁT</div>
                                             </button>
@@ -168,21 +175,21 @@ function Anbuml() {
                                                     }
                                                 >
                                                     {" "}
-                                                    <FontAwesomeIcon icon="fa-regular fa-heart" />
+                                                    <FontAwesomeIcon icon='fa-regular fa-heart' />
                                                 </div>
                                                 <div
                                                     className={
                                                         styles.albumActionIcon
                                                     }
                                                 >
-                                                    <FontAwesomeIcon icon="fa-solid fa-ellipsis" />
+                                                    <FontAwesomeIcon icon='fa-solid fa-ellipsis' />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </Col>
-                            <Col xs={12} md={12} lg={9}>
+                            <Col xs={12} md={12} xl={9}>
                                 <div className={styles.albumScroll}>
                                     <div className={styles.albumDescription}>
                                         <span className={styles.albumPreface}>
@@ -192,7 +199,7 @@ function Anbuml() {
                                     </div>
                                     <div className={styles.albumTitleBox}>
                                         <div className={styles.albumTitleLeft}>
-                                            <FontAwesomeIcon icon="fa-solid fa-arrow-down-wide-short" />
+                                            <FontAwesomeIcon icon='fa-solid fa-arrow-down-wide-short' />
                                             <span
                                                 style={{ marginLeft: "10px" }}
                                             >
@@ -219,7 +226,7 @@ function Anbuml() {
                                                         styles.albumIconMusic
                                                     }
                                                 >
-                                                    <FontAwesomeIcon icon="fa-solid fa-music" />
+                                                    <FontAwesomeIcon icon='fa-solid fa-music' />
                                                 </div>
                                                 <div
                                                     className={
@@ -240,14 +247,14 @@ function Anbuml() {
                                                             styles.albumImage
                                                         }
                                                         src={song.thumbnail}
-                                                        alt=""
+                                                        alt=''
                                                     />
                                                     <div
                                                         className={
                                                             styles.albumIconChild
                                                         }
                                                     >
-                                                        <FontAwesomeIcon icon="fa-solid fa-play" />
+                                                        <FontAwesomeIcon icon='fa-solid fa-play' />
                                                     </div>
                                                 </div>
                                                 <div
@@ -317,14 +324,14 @@ function Anbuml() {
                                         </div>
                                     ))}
                                     <div
-                                        className="d-flex mt-1 ps-2"
+                                        className='d-flex mt-1 ps-2'
                                         style={{
                                             color: "#ffffff80",
                                             fontSize: "12px",
                                         }}
                                     >
                                         {`${songs.length} bài hát`}
-                                        <span className="mx-2">•</span>
+                                        <span className='mx-2'>•</span>
                                         <div>{`${Math.floor(
                                             sumDuration / 3600
                                         )} giờ ${Math.floor(

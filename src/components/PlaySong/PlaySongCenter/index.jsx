@@ -1,14 +1,15 @@
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadCurrentSong } from "app/currentSongSilce";
+
 import ReactLoading from "react-loading";
 import songApi from "api/songApi";
-import { useDispatch, useSelector } from "react-redux";
 import PlaySongRight from "../PlaySongRight/PlaySongRight";
 import PlaySongLyric from "components/PlaySong/PlaySongLyric";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import formatTime from "utils/formatTime";
-import { loadCurrentSong } from "app/currentSongSilce";
+import Portal from "components/Portal";
+import Modal from "components/Modal";
 
 function PlaySongCenter() {
     const dataStore = useSelector((state) => state.currentSong);
@@ -35,7 +36,7 @@ function PlaySongCenter() {
     const { urlImage, title, artists, duration, thumbnailM } = infoSong;
 
     const [vol, setVol] = useState(1);
-    const [displayLyric, setDisplayLyric] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         if (dataStore.length !== 0) {
@@ -93,18 +94,6 @@ function PlaySongCenter() {
             setIsPlaying(false);
         }
     };
-
-    //xử lý thông báo bài hát dành cho tài khoản VIP
-    const notify = () =>
-        toast.error("Dành Cho Tài Khoản VIP", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        });
 
     //xử lý thanh thời gian chạy
     const handleOnchaneSeek = () => {
@@ -238,11 +227,12 @@ function PlaySongCenter() {
 
     // xử lý hiện lời bài hát
     const handelDisplayLyric = () => {
-        if (!displayLyric) {
-            setDisplayLyric(true);
-        } else {
-            setDisplayLyric(false);
-        }
+        setIsOpen(true);
+    };
+
+    //xử lý ẩn lời bài hát
+    const handleHideLyric = () => {
+        setIsOpen(false);
     };
 
     const audioRef = useRef();
@@ -274,11 +264,7 @@ function PlaySongCenter() {
                         <FontAwesomeIcon icon='fa-solid fa-backward-step' />
                     </button>
                     <button
-                        onClick={
-                            listSong.length > 0 && listSong[index].isWorldWide
-                                ? handlePlay
-                                : notify
-                        }
+                        onClick={handlePlay}
                         className='play-song__btn btn-play'
                     >
                         {loading ? (
@@ -367,12 +353,14 @@ function PlaySongCenter() {
                     <FontAwesomeIcon icon='fa-solid fa-list-ul' />
                 </button>
             </div>
-            {displayLyric ? (
+            <Modal isOpen={isOpen}>
                 <PlaySongLyric id={id} thumb={thumbnailM} time={time} />
-            ) : (
-                <></>
-            )}
-            <ToastContainer />
+                <Portal containerId='close-lyric-song'>
+                    <div className='play-song__btn' onClick={handleHideLyric}>
+                        <FontAwesomeIcon icon='fa-solid fa-angle-down' />
+                    </div>
+                </Portal>
+            </Modal>
         </>
     );
 }
