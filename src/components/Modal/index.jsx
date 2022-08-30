@@ -5,7 +5,7 @@ function Modal({ isOpen = false, children }) {
         return null;
     }
 
-    return <div >{children}</div>;
+    return <div>{children}</div>;
 }
 
 export default Modal;

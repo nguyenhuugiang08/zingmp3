@@ -209,7 +209,7 @@ function PlaySongLyric({ id, thumb, time }) {
             <div className='play-song-lyric__main'>
                 <Container fluid>
                     <Row xs={2}>
-                        <Col xs={12} lg={5}>
+                        <Col xs={12} xl={5}>
                             <div>
                                 <img
                                     className='play-song-lyric__img'
@@ -218,7 +218,7 @@ function PlaySongLyric({ id, thumb, time }) {
                                 />
                             </div>
                         </Col>
-                        <Col xs={12} lg={7}>
+                        <Col xs={12} xl={7}>
                             <div className='play-song-lyric__center'>
                                 {loading ? (
                                     <ReactLoading

@@ -279,7 +279,7 @@ function PlayMv({ encodeId }) {
                             </div>
                             <Container fluid>
                                 <Row>
-                                    <Col xs={12} lg={9}>
+                                    <Col xs={12} xl={9}>
                                         {loading ? (
                                             <>Loading...</>
                                         ) : (
@@ -445,7 +445,7 @@ function PlayMv({ encodeId }) {
                                             </div>
                                         )}
                                     </Col>
-                                    <Col xs={12} lg={3}>
+                                    <Col xs={12} xl={3}>
                                         <div className='list-mv'>
                                             <div className='list-mv__header'>
                                                 <div

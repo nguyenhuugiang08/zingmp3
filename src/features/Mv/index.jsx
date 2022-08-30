@@ -53,7 +53,7 @@ function MV() {
 
         getList();
     }, [id, page]);
-
+ 
     // call api lấy các danh mục mv
     useEffect(() => {
         const getCategoryMv = async () => {
