@@ -18,6 +18,7 @@ import "scss/content.scss";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
+import NotFound from "components/NotFound";
 
 function Routerall() {
     const path = useSelector((state) => state.link);
@@ -59,19 +60,24 @@ function Routerall() {
         { path: "new-music", component: NewMusic },
         { path: "genre", component: Genre },
         { path: `tim-kiem/tat-ca`, component: Search },
+        { path: "*", component: NotFound },
     ];
 
     listPath.map((item) => {
         routes.push(item);
     });
 
-    const mediaQueryMobile = window.matchMedia("(max-width: 739px)")
+    const mediaQueryMobile = window.matchMedia("(max-width: 739px)");
 
     return (
         <div
-            className="content-app"
+            className='content-app'
             style={{
-                marginBottom: `${mounted ? `${mediaQueryMobile.matches ? "62px" : "90px"}` : ""}`,
+                marginBottom: `${
+                    mounted
+                        ? `${mediaQueryMobile.matches ? "62px" : "90px"}`
+                        : ""
+                }`,
             }}
         >
             <Routes>

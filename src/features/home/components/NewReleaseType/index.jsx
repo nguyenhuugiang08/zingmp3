@@ -157,7 +157,7 @@ function NewReleaseType({ data }) {
                                                 </div>
                                                 <div className='new-release__song-info__artist'>
                                                     {song.artists.map(
-                                                        (artist) => (
+                                                        (artist, index) => (
                                                             <Link
                                                                 to={`${artist.link}/${artist.alias}`}
                                                                 onClick={() =>
@@ -169,7 +169,14 @@ function NewReleaseType({ data }) {
                                                                 key={artist.id}
                                                                 className='new-release__song-info__artist-item'
                                                             >
-                                                                {artist.name},{" "}
+                                                                {index <
+                                                                song.artists
+                                                                    .length -
+                                                                    1
+                                                                    ? `${
+                                                                          artist.name
+                                                                      } ${","}`
+                                                                    : `${artist.name}`}
                                                             </Link>
                                                         )
                                                     )}
@@ -217,7 +224,7 @@ function NewReleaseType({ data }) {
                                                 </div>
                                                 <div className='new-release-album-info__artist'>
                                                     {album.artists.map(
-                                                        (artist) => (
+                                                        (artist, index) => (
                                                             <Link
                                                                 to={`${artist.link}/${artist.alias}`}
                                                                 onClick={() =>
@@ -229,7 +236,12 @@ function NewReleaseType({ data }) {
                                                                 key={artist.id}
                                                                 className='new-release__song-info__artist-item'
                                                             >
-                                                                {artist.name},
+                                                                {index <
+                                                                album.artists
+                                                                    .length -
+                                                                    1
+                                                                    ? `${artist.name},`
+                                                                    : `${artist.name}`}
                                                             </Link>
                                                         )
                                                     )}
