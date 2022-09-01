@@ -121,8 +121,14 @@
         margin-right: 10px;
     }
 
+    .headerRecommendKeywordItem {
+        text-decoration: none;
+        color: #fff;
+    }
+
     .headerRecommendKeywordItem:hover {
         background-color: #ffffff1a;
+        color: #fff;
     }
 
     .headerSuggestThumbnail {
@@ -137,5 +143,10 @@
 
     .headerMenu {
         display: none;
+    }
+
+    .headerArtistLink {
+        font-size: 13px;
+        color: #ffffff80;
     }
 }

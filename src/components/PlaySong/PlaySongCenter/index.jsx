@@ -75,11 +75,11 @@ function PlaySongCenter() {
         if (listSong.length !== 0) {
             setInfoSong({
                 ...infoSong,
-                urlImage: listSong[index].thumbnail,
+                urlImage: listSong[index].thumbnail  || listSong[index].thumb,
                 title: listSong[index].title,
                 artists: listSong[index].artists,
                 duration: listSong[index].duration,
-                thumbnailM: listSong[index].thumbnailM,
+                thumbnailM: listSong[index].thumbnailM || listSong[index].thumb,
             });
         }
     }, [listSong, index]);
@@ -149,10 +149,10 @@ function PlaySongCenter() {
             let encodeIdNext = "";
             if (index >= listSong.length - 1) {
                 setIndex(0);
-                encodeIdNext = listSong[0].encodeId;
+                encodeIdNext = listSong[0].encodeId || listSong[0].id;
                 setId(encodeIdNext);
             } else {
-                encodeIdNext = listSong[index + 1].encodeId;
+                encodeIdNext = listSong[index + 1].encodeId || listSong[index + 1].id;
                 setId(encodeIdNext);
             }
             const action = loadCurrentSong({
@@ -172,10 +172,10 @@ function PlaySongCenter() {
             let encodeIdPrev = "";
             if (index <= 0) {
                 setIndex(listSong.length - 1);
-                encodeIdPrev = listSong[listSong.length - 1].encodeId;
+                encodeIdPrev = listSong[listSong.length - 1].encodeId || listSong[listSong.length - 1].id;
                 setId(encodeIdPrev);
             } else {
-                encodeIdPrev = listSong[index - 1].encodeId;
+                encodeIdPrev = listSong[index - 1].encodeId || listSong[index - 1].id;
                 setId(encodeIdPrev);
             }
             const action = loadCurrentSong({

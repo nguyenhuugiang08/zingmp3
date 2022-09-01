@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDebounce } from "use-debounce";
 import recommendKeywordApi from "api/recommendKeywordApi";
 import suggestionKeywordApi from "api/suggestKeywordApi";
@@ -9,6 +9,9 @@ import { Button } from "reactstrap";
 import ReactLoading from "react-loading";
 import formatFollow from "utils/formatFollow";
 import Menu from "./components/Menu";
+import { loadLink } from "app/linkSlice";
+import { useDispatch } from "react-redux";
+import { loadCurrentSong } from "app/currentSongSilce";
 
 function Header() {
     const [loading, setLoading] = useState(false);
@@ -24,6 +27,8 @@ function Header() {
     const navigate = useNavigate();
     const inputRef = useRef();
     const ulRef = useRef();
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const getRecommendKeyword = async () => {
@@ -115,6 +120,19 @@ function Header() {
         menuElement.style.left = "0";
     };
 
+    //xử lý click kết quả gợi ý
+    const handleClickSuggestionReslut = (type, ...rest) => {
+        if (type !== 1) {
+            const action = loadLink(rest);
+            dispatch(action);
+        }
+    };
+
+    // xử lý click kết quả gợi ý là bài hát
+    const handleClickSongSuggestion = (props) => {
+        const action = loadCurrentSong(props);
+        dispatch(action);
+    };
     return (
         <>
             <div className={`${styles.header} d-flex header`}>
@@ -262,124 +280,241 @@ function Header() {
                                                             Gợi ý kết quả
                                                         </div>
                                                         {item.suggestions.map(
-                                                            (
-                                                                suggest,
-                                                                index
-                                                            ) => (
-                                                                <div
-                                                                    key={index}
-                                                                    className={`${styles.headerRecommendKeywordItem} d-flex justify-content-start align-items-center`}
-                                                                    style={{
-                                                                        padding:
-                                                                            "8px 10px",
-                                                                        borderRadius:
-                                                                            "8px",
-                                                                    }}
-                                                                >
-                                                                    <div
-                                                                        className={
-                                                                            styles.headerSuggestThumbnail
+                                                            (suggest, index) =>
+                                                                suggest.type ===
+                                                                1 ? (
+                                                                    <div>
+                                                                        <div
+                                                                            key={
+                                                                                index
+                                                                            }
+                                                                            className={`${styles.headerRecommendKeywordItem} d-flex justify-content-start align-items-center`}
+                                                                            style={{
+                                                                                padding:
+                                                                                    "8px 10px",
+                                                                                borderRadius:
+                                                                                    "8px",
+                                                                            }}
+                                                                            onClick={() =>
+                                                                                handleClickSongSuggestion(
+                                                                                    {
+                                                                                        encodeId:
+                                                                                            suggest.id,
+                                                                                        isPlay: true,
+                                                                                        songs: item.suggestions.filter(
+                                                                                            (
+                                                                                                item
+                                                                                            ) =>
+                                                                                                item.type ===
+                                                                                                1
+                                                                                        ),
+                                                                                        index: item.suggestions
+                                                                                            .filter(
+                                                                                                (
+                                                                                                    item
+                                                                                                ) =>
+                                                                                                    item.type ===
+                                                                                                    1
+                                                                                            )
+                                                                                            .indexOf(
+                                                                                                item.suggestions.find(
+                                                                                                    (
+                                                                                                        item
+                                                                                                    ) =>
+                                                                                                        item.id ===
+                                                                                                        suggest.id
+                                                                                                )
+                                                                                            ),
+                                                                                    }
+                                                                                )
+                                                                            }
+                                                                        >
+                                                                            <div
+                                                                                className={
+                                                                                    styles.headerSuggestThumbnail
+                                                                                }
+                                                                            >
+                                                                                <div
+                                                                                    className={
+                                                                                        styles.headerSuggestThumbnailImg
+                                                                                    }
+                                                                                    style={{
+                                                                                        backgroundImage: `url(${
+                                                                                            suggest.avatar ||
+                                                                                            suggest.thumb
+                                                                                        })`,
+                                                                                        borderRadius: `${
+                                                                                            suggest.type ===
+                                                                                            4
+                                                                                                ? "50%"
+                                                                                                : "5px"
+                                                                                        }`,
+                                                                                    }}
+                                                                                ></div>
+                                                                            </div>
+                                                                            <div className='ms-2'>
+                                                                                <div
+                                                                                    style={{
+                                                                                        fontSize:
+                                                                                            "14px",
+                                                                                        fontWeight:
+                                                                                            "500",
+                                                                                    }}
+                                                                                >
+                                                                                    {suggest.name ||
+                                                                                        suggest.title}
+                                                                                </div>
+                                                                                <div className='d-flex justify-content-start align-items-center'>
+                                                                                    {suggest.artists.map(
+                                                                                        (
+                                                                                            artist,
+                                                                                            index
+                                                                                        ) => (
+                                                                                            <div
+                                                                                                key={
+                                                                                                    index
+                                                                                                }
+                                                                                                className={`${styles.headerArtistLink}`}
+                                                                                            >
+                                                                                                {index <
+                                                                                                suggest
+                                                                                                    .artists
+                                                                                                    .length -
+                                                                                                    1 ? (
+                                                                                                    <div className='me-1'>
+                                                                                                        {
+                                                                                                            artist.name
+                                                                                                        }
+
+                                                                                                        ,
+                                                                                                    </div>
+                                                                                                ) : (
+                                                                                                    `${artist.name}`
+                                                                                                )}
+                                                                                            </div>
+                                                                                        )
+                                                                                    )}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                ) : (
+                                                                    <Link
+                                                                        key={
+                                                                            index
+                                                                        }
+                                                                        className={`${styles.headerRecommendKeywordItem} d-flex justify-content-start align-items-center`}
+                                                                        style={{
+                                                                            padding:
+                                                                                "8px 10px",
+                                                                            borderRadius:
+                                                                                "8px",
+                                                                        }}
+                                                                        to={
+                                                                            suggest.type ===
+                                                                            4
+                                                                                ? `${
+                                                                                      suggest.link ||
+                                                                                      ""
+                                                                                  }/${
+                                                                                      suggest.aliasName
+                                                                                  }`
+                                                                                : `${
+                                                                                      suggest.link &&
+                                                                                      suggest.link.slice(
+                                                                                          18
+                                                                                      )
+                                                                                  }/${
+                                                                                      suggest.id
+                                                                                  }`
+                                                                        }
+                                                                        onClick={() =>
+                                                                            suggest.type ===
+                                                                            4
+                                                                                ? handleClickSuggestionReslut(
+                                                                                      suggest.type,
+                                                                                      suggest.link ||
+                                                                                          "",
+                                                                                      "artistdetail"
+                                                                                  )
+                                                                                : handleClickSuggestionReslut(
+                                                                                      suggest.type,
+                                                                                      suggest.link.slice(
+                                                                                          18
+                                                                                      ),
+                                                                                      "hubdetail"
+                                                                                  )
                                                                         }
                                                                     >
                                                                         <div
                                                                             className={
-                                                                                styles.headerSuggestThumbnailImg
+                                                                                styles.headerSuggestThumbnail
                                                                             }
-                                                                            style={{
-                                                                                backgroundImage: `url(${
-                                                                                    suggest.avatar ||
-                                                                                    suggest.thumb
-                                                                                })`,
-                                                                                borderRadius: `${
-                                                                                    suggest.type ===
-                                                                                    4
-                                                                                        ? "50%"
-                                                                                        : "5px"
-                                                                                }`,
-                                                                            }}
-                                                                        ></div>
-                                                                    </div>
-                                                                    <div className='ms-2'>
-                                                                        <div
-                                                                            style={{
-                                                                                fontSize:
-                                                                                    "14px",
-                                                                                fontWeight:
-                                                                                    "500",
-                                                                            }}
                                                                         >
-                                                                            {suggest.name ||
-                                                                                suggest.title}
-                                                                        </div>
-                                                                        {suggest.type ===
-                                                                        4 ? (
                                                                             <div
-                                                                                style={{
-                                                                                    fontSize:
-                                                                                        "13px",
-                                                                                    color: "#ffffff80",
-                                                                                }}
-                                                                            >
-                                                                                Nghệ
-                                                                                sĩ
-                                                                                •{" "}
-                                                                                {formatFollow(
-                                                                                    suggest.followers
-                                                                                )}
-                                                                            </div>
-                                                                        ) : suggest.type ===
-                                                                          5 ? (
-                                                                            <div
-                                                                                style={{
-                                                                                    fontSize:
-                                                                                        "13px",
-                                                                                    color: "#ffffff80",
-                                                                                }}
-                                                                            >
-                                                                                {
-                                                                                    suggest.hubGroup
+                                                                                className={
+                                                                                    styles.headerSuggestThumbnailImg
                                                                                 }
+                                                                                style={{
+                                                                                    backgroundImage: `url(${
+                                                                                        suggest.avatar ||
+                                                                                        suggest.thumb
+                                                                                    })`,
+                                                                                    borderRadius: `${
+                                                                                        suggest.type ===
+                                                                                        4
+                                                                                            ? "50%"
+                                                                                            : "5px"
+                                                                                    }`,
+                                                                                }}
+                                                                            ></div>
+                                                                        </div>
+                                                                        <div className='ms-2'>
+                                                                            <div
+                                                                                style={{
+                                                                                    fontSize:
+                                                                                        "14px",
+                                                                                    fontWeight:
+                                                                                        "500",
+                                                                                }}
+                                                                            >
+                                                                                {suggest.name ||
+                                                                                    suggest.title}
                                                                             </div>
-                                                                        ) : (
-                                                                            <div className='d-flex justify-content-start align-items-center'>
-                                                                                {suggest.artists.map(
-                                                                                    (
-                                                                                        artist,
-                                                                                        index
-                                                                                    ) => (
-                                                                                        <div
-                                                                                            style={{
-                                                                                                fontSize:
-                                                                                                    "13px",
-                                                                                                color: "#ffffff80",
-                                                                                            }}
-                                                                                            key={
-                                                                                                index
-                                                                                            }
-                                                                                        >
-                                                                                            {index <
-                                                                                            suggest
-                                                                                                .artists
-                                                                                                .length -
-                                                                                                1 ? (
-                                                                                                <div className='me-1'>
-                                                                                                    {
-                                                                                                        artist.name
-                                                                                                    }
-
-                                                                                                    ,
-                                                                                                </div>
-                                                                                            ) : (
-                                                                                                `${artist.name}`
-                                                                                            )}
-                                                                                        </div>
-                                                                                    )
-                                                                                )}
-                                                                            </div>
-                                                                        )}
-                                                                    </div>
-                                                                </div>
-                                                            )
+                                                                            {suggest.type ===
+                                                                            4 ? (
+                                                                                <div
+                                                                                    style={{
+                                                                                        fontSize:
+                                                                                            "13px",
+                                                                                        color: "#ffffff80",
+                                                                                    }}
+                                                                                >
+                                                                                    Nghệ
+                                                                                    sĩ
+                                                                                    •{" "}
+                                                                                    {formatFollow(
+                                                                                        suggest.followers
+                                                                                    )}{" "}
+                                                                                    quan
+                                                                                    tâm
+                                                                                </div>
+                                                                            ) : (
+                                                                                <div
+                                                                                    style={{
+                                                                                        fontSize:
+                                                                                            "13px",
+                                                                                        color: "#ffffff80",
+                                                                                    }}
+                                                                                >
+                                                                                    {
+                                                                                        suggest.hubGroup
+                                                                                    }
+                                                                                </div>
+                                                                            )}
+                                                                        </div>
+                                                                    </Link>
+                                                                )
                                                         )}
                                                     </div>
                                                 )}
