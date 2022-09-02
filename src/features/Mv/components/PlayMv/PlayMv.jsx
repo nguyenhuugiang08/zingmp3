@@ -62,7 +62,12 @@ function PlayMv({ encodeId }) {
 
     useEffect(() => {
         if (data.recommends && id === encodeId) {
-            const newList = [data.song, ...data.recommends];
+            let newList = [];
+            if (data.song) {
+                newList = [data.song, ...data.recommends];
+            } else {
+                newList = [data, ...data.recommends];
+            }
             setList(newList);
         }
     }, [data, encodeId]);
@@ -93,6 +98,7 @@ function PlayMv({ encodeId }) {
                 setId(list[index - 1].encodeId);
             }
         }
+        setStatus({ ...status, time: 0 });
     };
 
     //xứ lý next video tiếp theo trong danh sách
@@ -106,6 +112,7 @@ function PlayMv({ encodeId }) {
                 setId(list[index + 1].encodeId);
             }
         }
+        setStatus({ ...status, time: 0 });
     };
 
     //xử lý play & pause video
@@ -182,7 +189,6 @@ function PlayMv({ encodeId }) {
                     videoRef.current.getDuration()) *
                 100,
         });
-        progressRef.current.value = time;
         progressRef.current.style.backgroundSize =
             ((progressRef.current.value - progressRef.current.min) * 100) /
                 (progressRef.current.max - progressRef.current.min) +
@@ -275,6 +281,7 @@ function PlayMv({ encodeId }) {
                                             </div>
                                         </div>
                                     </div>
+                                    <div id="close-play-mv"></div>
                                 </div>
                             </div>
                             <Container fluid>
@@ -295,9 +302,25 @@ function PlayMv({ encodeId }) {
                                                     ref={videoRef}
                                                     url={`${
                                                         data.streaming &&
-                                                        data.streaming.mp4[
-                                                            "720p"
-                                                        ]
+                                                        data.streaming.mp4 && (
+                                                            data.streaming.mp4[
+                                                                "1080p"
+                                                            ] ||
+                                                                data.streaming
+                                                                    .mp4[
+                                                                    "720p"
+                                                                ] ||
+                                                                data.streaming
+                                                                    .mp4[
+                                                                    "360p"
+                                                                ] ||
+                                                                data.streaming
+                                                                    .mp4[
+                                                                    "240p"
+                                                                ] ||
+                                                                data.streaming
+                                                                    .mp4["144p"]
+                                                        )
                                                     }`}
                                                     playing={!isplay}
                                                     controls={false}
@@ -320,6 +343,7 @@ function PlayMv({ encodeId }) {
                                                             step={0.5}
                                                             min={0}
                                                             max={100}
+                                                            value={time}
                                                             className='player-custom-progress-input'
                                                             onChange={
                                                                 handleRewind

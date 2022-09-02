@@ -280,14 +280,15 @@ function Header() {
                                                             Gợi ý kết quả
                                                         </div>
                                                         {item.suggestions.map(
-                                                            (suggest, index) =>
+                                                            (suggest) =>
                                                                 suggest.type ===
                                                                 1 ? (
-                                                                    <div>
+                                                                    <div
+                                                                        key={
+                                                                            suggest.id
+                                                                        }
+                                                                    >
                                                                         <div
-                                                                            key={
-                                                                                index
-                                                                            }
                                                                             className={`${styles.headerRecommendKeywordItem} d-flex justify-content-start align-items-center`}
                                                                             style={{
                                                                                 padding:
@@ -442,7 +443,7 @@ function Header() {
                                                                                       suggest.link.slice(
                                                                                           18
                                                                                       ),
-                                                                                      "hubdetail"
+                                                                                      "nationdetail"
                                                                                   )
                                                                         }
                                                                     >

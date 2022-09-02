@@ -7,9 +7,14 @@ import { Autoplay, Navigation } from "swiper";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { Nav, NavItem } from "reactstrap";
 import style from "scss/Top100Outstanding.module.scss";
+import { loadCurrentSong } from "app/currentSongSilce";
+import PlayMv from "features/Mv/components/PlayMv/PlayMv";
+import Portal from "components/Portal";
 
 function NationsVideoType({ data }) {
     const [list, setList] = useState([]);
+    const [mounted, setMounted] = useState(false);
+    const [encodeId, setEncodeId] = useState("");
 
     const dispatch = useDispatch();
 
@@ -20,6 +25,17 @@ function NationsVideoType({ data }) {
     const handleClickLink = (...rest) => {
         const action = loadLink(rest);
         dispatch(action);
+    };
+
+    const handleSendEncodeId = (id) => {
+        setEncodeId(id);
+        setMounted(true);
+        const action = loadCurrentSong({ isPlay: false });
+        dispatch(action);
+    };
+
+    const handleClosePlayer = () => {
+        setMounted(false);
     };
 
     return (
@@ -79,20 +95,18 @@ function NationsVideoType({ data }) {
                                                     style.top100OutstandingChild
                                                 }
                                             >
-                                                <Link
+                                                <div
                                                     className={
                                                         style.top100OutstandingPlay
                                                     }
-                                                    to={`${item.link}/${item.encodeId}`}
                                                     onClick={() =>
-                                                        handleClickLink(
-                                                            item.link,
-                                                            "mv"
+                                                        handleSendEncodeId(
+                                                            item.encodeId
                                                         )
                                                     }
                                                 >
                                                     <FontAwesomeIcon icon='fa-solid fa-play' />
-                                                </Link>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className=' d-flex justify-content-start align-items-center mt-1'>
@@ -173,6 +187,21 @@ function NationsVideoType({ data }) {
                     </div>
                 </div>
             ))}
+            {!mounted ? (
+                <></>
+            ) : (
+                <Portal containerId='player-main'>
+                    <Portal containerId='close-play-mv'>
+                        <div
+                            className='playmv-container-header__icon'
+                            onClick={handleClosePlayer}
+                        >
+                            <FontAwesomeIcon icon='fa-solid fa-xmark' />
+                        </div>
+                    </Portal>
+                    <PlayMv encodeId={encodeId} />
+                </Portal>
+            )}
         </div>
     );
 }
