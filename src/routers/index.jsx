@@ -16,7 +16,7 @@ import Search from "components/Search";
 import "scss/content.scss";
 
 import { useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NotFound from "components/NotFound";
 
@@ -25,11 +25,17 @@ function Routerall() {
     const dataStore = useSelector((state) => state.currentSong);
     const [mounted, setMounted] = useState(false);
 
+    const { pathname } = useLocation();
+
     useEffect(() => {
         if (dataStore.length !== 0) {
             setMounted(dataStore[dataStore.length - 1].isPlay);
         }
     }, [dataStore]);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
     const listPath = path.map((path) => {
         return {
