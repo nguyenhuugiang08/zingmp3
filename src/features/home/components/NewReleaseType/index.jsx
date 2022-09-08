@@ -223,7 +223,7 @@ function NewReleaseType({ data }) {
                                                     {album.title}
                                                 </div>
                                                 <div className='new-release-album-info__artist'>
-                                                    {album.artists.map(
+                                                    {album.artists?.map(
                                                         (artist, index) => (
                                                             <Link
                                                                 to={`${artist.link}/${artist.alias}`}
