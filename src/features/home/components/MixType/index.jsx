@@ -14,7 +14,7 @@ function MixType({ data }) {
     useEffect(() => {
         if (data.length > 0) {
             setFavoriteArtist(
-                data.filter((item) => item.sectionType === "mix")[0].items
+                data.filter((item) => item.sectionType === "mix")[0]?.items
             );
         }
     }, [data]);
@@ -33,7 +33,7 @@ function MixType({ data }) {
         <div className='favorite-artist'>
             <div className='favorite-artist__title'>
                 {data.length > 0 &&
-                    data.filter((item) => item.sectionType === "mix")[0].title}
+                    data.filter((item) => item.sectionType === "mix")?.[0]?.title}
             </div>
             <Swiper
                 slidesPerView={2}
@@ -57,7 +57,7 @@ function MixType({ data }) {
                 }}
                 className='mySwiper'
             >
-                {favoriteArtist.map((artist, index) => (
+                {favoriteArtist?.map((artist, index) => (
                     <div
                         className='favorite-artist__card mb-3'
                         key={artist.encodeId}
